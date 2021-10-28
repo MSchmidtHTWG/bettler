@@ -1,5 +1,11 @@
 *.class
 *.log
-.vscode/
-.metals/
-.hallozdfd/
+/.bloop
+/.metals
+/.vscode
+/.bsp
+/.idea
+/.ammonite
+/target
+/project
+/null
