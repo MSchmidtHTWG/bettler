@@ -1,6 +1,10 @@
-import org.junit.Test
-import org.junit.Assert.*
 
-class Test1:
-  @Test def t1(): Unit = 
-    assertEquals("I was compiled by Scala 3. :)", msg)
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers._
+
+class Test1 extends AnyWordSpec:
+ "Main" should{
+   "have a bar as String of Form '+----+----+----+----+----+----+----+'" in {
+     bar() should be ("+----+----+----+----+----+----+----+" + eol)
+   }
+ }
