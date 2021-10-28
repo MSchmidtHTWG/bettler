@@ -3,11 +3,8 @@
 
 
   println("Welcome to Bettler")
-  //println(mesh())
-
   for (i <- 1 to playerNumber){
-    println("Spieler "+ i + " :")
-    println(mesh(cellSize,cardNumber))
+    println(player(playerNumber = i))
   }
   println("Spielfeld :")
   println(mesh(cellSize, fieldSize, fieldSize))
@@ -20,6 +17,9 @@ val cellSize = 4
 val playerNumber = 2
 val fieldSize = 2
 val eol = sys.props("line.separator")  
+
+def player(playerNumber: Int = 1, cardNumber: Int = 7) =
+  "Spieler " + playerNumber + " :" + eol + mesh(cellNum = cardNumber)
 
 def cell(cellwidth: Int = 3, cellNum: Int =3) = 
   ("|" + " " * cellwidth) * cellNum + "|" + eol
