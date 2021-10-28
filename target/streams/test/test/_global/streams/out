@@ -1,11 +1,16 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(Test1, org.scalatest.tools.Framework$$anon$1@4f8b012a, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(Test1, org.scalatest.tools.Framework$$anon$1@7f04afed, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTest1:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mMain[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should have a bar as String of Form '+----+----+----+----+----+----+----+'[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 215 milliseconds.[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a scalable bar[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a cell as String of Form '|   |   |   |[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a scalable cell[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a player as String of Form 'Spieler 1 : + eol + +----+----+----+----+----+----+----+ + eol + |    |    |    |    |    |    |    | + eol + +----+----+----+----+----+----+----+[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a number of players with varying cards[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 196 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 6[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 6, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Test1[0m
