@@ -28,5 +28,13 @@ class Test1 extends AnyWordSpec {
      player(1,1) should be ("Spieler 1 :" + eol + "+----+" + eol + "|    |" + eol + "+----+" + eol)
      player(2,2) should be ("Spieler 2 :" + eol + "+----+----+" + eol + "|    |    |" + eol + "+----+----+" + eol)
    }
+   "have a mesh as String of Form '+----+ + eol + |    | + eol + +----+ + eol" in {
+     mesh() should be ("+----+" + eol + "|    |" + eol + "+----+" + eol)
+   }
+   "have a scalable mesh" in {
+     mesh(1,1,1) should be ("+-+" + eol + "| |" + eol + "+-+" + eol)
+     mesh(3,2,1) should be ("+---+---+" + eol + "|   |   |" + eol + "+---+---+" + eol)
+     mesh(1,1,2) should be ("+-+" + eol + "| |" + eol + "+-+" + eol +"| |" + eol + "+-+" + eol)
+   }
  } 
 }

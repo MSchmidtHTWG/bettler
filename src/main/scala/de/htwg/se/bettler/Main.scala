@@ -28,7 +28,7 @@ def bar(cellwidth: Int = 4, cellNum: Int =7) =
   ("+" + "-" * cellwidth) * cellNum + "+" + eol
 
 
-def mesh(cellwidth: Int = 4, cellNum: Int = 7, rows: Int = 1) =
+def mesh(cellwidth: Int = 4, cellNum: Int = 1, rows: Int = 1) =
   (bar(cellwidth, cellNum) + cell(cellwidth,cellNum)) * rows + bar(cellwidth, cellNum)
 
 
