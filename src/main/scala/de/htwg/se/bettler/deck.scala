@@ -14,6 +14,8 @@ class Deck {
         return r;
     }
     def shuffle() : Unit = {
-        this.cards = Random.shuffle(this.cards);
+        val r = scala.util.Random();
+        r.setSeed(System.currentTimeMillis());
+        this.cards = r.shuffle(this.cards);
     }
 }

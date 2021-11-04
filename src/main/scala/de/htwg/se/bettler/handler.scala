@@ -2,11 +2,13 @@ package scala
 
 class Handler {
     private val deck = new Deck();
+    deck.shuffle();
     private var temp : List[(Char, String)] = Nil;
     private var spieler1 = deck.draw();
     private var spieler2 = deck.draw();
     private var spielfeld : List[(Char, String)] = Nil;
     private var gamestate = "start";
+
     def handle(input : String) : Unit = {
         if input == "exit" then {
             this.gamestate = "exit";
@@ -44,10 +46,12 @@ class Handler {
                     temp = (c(0).charAt(0), c(1)) :: temp;
                     println(temp);
                 }
-                if spieler1.contains(temp) == false then {
-                    println("Spieler 1 hat diese Karten nicht auf der Hand.")
-                    temp = Nil;
-                    return;
+                for (t <- temp) {
+                    if spieler1.contains(t) == false then {
+                        println("Spieler 1 hat diese Karten nicht auf der Hand.")
+                        temp = Nil;
+                        return;
+                    } 
                 }
                 var (symbol, value) = temp(0);
                 if temp.length > 2 then {
@@ -73,18 +77,18 @@ class Handler {
                         temp = Nil;
                         return;
                     }
-                    spielfeld = temp;
-                    for (k <- 0 to temp.length) {
-                        spieler1 = spieler1.filterNot(_ == temp(k));
-                    }
-                    field.printField(spielfeld, spieler1, spieler2);
-                    this.gamestate = "player2";
-                    if spieler1.length == 0 then {
-                        this.gamestate = "done";
-                        println("Spieler 1 hat gewonnen.")
-                    }
-                    temp = Nil;
                 }
+                spielfeld = temp;
+                for (k <- temp) {
+                    spieler1 = spieler1.filterNot(_ == k);
+                }
+                field.printField(spielfeld, spieler1, spieler2);
+                this.gamestate = "player2";
+                if spieler1.length == 0 then {
+                    this.gamestate = "done";
+                    println("Spieler 1 hat gewonnen.")
+                }
+                temp = Nil;
             }
             case "player2" => {
                 var s = input.split(" ");
@@ -93,22 +97,26 @@ class Handler {
                     return;
                 }
                 if s.length < 2 || s.length > 5 then {
-                    s = s.slice(1, s.length);
+                    println("Du musst 1-4 Karten spielen.");
+                    return;
                 }
-
-                for (i <- 0 to s.length) {
-                    var c = s(i).split(",");
+                s = s.filterNot(_ == "spiele");
+                for (i <- s) {
+                    var c = i.split(",");
                     if card.isCard((c(0).charAt(0)), c(1)) == false then {
                         println("Falsche Eingabe! " + c + " stellt keine Karte dar.");
                         temp = Nil;
                         return;
                     }
                     temp = (c(0).charAt(0), c(1)) :: temp;
+                    println(temp);
                 }
-                if spieler2.contains(temp) == false then {
-                    println("Spieler 2 hat diese Karten nicht auf der Hand.")
-                    temp = Nil;
-                    return;
+                for (t <- temp) {
+                    if spieler2.contains(t) == false then {
+                        println("Spieler 2 hat diese Karten nicht auf der Hand.")
+                        temp = Nil;
+                        return;
+                    } 
                 }
                 var (symbol, value) = temp(0);
                 if temp.length > 2 then {
@@ -134,18 +142,18 @@ class Handler {
                         temp = Nil;
                         return;
                     }
-                    spielfeld = temp;
-                    for (k <- 0 to temp.length) {
-                        spieler2 = spieler2.filterNot(_ == temp(k));
-                    }
-                    field.printField(spielfeld, spieler1, spieler2);
-                    this.gamestate = "player1";
-                    if spieler1.length == 0 then {
-                        this.gamestate = "done";
-                        println("Spieler 2 hat gewonnen.")
-                    }
-                    temp = Nil;
                 }
+                spielfeld = temp;
+                for (k <- temp) {
+                    spieler2 = spieler2.filterNot(_ == k);
+                }
+                field.printField(spielfeld, spieler1, spieler2);
+                this.gamestate = "player1";
+                if spieler2.length == 0 then {
+                    this.gamestate = "done";
+                    println("Spieler 2 hat gewonnen.")
+                }
+                temp = Nil;
             }
         }
     }
