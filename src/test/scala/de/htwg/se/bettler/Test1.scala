@@ -1,40 +1,41 @@
+package scala
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 
 class Test1 extends AnyWordSpec {
 
-
- "Main" should{
+ val field = new field
+ "field" should{
    "have a bar as String of Form '+----+----+----+----+----+----+----+'" in {
-    bar() should be ("+----+----+----+----+----+----+----+" + eol)
+    field.bar() should be ("+----+----+----+----+----+----+----+" + field.eol)
    }
    "have a scalable bar" in {
-    bar(1,1) should be ("+-+" + eol)
-    bar(2,1) should be ("+--+" + eol)
-    bar(2,2) should be ("+--+--+" + eol)
+    field.bar(1,1) should be ("+-+" + field.eol)
+    field.bar(2,1) should be ("+--+" + field.eol)
+    field.bar(2,2) should be ("+--+--+" + field.eol)
    }
    "have a cell as String of Form '|   |   |   |" in {
-    cell() should be ("|   |   |   |" + eol)
+    field.cell() should be ("|   |   |   |" + field.eol)
    }
    "have a scalable cell" in {
-    cell(1,1) should be ("| |" + eol)
-    cell(2,1) should be ("|  |" + eol)
-    cell(2,2) should be ("|  |  |" + eol)
+    field.cell(1,1) should be ("| |" + field.eol)
+    field.cell(2,1) should be ("|  |" + field.eol)
+    field.cell(2,2) should be ("|  |  |" + field.eol)
    }
    "have a player as String of Form 'Spieler 1 : + eol + +----+----+----+----+----+----+----+ + eol + |    |    |    |    |    |    |    | + eol + +----+----+----+----+----+----+----+" in {
-     player() should be ("Spieler 1 :" + eol + "+----+----+----+----+----+----+----+" + eol + "|    |    |    |    |    |    |    |" + eol + "+----+----+----+----+----+----+----+" + eol)
+     field.player() should be ("Spieler 1 :" + field.eol + "+----+----+----+----+----+----+----+" + field.eol + "|    |    |    |    |    |    |    |" + field.eol + "+----+----+----+----+----+----+----+" + field.eol)
    }
    "have a number of players with varying cards" in {
-     player(1,1) should be ("Spieler 1 :" + eol + "+----+" + eol + "|    |" + eol + "+----+" + eol)
-     player(2,2) should be ("Spieler 2 :" + eol + "+----+----+" + eol + "|    |    |" + eol + "+----+----+" + eol)
+     field.player(1,1) should be ("Spieler 1 :" + field.eol + "+----+" + field.eol + "|    |" + field.eol + "+----+" + field.eol)
+     field.player(2,2) should be ("Spieler 2 :" + field.eol + "+----+----+" + field.eol + "|    |    |" + field.eol + "+----+----+" + field.eol)
    }
    "have a mesh as String of Form '+----+ + eol + |    | + eol + +----+ + eol" in {
-     mesh() should be ("+----+" + eol + "|    |" + eol + "+----+" + eol)
+     field.mesh() should be ("+----+" + field.eol + "|    |" + field.eol + "+----+" + field.eol)
    }
    "have a scalable mesh" in {
-     mesh(1,1,1) should be ("+-+" + eol + "| |" + eol + "+-+" + eol)
-     mesh(3,2,1) should be ("+---+---+" + eol + "|   |   |" + eol + "+---+---+" + eol)
-     mesh(1,1,2) should be ("+-+" + eol + "| |" + eol + "+-+" + eol +"| |" + eol + "+-+" + eol)
+     field.mesh(1,1,1) should be ("+-+" + field.eol + "| |" + field.eol + "+-+" + field.eol)
+     field.mesh(3,2,1) should be ("+---+---+" + field.eol + "|   |   |" + field.eol + "+---+---+" + field.eol)
+     field.mesh(1,1,2) should be ("+-+" + field.eol + "| |" + field.eol + "+-+" + field.eol +"| |" + field.eol + "+-+" + field.eol)
    }
  } 
 }
