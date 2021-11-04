@@ -4,6 +4,8 @@ package scala
   
   val field = new field
   field.printField()
+  val karte = card('K','9')
+  print(karte.symbol)
 
 
 
