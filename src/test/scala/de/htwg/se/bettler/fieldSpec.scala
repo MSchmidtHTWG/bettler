@@ -1,6 +1,7 @@
 package scala
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
+import org.scalactic.Prettifier.default
 class fieldSpec extends AnyWordSpec {
 
        var player1 = ('H', "7")::('S', "ACE") :: Nil;
@@ -8,7 +9,7 @@ class fieldSpec extends AnyWordSpec {
        var board1 = ('D', "10")::('C', "7") :: Nil;
        var card = ('H', "7")
 
-  "field " should{
+    "field " should{
 
    "have a bar as String of Form '--------------------------------------------------'" in {
     field.bar() should be ("--------------------------------------------------" + field.eol)
@@ -22,7 +23,7 @@ class fieldSpec extends AnyWordSpec {
     field.printCard(card) should be ("[H,7]")
    }
    "have a printable Board" in {
-     field.printField(board1,player1,player2) should be(field.bar + field.eol  + "Spieler 1" + field.eol + "[H,7][S,ACE]" +field.eol + field.bar + field.eol+"Spieler 2" + field.eol + "[H,9][C,J]" + field.eol+bar+field.eol + "[D,10][C,7]"+field.eol + field.bar + field.eol)
+     field.printField(board1,player1,player2) should be(field.bar() + "Spieler 1" + field.eol + "[H,7][S,ACE]" +field.eol + field.bar()+"Spieler 2" + field.eol + "[H,9][C,J]" + field.eol+bar()+ "[D,10][C,7]"+field.eol + field.bar())
    }
 
 
