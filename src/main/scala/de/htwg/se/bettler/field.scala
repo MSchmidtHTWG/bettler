@@ -19,7 +19,7 @@ def printField(board: List[(Char, String)], player1: List[(Char, String)],player
   r += eol + bar() + "Spieler 2" + eol
   player2.foreach{r += printCard(_)}
   r += eol + bar()
-  board.foreach{r += printCard(_)}
+  board.foreach{r+= printCard(_)}
   r += eol + bar()
   return r
 
