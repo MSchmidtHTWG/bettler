@@ -13,7 +13,7 @@ object card {
             case "10" => return 3
             case "Jack" => return 4
             case "Queen" => return 5
-            case "Kind" => return 6
+            case "King" => return 6
             case "Ace" => return 7 
             case _ => return -1
         }

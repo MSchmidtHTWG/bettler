@@ -15,11 +15,11 @@ def printCard(card: Tuple2[Char,String]) : String =
 def printField(board: List[(Char, String)], player1: List[(Char, String)],player2: List[(Char, String)]) : String =
   
   var r = bar() + "Spieler 1" + eol
-  player1.foreach{r += _}
+  player1.foreach{r += printCard(_)}
   r += eol + bar() + "Spieler 2" + eol
-  player2.foreach{r += _}
+  player2.foreach{r += printCard(_)}
   r += eol + bar()
-  board.foreach{r+=_}
+  board.foreach{r += printCard(_)}
   r += eol + bar()
   return r
 
