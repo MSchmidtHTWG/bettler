@@ -1,11 +1,6 @@
+package scala
 class field {
 
-
-    
-
-
-
-  
 //val i = 0
 val cardNumber = 7
 val cellSize = 4
