@@ -8,14 +8,37 @@ val playerNumber = 2
 val fieldSize = 2
 val eol = sys.props("line.separator")  
 
+def printCard(card: Tuple2[Char,String]) =
+  var s = card.toString()
+  s = s.filter(!"()".contains(_))
+  print("[")
+  print(s) 
+  print("]")  
+  print("")
 
-def printField(playerNumber: Int = 2, fieldsize: Int = 2, cellSize: Int = 4) =
+
+def printFieldEmpty(playerNumber: Int = 2, fieldsize: Int = 2, cellSize: Int = 4) =
   println("Welcome to Bettler")
   for (i <- 1 to playerNumber){
     println(player(playerNumber = i))
   }
   println("Spielfeld :")
   println(mesh(cellSize, fieldSize, fieldSize))
+
+def printField(Playernumber: Int = 2, Player1: List[(Char, String)],Player2: List[(Char, String)]) =
+  
+
+  println("__________________________________")
+  println("")
+  println("Spieler 1 :")
+  Player1.foreach{printCard}
+  
+  println("")
+  println("__________________________________")
+  println("Spieler 2 :")
+  
+  Player2.foreach{printCard}
+ 
 
 def player(playerNumber: Int = 1, cardNumber: Int = 7) =
   "Spieler " + playerNumber + " :" + eol + mesh(cellNum = cardNumber)
