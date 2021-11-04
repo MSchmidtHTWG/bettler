@@ -9,11 +9,17 @@ class Handler {
     def handle(input : String) : Unit = {
         input match {
             case "Start" => {
-                field.printField(2, spieler1, spieler2);
+                field.printField(spielfeld, spieler1, spieler2);
+                this.gamestate = "Done";
+            }
+            case "Exit" => {
+                println("Handler hat input Exit bekommen und gamestate auf Exit gesetzt")
+                this.gamestate = "Exit"
             }
             case _ => {
             } 
         }
     }
+    def getGamestate() : String = this.gamestate;
 }
 
