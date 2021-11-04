@@ -9,7 +9,9 @@ class handler {
     def handle(input : String) : Unit = {
         input match {
             case "Start" => {
+                field.printField(2, spieler1, spieler2);
             }
         }
+    }
 }
 
