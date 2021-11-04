@@ -5,28 +5,25 @@ object field {
 
 val eol = sys.props("line.separator")  
 
-def printCard(card: Tuple2[Char,String]) =
+def printCard(card: Tuple2[Char,String]) : String =
   var s = card.toString()
   s = s.filter(!"()".contains(_))
-  print("[")
-  print(s) 
-  print("]")  
-  print("")
+  var r = "[" + s + "]"
+  return r
 
 
-def printField(board: List[(Char, String)], player1: List[(Char, String)],player2: List[(Char, String)]) =
-   
-  print("----------------------------------------------------" + eol)
-  print("Spieler 1 :"+ eol)
-  player1.foreach{printCard}
-  print(eol)
-  print("----------------------------------------------------"+ eol)
-  print("Spieler 2 :"  + eol)
-  player2.foreach{printCard}
-  print(eol)
-  print("----------------------------------------------------"+ eol)
-  board.foreach{printCard}
-  print(eol)
-  print("----------------------------------------------------"+ eol)
+def printField(board: List[(Char, String)], player1: List[(Char, String)],player2: List[(Char, String)]) : String =
+  
+  var r = bar() + "Spieler 1" + eol
+  player1.foreach{r += _}
+  r += eol + bar() + "Spieler 2" + eol
+  player2.foreach{r += _}
+  r += eol + bar()
+  board.foreach{r+=_}
+  r += eol + bar()
+  return r
 
+
+def bar(cellwidth: Int = 50) =
+  "-" * cellwidth + eol
 }
