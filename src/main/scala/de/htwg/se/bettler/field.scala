@@ -14,19 +14,25 @@ def printCard(card: Tuple2[Char,String]) =
   print("")
 
 
-def printField(Playernumber: Int = 2, Player1: List[(Char, String)],Player2: List[(Char, String)]) =
+
+
+
+def printField(board: List[(Char, String)], player1: List[(Char, String)],player2: List[(Char, String)]) =
   
 
   
   println("----------------------------------------------------")
   println("Spieler 1 :")
-  Player1.foreach{printCard}
+  player1.foreach{printCard}
   println("")
   println("----------------------------------------------------")
   println("Spieler 2 :")
-  Player2.foreach{printCard}
+  player2.foreach{printCard}
   println("")
   println("----------------------------------------------------")
+  board.foreach{printCard}
+  println("----------------------------------------------------")
+
 
 
 }
