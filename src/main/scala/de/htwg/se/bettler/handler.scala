@@ -1,6 +1,6 @@
 package scala
 
-class handler {
+class Handler {
     private val deck = new Deck();
     private var spieler1 = deck.draw();
     private var spieler2 = deck.draw();
@@ -11,6 +11,8 @@ class handler {
             case "Start" => {
                 field.printField(2, spieler1, spieler2);
             }
+            case _ => {
+            } 
         }
     }
 }

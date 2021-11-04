@@ -1,5 +1,5 @@
 package scala
-class field {
+object field {
 
 
 
