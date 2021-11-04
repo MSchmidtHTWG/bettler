@@ -26,6 +26,7 @@ def printField(board: List[(Char, String)], player1: List[(Char, String)],player
   print(eol)
   print("----------------------------------------------------"+ eol)
   board.foreach{printCard}
+  print(eol)
   print("----------------------------------------------------"+ eol)
 
 }
