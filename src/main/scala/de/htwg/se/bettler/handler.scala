@@ -17,7 +17,7 @@ class Handler {
         gamestate match {
             case "start" => {
                 if input == "start" then {
-                    field.printField(spielfeld, spieler1, spieler2);
+                    println(field.printField(spielfeld, spieler1, spieler2));
                     this.gamestate = "player1";
                     println("Eine neue Runde hat begonnen. Spieler 1 beginnt. Tippe 'spiele ' gefolgt von Karten (z.B.: spiele H,Ace C,Ace)");
                     println("Das Spiel kann jederzeit mit 'exit' beendet werden.")
@@ -81,7 +81,7 @@ class Handler {
                 for (k <- temp) {
                     spieler1 = spieler1.filterNot(_ == k);
                 }
-                field.printField(spielfeld, spieler1, spieler2);
+                println(field.printField(spielfeld, spieler1, spieler2));
                 this.gamestate = "player2";
                 if spieler1.length == 0 then {
                     this.gamestate = "done";
@@ -145,7 +145,7 @@ class Handler {
                 for (k <- temp) {
                     spieler2 = spieler2.filterNot(_ == k);
                 }
-                field.printField(spielfeld, spieler1, spieler2);
+                println(field.printField(spielfeld, spieler1, spieler2));
                 this.gamestate = "player1";
                 if spieler2.length == 0 then {
                     this.gamestate = "done";
