@@ -44,7 +44,6 @@ class Handler {
                         return;
                     }
                     temp = (c(0).charAt(0), c(1)) :: temp;
-                    println(temp);
                 }
                 for (t <- temp) {
                     if spieler1.contains(t) == false then {
@@ -109,7 +108,6 @@ class Handler {
                         return;
                     }
                     temp = (c(0).charAt(0), c(1)) :: temp;
-                    println(temp);
                 }
                 for (t <- temp) {
                     if spieler2.contains(t) == false then {
