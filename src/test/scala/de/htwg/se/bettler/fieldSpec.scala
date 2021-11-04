@@ -22,8 +22,9 @@ class fieldSpec extends AnyWordSpec {
    "have printeble cards '[H,7]]'" in {
     field.printCard(card) should be ("[H,7]")
    }
+   
    "have a printable Board" in {
-     field.printField(board1,player1,player2) should be(field.bar() + "Spieler 1" + field.eol + "[H,7][S,ACE]" +field.eol + field.bar()+"Spieler 2" + field.eol + "[H,9][C,J]" + field.eol+bar()+ "[D,10][C,7]"+field.eol + field.bar())
+     field.printField(board1,player1,player2) should be(field.bar() + "Spieler 1" + field.eol + "[H,7][S,ACE]" +field.eol + field.bar()+"Spieler 2" + field.eol + "[H,9][C,J]" + field.eol+field.bar()+ "[D,10][C,7]"+field.eol + field.bar())
    }
 
 
