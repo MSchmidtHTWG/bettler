@@ -2,6 +2,12 @@ package scala
 
 object card {
     def isCard(card : Tuple2[Char, String]) : Boolean = {
+        if card(0) != 'H' && card(0) != 'C' && card(0) != 'S' && card(0) != 'D' then {
+            return false;
+        }
+        if card(1) != "7" && card(1) != "8" && card(1) != "9" && card(1) != "10" && card(1) != "Jack" && card(1) != "Queen" && card(1) != "King" && card(1) != "Ace" then {
+            return false
+        } 
         return true;
     }
     
