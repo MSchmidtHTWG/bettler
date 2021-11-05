@@ -27,6 +27,12 @@ class Handler {
             }
             case "player1" => {
                 temp = Nil;
+                if input == "skip" then {
+                    this.gamestate = "player2";
+                    println("Spieler 1 möchte oder kann nicht legen. Spieler 2 ist an der Reihe.");
+                    spielfeld = temp;
+                    return;
+                }
                 var s = input.split(" ");
                 if s(0) != "spiele" then {
                     println("Falsche Eingabe!");
@@ -53,7 +59,7 @@ class Handler {
                 }
                 var (symbol, value) = temp(0);
                 if temp.length > 2 then {
-                    for (j <- 1 to temp.length) {
+                    for (j <- 1 to temp.length - 1) {
                         var  (symbol2, value2) = temp(j);
                         if value != value2 then {
                             println("Die Karten müssen den gleichen Wert haben!");
@@ -82,10 +88,18 @@ class Handler {
                 if spieler1.length == 0 then {
                     this.gamestate = "done";
                     println("Spieler 1 hat gewonnen.")
+                    return;
                 }
+                println("Spieler 2 ist an der Reihe.")
             }
             case "player2" => {
                 temp = Nil;
+                if input == "skip" then {
+                    this.gamestate = "player1";
+                    println("Spieler 2 möchte oder kann nicht legen. Spieler 1 ist an der Reihe.");
+                    spielfeld = temp;
+                    return;
+                }
                 var s = input.split(" ");
                 if s(0) != "spiele" then {
                     println("Falsche Eingabe!");
@@ -111,8 +125,8 @@ class Handler {
                     } 
                 }
                 var (symbol, value) = temp(0);
-                if temp.length > 2 then {
-                    for (j <- 1 to temp.length) {
+                if temp.length > 1 then {
+                    for (j <- 1 to temp.length - 1) {
                         var  (symbol2, value2) = temp(j);
                         if value != value2 then {
                             println("Die Karten müssen den gleichen Wert haben!");
@@ -140,8 +154,10 @@ class Handler {
                 this.gamestate = "player1";
                 if spieler2.length == 0 then {
                     this.gamestate = "done";
-                    println("Spieler 2 hat gewonnen.")
+                    println("Spieler 2 hat gewonnen.");
+                    return;
                 }
+                println("Spieler 1 ist an der Reihe.");
             }
         }
     }
