@@ -18,3 +18,8 @@ var t : String = ""
 var v = cards.foreach{t+=_}
 t
 v
+var s = "spiele H,7 C,9".split(" ")
+s(0)
+s(1)
+s(2)
+s = s.filterNot(_ == "spiele")

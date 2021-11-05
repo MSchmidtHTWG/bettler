@@ -26,6 +26,7 @@ class Handler {
                 }
             }
             case "player1" => {
+                temp = Nil;
                 var s = input.split(" ");
                 if s(0) != "spiele" then {
                     println("Falsche Eingabe!");
@@ -40,7 +41,6 @@ class Handler {
                     var c = i.split(",");
                     if card.isCard((c(0).charAt(0)), c(1)) == false then {
                         println("Falsche Eingabe! " + c + " stellt keine Karte dar.");
-                        temp = Nil;
                         return;
                     }
                     temp = (c(0).charAt(0), c(1)) :: temp;
@@ -48,7 +48,6 @@ class Handler {
                 for (t <- temp) {
                     if spieler1.contains(t) == false then {
                         println("Spieler 1 hat diese Karten nicht auf der Hand.")
-                        temp = Nil;
                         return;
                     } 
                 }
@@ -58,7 +57,6 @@ class Handler {
                         var  (symbol2, value2) = temp(j);
                         if value != value2 then {
                             println("Die Karten müssen den gleichen Wert haben!");
-                            temp = Nil;
                             return;
                         }
                     }
@@ -67,13 +65,11 @@ class Handler {
                     spielfeld = temp;
                 } else if spielfeld.length != temp.length then {
                     println("Du musst genau so viele Karten spielen, wie auf dem Spielfeld liegen!");
-                    temp = Nil;
                     return;
                 } else {
                     var (symbol3, value3) = spielfeld(0);
                     if card.isHigher(value, value3) == false then {
                         println("Der Wert der gespielten Karten muss größer sein als der Wert der Karten auf dem Spielfeld!");
-                        temp = Nil;
                         return;
                     }
                 }
@@ -87,9 +83,9 @@ class Handler {
                     this.gamestate = "done";
                     println("Spieler 1 hat gewonnen.")
                 }
-                temp = Nil;
             }
             case "player2" => {
+                temp = Nil;
                 var s = input.split(" ");
                 if s(0) != "spiele" then {
                     println("Falsche Eingabe!");
@@ -104,7 +100,6 @@ class Handler {
                     var c = i.split(",");
                     if card.isCard((c(0).charAt(0)), c(1)) == false then {
                         println("Falsche Eingabe! " + c + " stellt keine Karte dar.");
-                        temp = Nil;
                         return;
                     }
                     temp = (c(0).charAt(0), c(1)) :: temp;
@@ -112,7 +107,6 @@ class Handler {
                 for (t <- temp) {
                     if spieler2.contains(t) == false then {
                         println("Spieler 2 hat diese Karten nicht auf der Hand.")
-                        temp = Nil;
                         return;
                     } 
                 }
@@ -122,7 +116,6 @@ class Handler {
                         var  (symbol2, value2) = temp(j);
                         if value != value2 then {
                             println("Die Karten müssen den gleichen Wert haben!");
-                            temp = Nil;
                             return;
                         }
                     }
@@ -131,13 +124,11 @@ class Handler {
                     spielfeld = temp;
                 } else if spielfeld.length != temp.length then {
                     println("Du musst genau so viele Karten spielen, wie auf dem Spielfeld liegen!");
-                    temp = Nil;
                     return;
                 } else {
                     var (symbol3, value3) = spielfeld(0);
                     if card.isHigher(value, value3) == false then {
                         println("Der Wert der gespielten Karten muss größer sein als der Wert der Karten auf dem Spielfeld!");
-                        temp = Nil;
                         return;
                     }
                 }
@@ -151,10 +142,22 @@ class Handler {
                     this.gamestate = "done";
                     println("Spieler 2 hat gewonnen.")
                 }
-                temp = Nil;
             }
         }
     }
     def getGamestate() : String = this.gamestate;
+
+    def playedIsCard(cards : Array[String]) : Boolean = {
+        for (c <- cards) {
+            if c.length < 3 || c(1) != ',' then {
+                return false
+            }
+            var s = c.split(",");
+            if s.length != 2 then {return false;}
+            if s(0).length != 1 then {return false;}
+            if !card.isCard(s(0).charAt(0), s(1)) then {return false;}
+        }
+        return true;
+    }
 }
 
