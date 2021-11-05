@@ -5,30 +5,25 @@ class cardSpec extends AnyWordSpec{
 
   "Card" should {
   
-    "returnValueInt " should{
-     "return a value " in {
+
+
+    "have a return value  for return for returnValueInt" in {
     card.returnValueInt("Ace") should be (7)
-   }
-}
-    "should have a card return value in" {
-     "return 0 " in {
     card.returnValueInt("7") should be (0)
-   }
-}
-    "card returnValueInt(8) " should{
-     "return 1 " in {
-    card.returnValueInt("8") should be (1)
-   }
-}
-    "card returnValueInt(Queen) " should{
-     "return 5 " in {
     card.returnValueInt("Queen") should be (5)
    }
-}
-    "is Higher(Ace,Queen) " should{
-     "return 5 " in {
-    card.isHigher("Ace","Queen") should be (true)
-   }
-}
-  }
 
+  
+    "Have a true/false return value for isHigher " in{
+    card.isHigher("Ace","Queen") should be (true)
+    card.isHigher("Queen","Ace") should be (false)
+   }
+
+    "have a Methode isCard that returns if a something is a Card" in {
+    card.isCard('7',"Queen") should be (true)
+
+}
+  
+}
+
+}
