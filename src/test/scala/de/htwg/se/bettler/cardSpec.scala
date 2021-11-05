@@ -7,7 +7,7 @@ class cardSpec extends AnyWordSpec{
   
 
 
-    "have a return value  for return for returnValueInt" in {
+    "have a return value for returnValueInt" in {
     card.returnValueInt("Ace") should be (7)
     card.returnValueInt("7") should be (0)
     card.returnValueInt("Queen") should be (5)
@@ -20,7 +20,9 @@ class cardSpec extends AnyWordSpec{
    }
 
     "have a Methode isCard that returns if a something is a Card" in {
-    card.isCard('7',"Queen") should be (true)
+    card.isCard('D',"Queen") should be (true)
+    card.isCard('7',"Queen") should be (false)
+    card.isCard('5',"asjdfo") should be (false)
 
 }
   
