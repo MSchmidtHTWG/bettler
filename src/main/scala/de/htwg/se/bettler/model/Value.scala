@@ -2,7 +2,18 @@ package de.htwg.se.bettler
 package model
 
 enum Value (value : Int):
-    override def toString = value.toString;
+    override def toString =
+        value match {
+            case 7 => value.toString
+            case 8 => value.toString
+            case 9 => value.toString
+            case 10 => value.toString
+            case 11 => "J"
+            case 12 => "Q"
+            case 13 => "K"
+            case 14 => "A"
+        }
+
     def getValue = value
     case Seven extends Value(7)
     case Eight extends Value(8)
