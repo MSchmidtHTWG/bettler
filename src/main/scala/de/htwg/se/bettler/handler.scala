@@ -159,6 +159,11 @@ class Handler {
                 }
                 println("Spieler 1 ist an der Reihe.");
             }
+            case "done" => {
+                if input = "new" then {
+                    
+                }
+            }
         }
     }
     def getGamestate() : String = this.gamestate;
