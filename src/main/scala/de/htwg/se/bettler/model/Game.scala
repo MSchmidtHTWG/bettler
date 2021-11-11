@@ -18,6 +18,7 @@ class Game:
     def play(cards : Set[Card]) : Unit =
         state.play(cards)
     def skip() : Unit =
+        if state == null then return
         if state.isInstanceOf[P1TurnState] then {
             state = P2TurnState(this)
         } else {
