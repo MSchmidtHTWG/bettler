@@ -1,3 +1,4 @@
+package scala
 package de.htwg.se.bettler.model
 
 case class Card(s : Symbol, v : Value) {

@@ -1,21 +1,25 @@
 package scala
+package de.htwg.se.bettler.model
 
 import scala.util.Random
 
-class Deck {
-    var cards = ('H', "7") :: ('H', "8") :: ('H', "9") :: ('H', "10") :: ('H', "Jack") :: ('H', "Queen") :: ('H', "King") :: ('H', "Ace")
-        :: ('S', "7") :: ('S', "8") :: ('S', "9") :: ('S', "10") :: ('S', "Jack") :: ('S', "Queen") :: ('S', "King") :: ('S', "Ace")
-        :: ('D', "7") :: ('D', "8") :: ('D', "9") :: ('D', "10") :: ('D', "Jack") :: ('D', "Queen") :: ('D', "King") :: ('D', "Ace")
-        :: ('C', "7") :: ('C', "8") :: ('C', "9") :: ('C', "10") :: ('C', "Jack") :: ('C', "Queen") :: ('C', "King") :: ('C', "Ace") :: Nil
+class Deck:
+    var deck = Set(Card(Symbol.Hearts, Value.Seven), Card(Symbol.Hearts, Value.Eight), Card(Symbol.Hearts, Value.Nine), Card(Symbol.Hearts, Value.Ten), Card(Symbol.Hearts, Value.Jack), Card(Symbol.Hearts, Value.Queen), Card(Symbol.Hearts, Value.King), Card(Symbol.Hearts, Value.Ace))
+    deck = deck + Card(Symbol.Diamonds, Value.Seven) + Card(Symbol.Diamonds, Value.Eight) + Card(Symbol.Diamonds, Value.Nine) + Card(Symbol.Diamonds, Value.Ten) + Card(Symbol.Diamonds, Value.Jack) + Card(Symbol.Diamonds, Value.Queen) + Card(Symbol.Diamonds, Value.King) + Card(Symbol.Diamonds, Value.Ace)
+    deck = deck + Card(Symbol.Clubs, Value.Seven) + Card(Symbol.Clubs, Value.Eight) + Card(Symbol.Clubs, Value.Nine) + Card(Symbol.Clubs, Value.Ten) + Card(Symbol.Clubs, Value.Jack) + Card(Symbol.Clubs, Value.Queen) + Card(Symbol.Clubs, Value.King) + Card(Symbol.Clubs, Value.Ace)
+    deck = deck + Card(Symbol.Spades, Value.Seven) + Card(Symbol.Spades, Value.Eight) + Card(Symbol.Spades, Value.Nine) + Card(Symbol.Spades, Value.Ten) + Card(Symbol.Spades, Value.Jack) + Card(Symbol.Spades, Value.Queen) + Card(Symbol.Spades, Value.King) + Card(Symbol.Spades, Value.Ace)
+    def draw() : Set[Card] = 
+        val ran = Random()
+        ran.setSeed(System.currentTimeMillis())
+        var l : List[Card] = deck.toList
+        l = ran.shuffle(l)
+        l = l.slice(0, 7)
+        var r = Set.empty[Card]
+        for (ll <- l) {
+            r = r + ll
+        }
+        deck = deck -- r
+        return r
 
-    def draw() : List[(Char, String)] = {
-        val r : List[(Char, String)] = cards.slice(0, 7);
-        cards = cards.slice(7,cards.length);
-        return r;
-    }
-    def shuffle() : Unit = {
-        val r = scala.util.Random();
-        r.setSeed(System.currentTimeMillis());
-        this.cards = r.shuffle(this.cards);
-    }
-}
+
+
