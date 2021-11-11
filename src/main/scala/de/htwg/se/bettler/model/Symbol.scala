@@ -1,4 +1,5 @@
-package de.htwg.se.bettler.model
+package de.htwg.se.bettler
+package model
 
 enum Symbol(symbol : String):
     override def toString = symbol

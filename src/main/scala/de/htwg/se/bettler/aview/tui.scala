@@ -1,2 +1,4 @@
-package de.htwg.se.bettler.aview
+package de.htwg.se.bettler
+package aview
 
+class TUI(controller : Controller)

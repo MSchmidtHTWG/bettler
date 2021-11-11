@@ -1,4 +1,5 @@
-package de.htwg.se.bettler.model
+package de.htwg.se.bettler
+package model
 
 enum Value (value : Int):
     override def toString = value.toString;

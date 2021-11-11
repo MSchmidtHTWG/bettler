@@ -1,4 +1,5 @@
-package scala
+package de.htwg.se.bettler
+package model
 object field {
 
 

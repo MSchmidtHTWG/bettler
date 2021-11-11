@@ -1,4 +1,5 @@
-package de.htwg.se.bettler.model
+package de.htwg.se.bettler
+package model
 
 case class Card(s : Symbol, v : Value) {
     override def toString = s.toString + v.toString
