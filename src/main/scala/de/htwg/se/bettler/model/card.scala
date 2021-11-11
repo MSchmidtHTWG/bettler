@@ -2,6 +2,7 @@ package de.htwg.se.bettler
 package model
 
 import model.Symbol
+import scala.annotation.meta.setter
 
 case class Card(symbol : Symbol, value : Value) {
     override def toString = symbol.toString + value.toString
@@ -36,4 +37,14 @@ object Card {
         } else {
             return Card(sym, va)
         }
+    def isPartOfSet(cards : Set[Card], set : Set[Card]) = (cards -- set).size == 0
+    def isPlayAble(cards : Set[Card]) : Boolean = {
+        for (c <- cards) {
+            if !cards.head.sameValue(c) then {
+                return false
+            }
+        }
+        return true
+    }
+    def isBetter(cards : Set[Card], set : Set[Card]) = cards.size > 0 && (set.size == 0 || (cards.size == set.size && cards.head.isHigher(set.head)))
 }

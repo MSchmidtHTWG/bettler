@@ -3,6 +3,8 @@ package model
 
 class StartState(game : Game) extends State:
     var msg = ""
+    override def play(cards : Set[Card]) : Unit =
+        println("")
     override def toString = msg
     override def handle(input : String) : Unit =
         if (input == "start") {
