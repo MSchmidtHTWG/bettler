@@ -8,10 +8,10 @@ import util.Observer
 class TUI(controller : Controller) extends Observer:
     controller.add(this)
     def run =
-        println(controller.field.toString())
+        println(controller.toString())
         TUI()
     override def update = 
-        println(controller.field.toString())
+        println(controller.toString())
 
     def TUI(): Unit =
         val input = readLine;

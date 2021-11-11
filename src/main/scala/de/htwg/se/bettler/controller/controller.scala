@@ -1,10 +1,10 @@
 package de.htwg.se.bettler
 package controller
 
-import model.Field
+import model.Game
 import util.Observable
 
-case class Controller(var field : Field) extends Observable:
-    override def toString = field.toString
+case class Controller(var game : Game) extends Observable:
+    override def toString = game.toString
     def handle(input : String): Unit =
         println(input)
