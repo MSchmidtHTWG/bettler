@@ -6,14 +6,14 @@ object field {
 
 val eol = sys.props("line.separator")  
 
-def printCard(card: Tuple2[Char,String]) : String =
+def printCard(card : Card) : String =
   var s = card.toString()
   s = s.filter(!"()".contains(_))
   var r = "[" + s + "]"
   return r
 
 
-def printField(board: List[(Char, String)], player1: List[(Char, String)],player2: List[(Char, String)]) : String =
+def printField(board: Set[Card], player1: Set[Card],player2: Set[Card]) : String =
   
   var r = bar() + "Spieler 1" + eol
   player1.foreach{r += printCard(_)}
