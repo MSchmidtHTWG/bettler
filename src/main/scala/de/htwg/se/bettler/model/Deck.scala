@@ -12,8 +12,7 @@ class Deck:
         val ran = Random()
         ran.setSeed(System.currentTimeMillis())
         var l : List[Card] = deck.toList
-        l = ran.shuffle(l)
-        l = l.slice(0, 7)
+        l = ran.shuffle(l).slice(0, 7)
         var r = Set.empty[Card]
         for (ll <- l) {
             r = r + ll
