@@ -7,7 +7,10 @@ class Game:
     var spieler2 = Set.empty[Card]
     var spielfeld = Set.empty[Card]
     val deck = Deck()
+
     def handle(input : String) : Unit =
-        println(input)
-    override def toString = field.printField(spielfeld, spieler1, spieler2)
+        state.handle(input)
+        
+    override def toString = field.printField(spielfeld, spieler1, spieler2) + field.eol + state.toString
+    
 

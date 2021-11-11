@@ -10,10 +10,12 @@ class TUI(controller : Controller) extends Observer:
     def run =
         println(controller.toString())
         TUI()
+        
     override def update = 
         println(controller.toString())
 
     def TUI(): Unit =
         val input = readLine;
+        if input == "exit" then return
         controller.handle(input)
         TUI()

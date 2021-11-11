@@ -1,8 +1,39 @@
 package de.htwg.se.bettler
 package model
 
-case class Card(s : Symbol, v : Value) {
-    override def toString = s.toString + v.toString
-    def sameValue(c : Card) = this.v == c.v
-    def isHigher(c : Card) = this.v.getValue > c.v.getValue
+import model.Symbol
+
+case class Card(symbol : Symbol, value : Value) {
+    override def toString = symbol.toString + value.toString
+    def sameValue(card : Card) = this.value == card.value
+    def isHigher(card : Card) = this.value.getValue > card.value.getValue
+}
+
+object Card {
+    def returnCard(input : String) : Card = 
+        val s = input(0)
+        val v = input.slice(1, input.length)
+        val sym = s match {
+            case 'H' => Symbol.Hearts
+            case 'D' => Symbol.Diamonds
+            case 'S' => Symbol.Spades
+            case 'C' => Symbol.Clubs
+            case _ => null
+        }
+        val va = v match {
+            case "7" => Value.Seven
+            case "8" => Value.Eight
+            case "9" => Value.Nine
+            case "10" => Value.Ten
+            case "J" => Value.Jack
+            case "Q" => Value.Queen
+            case "K" => Value.King
+            case "A" => Value.Ace
+            case _ => null
+        } 
+        if (sym == null || va == null) {
+            return null
+        } else {
+            return Card(sym, va)
+        }
 }
