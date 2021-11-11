@@ -1,4 +1,3 @@
-package scala
 package de.htwg.se.bettler.model
 
 enum Symbol(symbol : String):

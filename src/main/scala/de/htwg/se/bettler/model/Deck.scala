@@ -1,4 +1,3 @@
-package scala
 package de.htwg.se.bettler.model
 
 import scala.util.Random
