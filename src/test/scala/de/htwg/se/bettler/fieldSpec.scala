@@ -23,12 +23,18 @@ class FieldSpec extends AnyWordSpec {
       Field.bar(1) should be ("-" + Field.eol)
       Field.bar(15) should be ("---------------" + Field.eol)
     }
-    "have printeble cards '[H,7]]'" in {
-      Field.printCard(card) should be ("[H,7]")
+    "have printeble cards '[H7]'" in {
+      Field.printCard(Card(Symbol.Hearts, Value.Seven)) should be ("[H7]")
     }
      
     "have a printable Board" in {
-      Field.printField(board1,player1,player2) should be(Field.bar() + "Spieler 1" + Field.eol + "[H,7][S,ACE]" +Field.eol + Field.bar()+"Spieler 2" + Field.eol + "[H,9][C,J]" + Field.eol+Field.bar()+ "[D,10][C,7]"+Field.eol + Field.bar())
+      var board = Set.empty[Card]
+      var player1 = Set.empty[Card]
+      var player2 = Set.empty[Card]
+      board = board + Card(Symbol.Hearts, Value.Seven)
+      player2 = player2 + Card(Symbol.Hearts, Value.Nine)
+      player1 = player1 + Card(Symbol.Diamonds, Value.Ten)
+      Field.printField(board,player1,player2) should be(Field.bar() + "Spieler 1" + Field.eol + "[D10]" +Field.eol + Field.bar()+"Spieler 2" + Field.eol + "[H9]" + Field.eol+Field.bar()+ "[H7]"+Field.eol + Field.bar())
     }
  
   }
