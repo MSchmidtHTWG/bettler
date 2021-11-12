@@ -1,7 +1,7 @@
 package de.htwg.se.bettler
 package model
 
-class Field(game : Game) {
+case class Field(game : Game) {
 
   val eol = sys.props("line.separator")  
 

@@ -39,7 +39,8 @@ case class Card(symbol : Symbol, value : Value) {
 }
 
 object Card :
-    def returnCard(input : String) : Card = 
+    def returnCard(input : String) : Option[Card] = {
+        if input.length < 2 then return None
         val s = input(0)
         val v = input.slice(1, input.length)
         val sym = s match {
@@ -47,7 +48,7 @@ object Card :
             case 'D' => Symbol.Diamonds
             case 'S' => Symbol.Spades
             case 'C' => Symbol.Clubs
-            case _ => null
+            case _ => Symbol.Empty
         }
         val va = v match {
             case "7" => Value.Seven
@@ -58,10 +59,11 @@ object Card :
             case "Q" => Value.Queen
             case "K" => Value.King
             case "A" => Value.Ace
-            case _ => null
+            case _ => Value.Empty
         } 
-        if (sym == null || va == null) {
-            return null
+        if (sym == Symbol.Empty || va == Value.Empty) {
+            return None
         } else {
-            return Card(sym, va)
+            return Some(Card(sym, va))
         }
+    }

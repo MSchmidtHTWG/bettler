@@ -29,7 +29,10 @@ class TUI(controller : Controller) extends Observer:
                     val s = input.split(" ")
                     var l = Set.empty[Card]
                     for (i <- 1 to s.size - 1) {
-                        l = l + Card.returnCard(s(i))
+                        Card.returnCard(s(i)) match {
+                            case Some(c) => l = l + c
+                            case None => println("")
+                        }
                     }
                     controller.play(l)
                 }

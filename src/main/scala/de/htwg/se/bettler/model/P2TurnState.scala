@@ -2,7 +2,7 @@ package de.htwg.se.bettler
 package model
 
 
-class P2TurnState() extends State:
+case class P2TurnState() extends State:
     override def play(cards : Set[Card], game : Game) : Game =
         if cards.isEmpty then {
             val msg = "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 1 ist an der Reihe."
