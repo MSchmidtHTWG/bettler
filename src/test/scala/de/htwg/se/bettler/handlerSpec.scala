@@ -2,7 +2,7 @@ package scala
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 class chandlerSpec extends AnyWordSpec{
-
+/*
   "Handler" should {
 
     "have a Methode for checking if something played is Card" in {
@@ -13,4 +13,5 @@ class chandlerSpec extends AnyWordSpec{
     handler.playedIsCard(b)  should be (false)
    }
 }
+*/
 }
