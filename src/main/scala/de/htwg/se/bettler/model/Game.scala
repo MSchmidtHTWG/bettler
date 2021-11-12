@@ -26,6 +26,6 @@ class Game:
         }
         spielfeld = Set.empty[Card]
 
-    override def toString = field.printField(spielfeld, spieler1, spieler2) + field.eol + state.toString
+    override def toString = Field.printField(spielfeld, spieler1, spieler2) + Field.eol + state.toString
     
 
