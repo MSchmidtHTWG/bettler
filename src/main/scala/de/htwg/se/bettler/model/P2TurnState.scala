@@ -1,7 +1,6 @@
 package de.htwg.se.bettler
 package model
 
-
 case class P2TurnState() extends State:
     override def play(cards : Set[Card], game : Game) : Game =
         if cards.isEmpty then {
