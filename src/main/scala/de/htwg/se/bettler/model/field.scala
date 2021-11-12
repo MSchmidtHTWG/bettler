@@ -1,6 +1,6 @@
 package de.htwg.se.bettler
 package model
-object field {
+object Field {
 
 
 
