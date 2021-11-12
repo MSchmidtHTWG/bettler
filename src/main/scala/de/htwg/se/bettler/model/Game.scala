@@ -3,7 +3,7 @@ package model
 
 case class Game(state : State, spieler1 : Cards, spieler2 : Cards, spielfeld : Cards, deck : Deck, msg : String):
     def start() : Game =
-        val d = Deck()
+        val d = Deck(32)
         val board = Cards(Set.empty[Card])
         val s1 = Cards(d.draw())
         val s2 = Cards(d.draw())
@@ -24,8 +24,18 @@ case class Game(state : State, spieler1 : Cards, spieler2 : Cards, spielfeld : C
             return Game(s, this.spieler1, this.spieler2, this.spielfeld, this.deck, m)
         }
     }
+    override def toString : String = {
+        val field = Field(this)
+        return spieler1.returnSet.size.toString
+    }
 
-
-    override def toString = Field.printField(spielfeld.cards, spieler1.cards, spieler2.cards) + Field.eol + msg
+object Game:
+        def start() : Game =
+            val d = Deck(32)
+            val board = Cards(Set.empty[Card])
+            val s1 = Cards(d.draw())
+            val s2 = Cards(d.draw())
+            val st = P1TurnState()
+            return Game(st, s1, s2, board, d, "Spieler 1 ist dran.")
     
 

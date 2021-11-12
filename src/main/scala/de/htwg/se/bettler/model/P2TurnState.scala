@@ -3,25 +3,24 @@ package model
 
 
 class P2TurnState() extends State:
-    var msg = "Spieler 2 ist an der Reihe."
-    override def toString = msg
-    override def play(cards : Set[Card]) : Unit =
+    override def play(cards : Set[Card], game : Game) : Game =
         if cards.isEmpty then {
-            msg = "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 2 ist an der Reihe."
-            return
+            val msg = "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 1 ist an der Reihe."
+            return Game(game.state, game.spieler1, game.spieler2, game.spielfeld, game.deck, msg)
         }
-        if !Card.isPartOfSet(cards, game.spieler2) then {
-            msg = "Spieler 2 hat diese Karten nicht."
-            return
+        if game.spieler2.contains(cards) then {
+            val msg = "Spieler 1 hat diese Karten nicht."
+            return Game(game.state, game.spieler1, game.spieler2, game.spielfeld, game.deck, msg)
         }
-        if !Card.isPlayAble(cards) then {
-            msg = "Die Karten haben nicht den gleichen Wert."
-            return
+        if Cards(cards).isPlayable then {
+            val msg = "Die Karten haben nicht den gleichen Wert."
+            return Game(game.state, game.spieler1, game.spieler2, game.spielfeld, game.deck, msg)
         }
-        if !Card.isBetter(cards, game.spielfeld) then {
-            msg = "Es müssen genau gleichviele Karten gespielt wie auf dem Spielfeld liegen und ihr Wert muss größer sein."
-            return
+        if game.spielfeld.isWorse(cards) then {
+            val msg = "Es müssen genau gleichviele Karten gespielt wie auf dem Spielfeld liegen und ihr Wert muss größer sein."
+            return Game(game.state, game.spieler1, game.spieler2, game.spielfeld, game.deck, msg)
         }
-        game.spieler2 = game.spieler2 -- cards
-        game.spielfeld = cards
-        game.state = P1TurnState(game)
+        val s1 = game.spieler2.returnSet -- cards
+        val board = cards
+        val state = P2TurnState()
+        return Game(state, game.spieler1, Cards(s1), Cards(board), game.deck, "Spieler 1 ist dran.")

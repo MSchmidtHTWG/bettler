@@ -1,7 +1,7 @@
 package de.htwg.se.bettler
 package model
 
-object Field {
+class Field(game : Game) {
 
   val eol = sys.props("line.separator")  
 
@@ -12,14 +12,13 @@ object Field {
     return r
 
 
-  def printField(board: Set[Card], player1: Set[Card],player2: Set[Card]) : String =
-    
+  def printField() : String =
     var r = bar() + "Spieler 1" + eol
-    player1.foreach{r += printCard(_)}
+    game.spieler1.returnSet.foreach{r += printCard(_)}
     r += eol + bar() + "Spieler 2" + eol
-    player2.foreach{r += printCard(_)}
+    game.spieler2.returnSet.foreach{r += printCard(_)}
     r += eol + bar()
-    board.foreach{r+= printCard(_)}
+    game.spielfeld.returnSet.foreach{r+= printCard(_)}
     r += eol + bar()
     return r
 

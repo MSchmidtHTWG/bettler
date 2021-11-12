@@ -38,7 +38,7 @@ case class Card(symbol : Symbol, value : Value) {
     }
 }
 
-object Card { //toDo Option
+object Card :
     def returnCard(input : String) : Card = 
         val s = input(0)
         val v = input.slice(1, input.length)
@@ -65,14 +65,3 @@ object Card { //toDo Option
         } else {
             return Card(sym, va)
         }
-    def isPartOfSet(cards : Set[Card], set : Set[Card]) = (cards -- set).size == 0
-    def isPlayAble(cards : Set[Card]) : Boolean = {
-        for (c <- cards) {
-            if !cards.head.sameValue(c) then {
-                return false
-            }
-        }
-        return true
-    }
-    def isBetter(cards : Set[Card], set : Set[Card]) = cards.size > 0 && (set.size == 0 || (cards.size == set.size && cards.head.isHigher(set.head)))
-}

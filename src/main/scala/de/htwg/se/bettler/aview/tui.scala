@@ -17,16 +17,22 @@ class TUI(controller : Controller) extends Observer:
         println(controller.toString())
 
     def TUI(): Unit =
-        val input = readLine;
-        if input == "start" then controller.start()
-        if input == "exit" then return
-        if input == "skip" then controller.skip()
-        val s = input.split(" ")
-        var cards = Set.empty[Card]
-        if (s(0) == "play" && s.size > 1) then {
-            for (i <- 1 to s.size - 1) {
-                cards = cards + Card.returnCard(s(i))
+        val input = readLine
+        input match {
+            case "start" => {
+                controller.start()
             }
-            controller.play(cards)
+            case "exit" => return
+            case "skip" => controller.skip()
+            case _ => {
+                if input.startsWith("play") then {
+                    val s = input.split(" ")
+                    var l = Set.empty[Card]
+                    for (i <- 1 to s.size - 1) {
+                        l = l + Card.returnCard(s(i))
+                    }
+                    controller.play(l)
+                }
+            }
         }
         TUI()
