@@ -29,5 +29,4 @@ class TUI(controller : Controller) extends Observer:
             }
             controller.play(cards)
         }
-        //controller.handle(input)
         TUI()

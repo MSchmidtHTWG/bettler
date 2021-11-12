@@ -7,3 +7,4 @@ enum Symbol(symbol : String):
     case Diamonds extends Symbol("D")
     case Clubs extends Symbol("C")
     case Spades extends Symbol("S")
+    case Empty extends Symbol("")

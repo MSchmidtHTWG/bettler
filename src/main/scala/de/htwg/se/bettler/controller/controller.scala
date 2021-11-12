@@ -7,15 +7,12 @@ import model.Card
 
 case class Controller(var game : Game) extends Observable:
     override def toString = game.toString
-    def handle(input : String): Unit =
-        game.handle(input)
-        notifyObservers
     def play(cards : Set[Card]) : Unit =
-        game.play(cards)
+        game = game.play(cards)
         notifyObservers
     def start() : Unit = 
-        game.start()
+        game = game.start()
         notifyObservers
     def skip() : Unit =
-        game.skip()
+        game = game.skip()
         notifyObservers

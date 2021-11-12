@@ -1,31 +1,31 @@
 package de.htwg.se.bettler
 package model
 
-class Game:
-    var state : State = null
-    var spieler1 = Set.empty[Card]
-    var spieler2 = Set.empty[Card]
-    var spielfeld = Set.empty[Card]
-    val deck = Deck()
+case class Game(state : State, spieler1 : Cards, spieler2 : Cards, spielfeld : Cards, deck : Deck, msg : String):
+    def start() : Game =
+        val d = Deck()
+        val board = Cards(Set.empty[Card])
+        val s1 = Cards(d.draw())
+        val s2 = Cards(d.draw())
+        val st = P1TurnState()
+        return Game(st, s1, s2, board, d, "Spieler 1 ist dran.")
 
-    def start() : Unit =
-        spielfeld = Set.empty[Card]
-        spieler1 = deck.draw()
-        spieler2 = deck.draw()
-        state = P1TurnState(this)
-    def handle(input : String) : Unit =
-        state.handle(input)
-    def play(cards : Set[Card]) : Unit =
-        state.play(cards)
-    def skip() : Unit =
-        if state == null then return
+    def play(cards : Set[Card]) : Game =
+        return state.play(cards, this)
+
+    def skip() : Game = {
         if state.isInstanceOf[P1TurnState] then {
-            state = P2TurnState(this)
+            val s = P2TurnState()
+            val m = "Spieler 2 ist dran."
+            return Game(s, this.spieler1, this.spieler2, this.spielfeld, this.deck, m) 
         } else {
-            state = P1TurnState(this)
+            val s = P1TurnState()
+            val m = "Spieler 1 ist dran."
+            return Game(s, this.spieler1, this.spieler2, this.spielfeld, this.deck, m)
         }
-        spielfeld = Set.empty[Card]
+    }
 
-    override def toString = Field.printField(spielfeld, spieler1, spieler2) + Field.eol + state.toString
+
+    override def toString = Field.printField(spielfeld.cards, spieler1.cards, spieler2.cards) + Field.eol + msg
     
 

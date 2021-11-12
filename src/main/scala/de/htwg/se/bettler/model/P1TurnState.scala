@@ -1,10 +1,10 @@
 package de.htwg.se.bettler
 package model
 
-class P1TurnState(game : Game) extends State:
+class P1TurnState() extends State:
     var msg = "Spieler 1 ist an der Reihe."
     override def toString = msg
-    override def play(cards : Set[Card]) : Unit =
+    override def play(cards : Set[Card], game : Game) : Game =
         if cards.isEmpty then {
             msg = "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 1 ist an der Reihe."
             return
@@ -21,55 +21,7 @@ class P1TurnState(game : Game) extends State:
             msg = "Es müssen genau gleichviele Karten gespielt wie auf dem Spielfeld liegen und ihr Wert muss größer sein."
             return
         }
-        game.spieler1 = game.spieler1 -- cards
-        game.spielfeld = cards
-        game.state = P2TurnState(game)
-
-    override def handle(input : String) : Unit =
-        var s = input.split(" ")
-        if (s.length < 1 || s.length > 5) {
-            msg = "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 1 ist an der Reihe."
-            return
-        }
-        if (s(0) == "play") {
-            var cset = Set.empty[Card]
-            var c : Card = null
-            for (i <- 1 to s.length - 1) {
-                c = Card.returnCard(s(i))
-                if c == null then {
-                    msg = "Nicht existente Karte eingegeben. Spieler 1 ist an der Reihe"
-                    return
-                }
-                cset = cset + c
-            }
-
-            if !(cset subsetOf game.spieler1) then {
-                msg = "Spieler 1 hat diese Karten nicht auf der Hand. Spieler 1 ist an der Reihe."
-                return
-            }
-
-            for (i <- cset) {
-                if !i.sameValue(c) then {
-                    msg = "Es dürfen nur Karten vom gleichen Wert gespielt werden. Spieler 1 ist an der Reihe."
-                    return
-                }
-            }
-
-            if game.spielfeld.isEmpty then {
-                game.spielfeld = cset
-                game.spieler1 = game.spieler1 -- cset
-                game.state = P2TurnState(game)
-                return
-            } else if game.spielfeld.size != cset.size then {
-                msg = "Es müssen genau so viele Karten gespielt werden, wie auf dem Feld liegen"
-                return
-            } else if !cset.head.isHigher(game.spielfeld.head) then {
-                msg = "Die Karten müssen einen höheren Wert haben als die Karten auf dem Spielfeld. Spieler 1 ist an der Reihe."
-                return
-            } else {
-                game.spielfeld = cset
-                game.spieler1 = game.spieler1 -- cset
-                game.state = P2TurnState(game)
-                return
-            }
-        }
+        val s1 = game.spieler1 -- cards
+        val board = cards
+        val state = P2TurnState()
+        return Game(state, s1, game.spieler2, board, game.deck)

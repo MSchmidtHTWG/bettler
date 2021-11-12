@@ -23,3 +23,4 @@ enum Value (value : String):
     case Queen extends Value("Q")
     case King extends Value("K")
     case Ace extends Value("A")
+    case Empty extends Value("")
