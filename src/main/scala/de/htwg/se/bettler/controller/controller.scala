@@ -11,7 +11,7 @@ case class Controller(var game : Game) extends Observable:
         game = game.play(cards)
         notifyObservers
     def start() : Unit = 
-        game = game.start()
+        game = Game()
         notifyObservers
     def skip() : Unit =
         game = game.skip()
