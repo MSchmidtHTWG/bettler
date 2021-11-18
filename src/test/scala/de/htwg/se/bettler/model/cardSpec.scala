@@ -7,6 +7,7 @@ import Value._
 import Symbol._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
+
 class cardSpec extends AnyWordSpec{
   "Card" should {
     val card1 = Card(Symbol.Clubs, Value.Seven)
