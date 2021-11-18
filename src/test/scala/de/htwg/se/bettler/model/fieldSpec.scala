@@ -14,17 +14,16 @@ class FieldSpec extends AnyWordSpec {
 
 
   "Field" should {
-
-    "have a bar as String of Form '--------------------------------------------------'" in {
-      Field.bar() should be ("--------------------------------------------------" + Field.eol)
-    }
+    val game = Game()
+    val field = Field(game)
     "have a scalable bar" in {
-      Field.bar(100) should be ("----------------------------------------------------------------------------------------------------" + Field.eol)
-      Field.bar(1) should be ("-" + Field.eol)
-      Field.bar(15) should be ("---------------" + Field.eol)
+      field.bar() should be ("--------------------------------------------------" + field.eol)
+      field.bar(100) should be ("----------------------------------------------------------------------------------------------------" + field.eol)
+      field.bar(1) should be ("-" + field.eol)
+      field.bar(15) should be ("---------------" + field.eol)
     }
-    "have printeble cards '[H7]'" in {
-      Field.printCard(Card(Symbol.Hearts, Value.Seven)) should be ("[H7]")
+    "have a method to print a single Card" in {
+      field.printCard(Card(Symbol.Hearts, Value.Seven)) should be ("[H7]")
     }
      
     "have a printable Board" in {
@@ -34,7 +33,9 @@ class FieldSpec extends AnyWordSpec {
       board = board + Card(Symbol.Hearts, Value.Seven)
       player2 = player2 + Card(Symbol.Hearts, Value.Nine)
       player1 = player1 + Card(Symbol.Diamonds, Value.Ten)
-      Field.printField(board,player1,player2) should be(Field.bar() + "Spieler 1" + Field.eol + "[D10]" +Field.eol + Field.bar()+"Spieler 2" + Field.eol + "[H9]" + Field.eol+Field.bar()+ "[H7]"+Field.eol + Field.bar())
+      val game2 = Game(P1TurnState(), Cards(player1), Cards(player2), Cards(board), Deck(32), "")
+      val field2 = Field(game2)
+      field2.printField() should be(field2.bar() + "Spieler 1" + field2.eol + "[D10]" + field2.eol + field2.bar()+"Spieler 2" + field2.eol + "[H9]" + field2.eol + field2.bar()+ "[H7]"+ field2.eol + field2.bar())
     }
  
   }
