@@ -4,7 +4,7 @@ package model
 case class P2TurnState() extends State:
     override def play(cards : Set[Card], game : Game) : Game =
         if cards.isEmpty then {
-            val msg = "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 1 ist an der Reihe."
+            val msg = "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 2 ist an der Reihe."
             return Game(game.state, game.spieler1, game.spieler2, game.spielfeld, game.deck, msg)
         }
         if !game.spieler2.contains(cards) then {
