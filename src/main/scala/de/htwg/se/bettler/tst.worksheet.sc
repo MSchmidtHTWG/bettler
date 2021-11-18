@@ -3,6 +3,7 @@ import model._
 
 val deck = Deck(32)
 var r = deck.draw()
+deck.size
 
 val game = Game()
 val state = P1TurnState()

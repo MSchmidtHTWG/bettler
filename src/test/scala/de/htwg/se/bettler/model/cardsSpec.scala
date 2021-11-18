@@ -26,7 +26,7 @@ class cardsSpec extends AnyWordSpec {
             val cards2 = Cards(Set.empty[Card])
             cards.isWorse(set) shouldBe(false)
             cards.isWorse(set2) shouldBe(false)
-            cards.isWorse(set3) shouldBe(true)
+            cards.isWorse(set3) shouldBe(false)
             cards.isWorse(Set.empty[Card]) shouldBe(false)
             cards2.isWorse(Set.empty[Card]) shouldBe(false)
             cards2.isWorse(set) shouldBe(true)

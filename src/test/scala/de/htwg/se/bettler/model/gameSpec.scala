@@ -8,7 +8,7 @@ class gameSpec extends AnyWordSpec {
     "Game" should {
         "should create a new Game with 2 players, each with 7 Cards and an empty field" in {
             val game = Game()
-            game.deck.size shouldBe(18)
+            game.deck.deck.size shouldBe(18)
             game.spieler1.cards.size shouldBe(7)
             game.spieler2.cards.size shouldBe(7)
             game.spielfeld.cards.size shouldBe(0)
@@ -20,7 +20,7 @@ class gameSpec extends AnyWordSpec {
             val cards = Set(game.spieler1.cards.head)
             val game2 = game.play(cards)
             game2.spieler1.cards.size shouldBe(6)
-            game2.spieler1.cards.size shouldBe(7)
+            game2.spieler2.cards.size shouldBe(7)
             game2.state.isInstanceOf[P2TurnState] shouldBe(true)
             game2.spielfeld.cards.size shouldBe(1)
             game2.spielfeld.cards.contains(game.spieler1.cards.head) shouldBe(true)
@@ -40,7 +40,7 @@ class gameSpec extends AnyWordSpec {
             val game = Game()
             val s = game.toString()
             val field = Field(game)
-            s == field.toString + field.eol + game.msg shouldBe(true)
+            s == (field.printField() + field.eol + game.msg) shouldBe(true)
             val game2 = Game(P1TurnState(), Cards(Set(Card(Symbol.Clubs, Value.Ace))), Cards(Set(Card(Symbol.Diamonds, Value.Ace))), Cards(Set(Card(Symbol.Hearts, Value.Ace))), Deck(32), "test")
             game2.toString() shouldBe (
                 "--------------------------------------------------" + field.eol +

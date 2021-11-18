@@ -11,6 +11,7 @@ class P1TurnStateSpec extends AnyWordSpec {
             val state = P2TurnState()
             val set = Set(Card(Symbol.Hearts, Value.Seven), Card(Symbol.Hearts, Value.Eight))
             val set2 = Set(Card(Symbol.Diamonds, Value.Ten), Card(Symbol.Hearts, Value.Ten))
+            val set4 = Set(Card(Symbol.Diamonds, Value.Ten), Card(Symbol.Hearts, Value.Ace))
             val cards = game.spieler1.returnSet.head
             val game2 = state.play(Set.empty[Card], game)
             game2.spieler1.equals(game.spieler1) shouldBe(true)
@@ -28,7 +29,7 @@ class P1TurnStateSpec extends AnyWordSpec {
             game3.state.equals(game.state) shouldBe(true)
             game3.msg == "Spieler 2 hat diese Karten nicht."
 
-            val game5 = Game(state, Cards(set), Cards(set2), Cards(Set.empty[Card]), Deck(32), "")
+            val game5 = Game(state, Cards(set), Cards(set4), Cards(Set.empty[Card]), Deck(32), "")
             val game4 = state.play(game5.spieler2.cards, game5)
             game4.spieler1.equals(game5.spieler1) shouldBe(true)
             game4.spieler2.equals(game5.spieler2) shouldBe(true)

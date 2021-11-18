@@ -23,9 +23,9 @@ class cardSpec extends AnyWordSpec{
     set3 = set3 + card2
 
     "Should have A Method for returning Cards "  in {
-      Card.returnCard("C7") should be (Card(Symbol.Clubs,Value.Seven))
-      Card.returnCard("SK") should be (Card(Symbol.Spades,Value.King))
-      Card.returnCard("DQ") should be (Card(Symbol.Diamonds,Value.Queen))
+      Card.returnCard("C7") should be (Some(Card(Symbol.Clubs,Value.Seven)))
+      Card.returnCard("SK") should be (Some(Card(Symbol.Spades,Value.King)))
+      Card.returnCard("DQ") should be (Some(Card(Symbol.Diamonds,Value.Queen)))
       Card.returnCard("NSD") should be (None)
     }
     "Should have A Method for finding out the Higher Card " in {
