@@ -2,14 +2,6 @@ package de.htwg.se.bettler
 package model
 
 case class Game(state : State, spieler1 : Cards, spieler2 : Cards, spielfeld : Cards, deck : Deck, msg : String):
-    def start() : Game =
-        val d = Deck(32)
-        val board = Cards(Set.empty[Card])
-        val s1 = Cards(d.draw())
-        val s2 = Cards(d.draw())
-        val st = P1TurnState()
-        Game(st, s1, s2, board, d, "Spieler 1 ist dran.")
-
     def play(cards : Set[Card]) : Game =
         return state.play(cards, this)
 
