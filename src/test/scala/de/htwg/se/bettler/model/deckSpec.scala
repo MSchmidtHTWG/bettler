@@ -3,7 +3,7 @@ package model
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
-import org.scalactic.Prettifier.default
+
 class deckSpec extends AnyWordSpec {
    "Deck" should {
       var deck = Deck(32)
