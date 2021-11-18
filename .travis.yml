@@ -3,7 +3,7 @@ scala:
 - 3.0.2
 
 script:
-- sbt clean coverage test coverReport
+- sbt clean test jacoco
 
 after_success:
-- sbt coverageReport coveralls
+- sbt jacocoCoveralls
