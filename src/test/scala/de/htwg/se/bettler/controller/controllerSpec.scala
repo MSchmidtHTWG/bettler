@@ -24,7 +24,7 @@ class controllerSpec extends AnyWordSpec {
             val game = Game()
             val controller = Controller(game)
             val game2 = controller.start()
-            game.equals(game2) shouldBe(true)
+            game.deck.equals(game2.deck) shouldBe(true)
         }
     }
 }
