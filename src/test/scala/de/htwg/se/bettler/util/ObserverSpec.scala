@@ -24,4 +24,14 @@ class ObserverSpec extends AnyWordSpec with Matchers {
       }
     }
   }
+  "An Observer" should {
+    "have a funtion update" in {
+      var updated = false
+      val observer = new Observer {
+        override def update: Unit = updated = true
+      }
+      observer.update
+      updated shouldBe(true)
+    }
+  }
 }
