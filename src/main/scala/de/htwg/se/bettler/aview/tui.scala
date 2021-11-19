@@ -34,7 +34,7 @@ class TUI(controller : Controller) extends Observer:
                             case None => println("")
                         }
                     }
-                    controller.play(l)
+                    controller.doAndNotify(controller.play, l)
                 }
             }
         }
