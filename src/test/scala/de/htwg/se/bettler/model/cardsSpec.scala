@@ -17,6 +17,8 @@ class cardsSpec extends AnyWordSpec {
             val cards = Cards(set)
             cards.contains(set) shouldBe(true)
             cards.contains(set2) shouldBe(false)
+            cards.contains(Cards(set)) shouldBe(true)
+            cards.contains(Cards(set2)) shouldBe(false)
         }
         "have a method to check if the Set of Cards is worse than another Set of Cards" in {
             val set = Set(Card(Symbol.Hearts, Value.Ace))
@@ -32,6 +34,14 @@ class cardsSpec extends AnyWordSpec {
             cards2.isWorse(set) shouldBe(true)
             cards2.isWorse(set2) shouldBe(true)
             cards2.isWorse(set3) shouldBe(true)
+            cards.isWorse(Cards(set)) shouldBe(false)
+            cards.isWorse(Cards(set2)) shouldBe(false)
+            cards.isWorse(Cards(set3)) shouldBe(false)
+            cards.isWorse(Cards(Set.empty[Card])) shouldBe(false)
+            cards2.isWorse(Cards(Set.empty[Card])) shouldBe(false)
+            cards2.isWorse(Cards(set)) shouldBe(true)
+            cards2.isWorse(Cards(set2)) shouldBe(true)
+            cards2.isWorse(Cards(set3)) shouldBe(true)
         }
         "have a method to check if all the Cards in the Set have the same value" in {
             val set = Set(Card(Symbol.Hearts, Value.Ace), Card(Symbol.Diamonds, Value.Ace))
