@@ -23,6 +23,7 @@ class cardSpec extends AnyWordSpec{
     set3 = set3 + card2
 
     "Should have A Method for returning Cards "  in {
+      Card.returnCard("C7") should be (Some(Card))
       Card.returnCard("C7") should be (Some(Card(Symbol.Clubs,Value.Seven)))
       Card.returnCard("C8") should be (Some(Card(Symbol.Clubs,Value.Eight)))
       Card.returnCard("C9") should be (Some(Card(Symbol.Clubs,Value.Nine)))
