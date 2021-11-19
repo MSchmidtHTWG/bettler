@@ -24,9 +24,19 @@ class cardSpec extends AnyWordSpec{
 
     "Should have A Method for returning Cards "  in {
       Card.returnCard("C7") should be (Some(Card(Symbol.Clubs,Value.Seven)))
-      Card.returnCard("SK") should be (Some(Card(Symbol.Spades,Value.King)))
-      Card.returnCard("DQ") should be (Some(Card(Symbol.Diamonds,Value.Queen)))
-      Card.returnCard("NSD") should be (None)
+      Card.returnCard("C8") should be (Some(Card(Symbol.Clubs,Value.Eight)))
+      Card.returnCard("C9") should be (Some(Card(Symbol.Clubs,Value.Nine)))
+      Card.returnCard("C10") should be (Some(Card(Symbol.Clubs,Value.Ten)))
+      Card.returnCard("CJ") should be (Some(Card(Symbol.Clubs,Value.Jack)))
+      Card.returnCard("CQ") should be (Some(Card(Symbol.Clubs,Value.Queen)))
+      Card.returnCard("CK") should be (Some(Card(Symbol.Clubs,Value.King)))
+      Card.returnCard("CA") should be (Some(Card(Symbol.Clubs,Value.Ace)))
+      Card.returnCard("DA") should be (Some(Card(Symbol.Diamonds,Value.Ace)))
+      Card.returnCard("SA") should be (Some(Card(Symbol.Spades,Value.Ace)))
+      Card.returnCard("HA") should be (Some(Card(Symbol.Hearts,Value.Ace)))
+      Card.returnCard("C11") should be (None)
+      Card.returnCard("Q7") should be (None)
+      Card.returnCard("") shouldBe (None)
     }
     "Should have A Method for finding out the Higher Card " in {
       card1.isHigher(card2) shouldBe(false)
