@@ -14,7 +14,10 @@ class controllerSpec extends AnyWordSpec {
             game2.deck.equals(game.deck) shouldBe(true)
             game2.msg == "Falsche Eingabe. Spiele Karten mit 'play Karte1 Karte2 ..'. Spieler 1 ist an der Reihe." shouldBe(true)
             val game3 = controller.play(Set(game.spieler1.cards.head))
+            val game4 = Controller(Game()).play(Set(game.spieler1.cards.head))
             game3.state.isInstanceOf[P2TurnState] shouldBe(true)
+            game4.state.isInstanceOf[P2TurnState] shouldBe(true)
+            game4.msg == "Spieler 2 ist dran." shouldBe(true)
         }
         "have a method skip to skip a turn" in {
             val game = Game()
