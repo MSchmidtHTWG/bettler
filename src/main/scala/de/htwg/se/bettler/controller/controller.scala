@@ -7,8 +7,8 @@ import model.Card
 
 case class Controller(var game : Game) extends Observable:
     override def toString = game.toString
-    def doAndNotify(p : (Set[Card]) => Game, s : Set[Card]) : Unit =
-        game = p(s)
+    def doAndNotify(p : (Set[Card]) => Game, cards : Set[Card]) : Unit =
+        game = p(cards)
         notifyObservers
     def doAndNotify(p : () => Game) : Unit =
         game = p()
