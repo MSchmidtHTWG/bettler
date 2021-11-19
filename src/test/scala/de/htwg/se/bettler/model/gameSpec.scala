@@ -14,6 +14,12 @@ class gameSpec extends AnyWordSpec {
             game.spielfeld.cards.size shouldBe(0)
             game.msg shouldBe("Spieler 1 ist dran.")
             game.state.isInstanceOf[P1TurnState] shouldBe(true)
+            Game().deck.deck.size shouldBe(18)
+            Game().spieler1.cards.size shouldBe(7)
+            Game().spieler2.cards.size shouldBe(7)
+            Game().spielfeld.cards.size shouldBe(0)
+            Game().msg shouldBe("Spieler 1 ist dran.")
+            Game().state.isInstanceOf[P1TurnState] shouldBe(true)
         }
         "should have a method to play cards" in {
             val game = Game()
