@@ -4,7 +4,7 @@ package aview
 import scala.io.StdIn.readLine
 import controller.Controller
 import util.Observer
-import model.Card
+import model._
 
 class TUI(controller : Controller) extends Observer:
     controller.add(this)
@@ -18,24 +18,20 @@ class TUI(controller : Controller) extends Observer:
 
     def TUI(): Unit =
         val input = readLine
-        input match {
-            case "start" => {
-                controller.doAndNotify(controller.start)
-            }
+        input match
+            case "start pvp" => controller.doAndNotify(controller.newGame, "pvp")
+            case "start pve" => controller.doAndNotify(controller.newGame, "pve")
             case "exit" => return
-            case "skip" => controller.skip()
-            case _ => {
-                if input.startsWith("play") then {
+            case "skip" => controller.doAndNotify(controller.skip)
+            case "save" => controller.addMemento()
+            case "restore" => controller.restore(controller.getMemento)
+            case _ =>
+                if input.startsWith("play") then
                     val s = input.split(" ")
                     var l = Set.empty[Card]
-                    for (i <- 1 to s.size - 1) {
-                        Card.returnCard(s(i)) match {
+                    for (i <- 1 to s.size - 1)
+                        Card.returnCard(s(i)) match
                             case Some(c) => l = l + c
                             case None => println("")
-                        }
-                    }
-                    controller.doAndNotify(controller.play, l)
-                }
-            }
-        }
+                    controller.doAndNotify(controller.play, Cards(l))
         TUI()

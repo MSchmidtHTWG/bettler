@@ -1,22 +1,31 @@
 package de.htwg.se.bettler
 package controller
 
-import model.Game
-import util.Observable
-import model.Card
-import model.Cards
+import model._
+import util._
 
-case class Controller(var game : Game) extends Observable:
+case class Controller(var game : Game) extends Observable with Caretaker:
     override def toString = game.toString
-    def doAndNotify(p : (Set[Card]) => Game, cards : Set[Card]) : Unit =
+    def doAndNotify(p : (Cards) => Game, cards : Cards) : Unit =
         game = p(cards)
+        notifyObservers
+    def doAndNotify(p : (String) => Game, kind : String) : Unit =
+        game = p(kind)
         notifyObservers
     def doAndNotify(p : () => Game) : Unit =
         game = p()
         notifyObservers
-    def play(cards : Set[Card]) : Game =
-        game.play(Cards(cards))
+    def restore(p : () => Memento) : Unit =
+        if !stack.isEmpty then
+            game = game.restore(p())
+            notifyObservers
+    def play(cards : Cards) : Game =
+        game.play(cards)
     def start() : Game = 
         game.start()
     def skip() : Game =
         game.skip()
+    def newGame(kind : String) : Game =
+        GameFactory.getInstance(kind)
+    def addMemento() : Unit = stack.push(game.save())
+    def getMemento() : Memento = stack.pop()

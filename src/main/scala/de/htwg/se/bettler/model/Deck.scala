@@ -13,7 +13,7 @@ case class Deck(size : Int):
     }
     def draw() : Set[Card] = 
         val ran = Random()
-        ran.setSeed(System.currentTimeMillis())
+        //ran.setSeed(DeckStrategy.execute(DeckStrategy.strategy2))
         var l : List[Card] = deck.toList
         l = ran.shuffle(l).slice(0, 7)
         var r = Set.empty[Card]
