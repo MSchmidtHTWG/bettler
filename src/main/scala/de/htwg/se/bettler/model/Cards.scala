@@ -3,7 +3,7 @@ package model
 
 case class Cards(cards : Set[Card]):
     def returnSet = cards
-    def contains(c : Cards) = c.cards.isEmpty || (c.cards -- cards).size == 0
+    def contains(c : Cards) = !c.cards.isEmpty && (c.cards -- cards).size == 0
     def isWorse(c: Cards) : Boolean =
         if c.cards.isEmpty then return false
         if cards.size == 0 then return true
@@ -23,4 +23,5 @@ case class Cards(cards : Set[Card]):
         } return false
         return true
     def remove(c : Cards) = Cards(this.cards -- c.cards)
+    def size = cards.size
 

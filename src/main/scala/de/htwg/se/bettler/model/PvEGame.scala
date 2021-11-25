@@ -44,7 +44,7 @@ object PvEGame:
         def apply() : Game =
             val d = Deck(32)
             val board = Cards(Set.empty[Card])
-            val s1 = Cards(d.draw())
-            val s2 = Cards(d.draw())
+            val s1 = d.draw()
+            val s2 = d.draw()
             GameStateContext.handle(Event.Start)
             return PvEGame(Vector(s1,s2), board, "Player 1 turn.")

@@ -11,7 +11,7 @@ case class Deck(size : Int):
         deck = deck + Card(Symbol.Clubs, Value.Seven) + Card(Symbol.Clubs, Value.Eight) + Card(Symbol.Clubs, Value.Nine) + Card(Symbol.Clubs, Value.Ten) + Card(Symbol.Clubs, Value.Jack) + Card(Symbol.Clubs, Value.Queen) + Card(Symbol.Clubs, Value.King) + Card(Symbol.Clubs, Value.Ace)
         deck = deck + Card(Symbol.Spades, Value.Seven) + Card(Symbol.Spades, Value.Eight) + Card(Symbol.Spades, Value.Nine) + Card(Symbol.Spades, Value.Ten) + Card(Symbol.Spades, Value.Jack) + Card(Symbol.Spades, Value.Queen) + Card(Symbol.Spades, Value.King) + Card(Symbol.Spades, Value.Ace)
     }
-    def draw() : Set[Card] = 
+    def draw() : Cards = 
         val ran = Random()
         //ran.setSeed(DeckStrategy.execute(DeckStrategy.strategy2))
         var l : List[Card] = deck.toList
@@ -21,7 +21,7 @@ case class Deck(size : Int):
             r = r + ll
         }
         deck = deck -- r
-        return r
+        return Cards(r)
 
 
 
