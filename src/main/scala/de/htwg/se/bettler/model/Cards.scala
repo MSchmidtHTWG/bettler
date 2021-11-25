@@ -36,4 +36,5 @@ case class Cards(cards : Set[Card]):
         } return false
         return true
     }
+    def remove(c : Cards) = Cards(this.cards -- c.cards)
 

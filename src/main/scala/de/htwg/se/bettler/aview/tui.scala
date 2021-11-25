@@ -20,7 +20,7 @@ class TUI(controller : Controller) extends Observer:
         val input = readLine
         input match {
             case "start" => {
-                controller.start()
+                controller.doAndNotify(controller.start)
             }
             case "exit" => return
             case "skip" => controller.skip()

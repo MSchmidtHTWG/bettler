@@ -14,11 +14,11 @@ case class Field(game : Game) {
 
   def printField() : String =
     var r = bar() + "Spieler 1" + eol
-    game.spieler1.returnSet.foreach{r += printCard(_)}
+    game.players(0).returnSet.foreach{r += printCard(_)}
     r += eol + bar() + "Spieler 2" + eol
-    game.spieler2.returnSet.foreach{r += printCard(_)}
+    game.players(1).returnSet.foreach{r += printCard(_)}
     r += eol + bar()
-    game.spielfeld.returnSet.foreach{r+= printCard(_)}
+    game.board.returnSet.foreach{r+= printCard(_)}
     r += eol + bar()
     return r
 

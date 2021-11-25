@@ -4,6 +4,7 @@ package controller
 import model.Game
 import util.Observable
 import model.Card
+import model.Cards
 
 case class Controller(var game : Game) extends Observable:
     override def toString = game.toString
@@ -14,8 +15,8 @@ case class Controller(var game : Game) extends Observable:
         game = p()
         notifyObservers
     def play(cards : Set[Card]) : Game =
-        game.play(cards)
+        game.play(Cards(cards))
     def start() : Game = 
-        Game()
+        game.start()
     def skip() : Game =
         game.skip()

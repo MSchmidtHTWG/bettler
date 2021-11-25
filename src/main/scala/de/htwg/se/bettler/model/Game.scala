@@ -1,25 +1,38 @@
 package de.htwg.se.bettler
 package model
 
-case class Game(state : State, spieler1 : Cards, spieler2 : Cards, spielfeld : Cards, deck : Deck, msg : String):
-    def play(cards : Set[Card]) : Game =
-        return state.play(cards, this)
+case class Game(players : Vector[Cards], board : Cards, msg : String):
+    def play(cards : Cards) : Game =
+        if GameStateContext.state.isInstanceOf[PlayerTurnState] then
+            println("test3")
+            val currentPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
+            val playerCards = players(currentPlayer)
+            if playerCards.contains(cards) && cards.isPlayable && board.isWorse(cards) then
+                println("test4")
+                val newPlayerCards = playerCards.remove(cards)
+                val newPlayers = players.updated(currentPlayer, newPlayerCards)
+                val newBoard = cards
+                GameStateContext.handle(Event.Skip)
+                return copy(players = newPlayers, board = newBoard, msg = "Player 2 turn.")
+            return copy(msg = "Cards are not playable.")
+        return copy(msg = "It is not a players turn right now.")
 
-    def skip() : Game = {
-        if state.isInstanceOf[P1TurnState] then {
-            val s = P2TurnState()
-            val m = "Spieler 2 ist dran."
-            copy(state = s, msg = m) 
-        } else {
-            val s = P1TurnState()
-            val m = "Spieler 1 ist dran."
-            copy(state = s, msg = m) 
-        }
-    }
-    override def toString : String = {
+    def skip() : Game =
+        if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
+            GameStateContext.handle(Event.Skip)
+        return this
+    
+    def newGame() : Game =
+        GameStateContext.setState(StartState())
+        return Game()
+    
+    def start() : Game = 
+        GameStateContext.handle(Event.Start)
+        this
+
+    override def toString : String =
         val field = Field(this)
         return field.printField() + field.eol + msg
-    }
 
 object Game:
         def apply() : Game =
@@ -27,7 +40,6 @@ object Game:
             val board = Cards(Set.empty[Card])
             val s1 = Cards(d.draw())
             val s2 = Cards(d.draw())
-            val st = P1TurnState()
-            return Game(st, s1, s2, board, d, "Spieler 1 ist dran.")
+            return Game(Vector(s1,s2), board, "Player 1 turn.")
     
 
