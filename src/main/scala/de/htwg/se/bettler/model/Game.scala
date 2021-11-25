@@ -7,7 +7,6 @@ trait Game extends Originator:
     def play(cards : Cards) : Game
     def skip() : Game
     def newGame() : Game
-    def start() : Game
     def getPlayers() : Vector[Cards]
     def getBoard() : Cards
     def getMessage() : String

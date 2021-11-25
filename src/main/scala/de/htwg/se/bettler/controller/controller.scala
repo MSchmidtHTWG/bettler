@@ -21,8 +21,6 @@ case class Controller(var game : Game) extends Observable with Caretaker:
             notifyObservers
     def play(cards : Cards) : Game =
         game.play(cards)
-    def start() : Game = 
-        game.start()
     def skip() : Game =
         game.skip()
     def newGame(kind : String) : Game =

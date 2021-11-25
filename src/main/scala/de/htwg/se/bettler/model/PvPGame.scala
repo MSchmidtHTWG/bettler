@@ -25,10 +25,6 @@ case class PvPGame(players : Vector[Cards], board : Cards, msg : String) extends
     def newGame() : Game =
         GameStateContext.setState(StartState())
         return PvPGame()
-    
-    def start() : Game = 
-        GameStateContext.handle(Event.Start)
-        this
 
     def getPlayers() = players
     def getBoard() = board
