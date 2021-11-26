@@ -8,21 +8,21 @@ import model._
 class controllerSpec extends AnyWordSpec {
     "Controller" should {
         "have a method play, that returns a Game" in {
-            //GameStateContext.setState(StartState())
+            GameStateContext.setState(StartState())
             val game = PvPGame()
             val controller = Controller(game)
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
-            GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
+            //GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             controller.doAndNotify(controller.play, Cards(Set.empty[Card]))
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
-            GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
+            //GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             controller.game.getMessage() shouldBe("Cards are not playable.")
             val player1 = game.getPlayers()(0)
             val player1HeadCard = Cards(Set(player1.returnSet.head))
             controller.doAndNotify(controller.play, player1HeadCard)
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
-            GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(1)
-            controller.game.getMessage() == "Player 2 turn." shouldBe(true)
+            //GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(1)
+            controller.game.getMessage() shouldBe("Player 2 turn.")
         }
         "have a method skip to skip a turn" in {
             val game = PvPGame()

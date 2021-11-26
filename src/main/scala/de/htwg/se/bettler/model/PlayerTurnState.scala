@@ -11,5 +11,5 @@ case class PlayerTurnState(currentPlayer : Int, maxPlayers : Int) extends State:
                 else
                     val nextPlayer = currentPlayer + 1
                     return PlayerTurnState(nextPlayer, maxPlayers)
-            case Event.Start => PlayerTurnState(0,maxPlayers)
+            case Event.Start => PlayerTurnState(0, maxPlayers)
             case _ => this
