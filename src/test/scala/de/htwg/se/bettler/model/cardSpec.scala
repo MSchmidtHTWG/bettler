@@ -22,7 +22,7 @@ class cardSpec extends AnyWordSpec{
     set2 = set2 + card3
     set3 = set3 + card2
 
-    "Should have A Method for returning Cards "  in {
+    "have A Method for returning Cards "  in {
       Card.returnCard("C7") should be (Some(Card(Symbol.Clubs,Value.Seven)))
       Card.returnCard("C8") should be (Some(Card(Symbol.Clubs,Value.Eight)))
       Card.returnCard("C9") should be (Some(Card(Symbol.Clubs,Value.Nine)))
@@ -38,13 +38,13 @@ class cardSpec extends AnyWordSpec{
       Card.returnCard("Q7") should be (None)
       Card.returnCard("") shouldBe (None)
     }
-    "Should have A Method for finding out the Higher Card " in {
+    "have A Method for finding out the Higher Card " in {
       card1.isHigher(card2) shouldBe(false)
       card2.isHigher(card1) shouldBe(true)
       card2.isHigher(card3) shouldBe(true)
       card1.isHigher(card1) shouldBe(false)
     }
-    "Should have A Method for finding out if the value is the same" in {
+    "have A Method for finding out if the value is the same" in {
       card2.sameValue(card1) shouldBe(false)
       card1.sameValue(card2) shouldBe(false)
       card2.sameValue(card2) shouldBe(true)
@@ -52,7 +52,7 @@ class cardSpec extends AnyWordSpec{
       card1.sameValue(card4) shouldBe(true)
       card4.sameValue(card1) shouldBe(true)
     }
-    "Should have a string representation of a Card" in {
+    "have a string representation of a Card" in {
       card1.toString() shouldBe("C7")
       card2.toString() shouldBe("SK")
       card3.toString() shouldBe("DQ")

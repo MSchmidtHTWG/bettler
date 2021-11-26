@@ -12,10 +12,10 @@ class controllerSpec extends AnyWordSpec {
             val game = PvPGame()
             val controller = Controller(game)
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
-            //GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
+            GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             controller.doAndNotify(controller.play, Cards(Set.empty[Card]))
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
-            //GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
+            GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             controller.game.getMessage() shouldBe("Cards are not playable.")
             val player1 = game.getPlayers()(0)
             val player1HeadCard = Cards(Set(player1.returnSet.head))
@@ -25,6 +25,7 @@ class controllerSpec extends AnyWordSpec {
             controller.game.getMessage() shouldBe("Player 2 turn.")
         }
         "have a method skip to skip a turn" in {
+            GameStateContext.setState(StartState())
             val game = PvPGame()
             val controller = Controller(game)
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
@@ -34,6 +35,7 @@ class controllerSpec extends AnyWordSpec {
             GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(1)
         }
         "have a method start to start a new game" in {
+            GameStateContext.setState(StartState())
             val game = PvPGame()
             val controller = Controller(game)
             controller.doAndNotify(controller.newGame, "pve")

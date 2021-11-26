@@ -11,7 +11,7 @@ class deckSpec extends AnyWordSpec {
       "Have a Method for drawning from a deck" in {
          deck.draw().size should be (7)
       }
-      "should be subset" in {
+      "be subset" in {
          deck.draw().returnSet subsetOf deck2.deck should be (true)
       }
    }

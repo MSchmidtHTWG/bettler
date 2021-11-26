@@ -6,7 +6,8 @@ import org.scalatest.matchers.should.Matchers._
 
 class gameSpec extends AnyWordSpec {
     "Game" should {
-        "should create a new Game with 2 players, each with 7 Cards and an empty field" in {
+        "create a new Game with 2 players, each with 7 Cards and an empty field" in {
+            GameStateContext.setState(StartState())
             val game = PvPGame()
             game.getPlayers().size shouldBe(2)
             game.getBoard().cards.isEmpty shouldBe(true)
@@ -14,7 +15,8 @@ class gameSpec extends AnyWordSpec {
                 p.cards.size shouldBe(7)
             }
         }
-        "should have a method to play cards" in {
+        "have a method to play cards" in {
+            GameStateContext.setState(StartState())
             val game = PvPGame()
             val player1 = game.getPlayers()(0)
             val cards = Cards(Set(player1.returnSet.head))
@@ -28,7 +30,7 @@ class gameSpec extends AnyWordSpec {
             game2.getPlayers()(0).contains(cards) shouldBe(false)
             game2.getMessage() shouldBe("Player 2 turn.")
         }
-        "should have a method to skip turns" in {
+        "have a method to skip turns" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
@@ -38,7 +40,7 @@ class gameSpec extends AnyWordSpec {
             val game3 = game.skip()
             GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
         }
-        "should have a String representation of the Game" in {
+        "have a String representation of the Game" in {
             /*val game = Game()
             val s = game.toString()
             val field = Field(game)
