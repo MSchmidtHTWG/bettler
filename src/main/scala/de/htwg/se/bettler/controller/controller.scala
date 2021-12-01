@@ -24,6 +24,6 @@ case class Controller(var game : Game) extends Observable with Caretaker:
     def skip() : Game =
         game.skip()
     def newGame(kind : String) : Game =
-        GameFactory.getInstance(kind)
+        Game(kind)
     def addMemento() : Unit = stack.push(game.save())
     def getMemento() : Memento = stack.pop()

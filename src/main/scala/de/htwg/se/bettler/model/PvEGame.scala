@@ -13,9 +13,21 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
                 val newPlayers = players.updated(currentPlayer, newPlayerCards)
                 val newBoard = cards
                 GameStateContext.handle(Event.Skip)
-                return copy(players = newPlayers, board = newBoard, msg = "Player 2 turn.")
+                val currentAiPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
+                val aiPlayerCards = players(currentAiPlayer)
+                for (aiPlayerCard <- aiPlayerCards.returnSet)
+                    if newBoard.isWorse(Cards(Set(aiPlayerCard))) then
+                        val newAiPlayerCards = aiPlayerCards.remove(Cards(Set(aiPlayerCard)))
+                        val newAiBoard = Cards(Set(aiPlayerCard))
+                        val newAiPlayers = newPlayers.updated(currentAiPlayer, newAiPlayerCards)
+                        GameStateContext.handle(Event.Skip)
+                        return copy(players = newAiPlayers, board = newAiBoard, msg= "Player 1 turn.")
+                GameStateContext.handle(Event.Skip)
+                return copy(players = newPlayers, board = newBoard, msg = "Player 1 turn.")
             return copy(msg = "Cards are not playable.")
         return copy(msg = "It is not a players turn right now.")
+
+    
 
     def skip() : Game =
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then

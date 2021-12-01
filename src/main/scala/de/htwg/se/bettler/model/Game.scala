@@ -11,7 +11,7 @@ trait Game extends Originator:
     def getBoard() : Cards
     def getMessage() : String
 
-object GameFactory:
-    def getInstance(kind: String) = kind match
+object Game:
+    def apply(kind: String) = kind match
         case "pvp" => PvPGame()
         case "pve" => PvEGame()
