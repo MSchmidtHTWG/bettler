@@ -18,5 +18,3 @@ class PlayCommand(controller : Controller) extends Command:
         controller.game = memento.savegame
         GameStateContext.setState(memento.savestate)
         memento = newMemento
-
-        
