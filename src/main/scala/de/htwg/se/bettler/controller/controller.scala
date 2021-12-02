@@ -65,8 +65,7 @@ case class Controller(var game : Option[Game]) extends Observable with Caretaker
             case None => return
 
     def getMemento() : Memento =
-        game match
-            case Some(g) => stack.pop()
+        stack.pop()
 
     def undo : Unit = 
         undomanager.undoStep
