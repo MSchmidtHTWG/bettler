@@ -37,6 +37,8 @@ class cardSpec extends AnyWordSpec{
       Card("C11") should be (None)
       Card("Q7") should be (None)
       Card("") shouldBe (None)
+      val card = Card.apply("C7")
+      card.isDefined shouldBe(true)
     }
     "have A Method for finding out the Higher Card" in {
       card1.isHigher(card2) shouldBe(false)
