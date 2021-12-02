@@ -42,11 +42,11 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
     def getBoard() = board
     def getMessage() = msg
 
-    def save() : Memento = GameMemento(Some(this), GameStateContext.getState())
-    def restore(m : Memento) : Option[Game] = 
+    def save() : Memento = GameMemento(this, GameStateContext.getState())
+    def restore(m : Memento) : Game = 
         GameStateContext.setState(m.state())
         m.game()
-
+        
     override def toString : String =
         val field = Field(this)
         return field.printField() + field.eol + msg

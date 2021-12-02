@@ -30,8 +30,8 @@ case class PvPGame(players : Vector[Cards], board : Cards, msg : String) extends
     def getBoard() = board
     def getMessage() = msg
 
-    def save() : Memento = GameMemento(Some(this), GameStateContext.getState())
-    def restore(m : Memento) : Option[Game] = 
+    def save() : Memento = GameMemento(this, GameStateContext.getState())
+    def restore(m : Memento) : Game = 
         GameStateContext.setState(m.state())
         m.game()
 

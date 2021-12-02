@@ -9,12 +9,12 @@ class MementoSpec extends AnyWordSpec with Matchers {
     "A GameMemento" when {
         "create a new GameMemento" should {
             val game = PvPGame()
-            val gameMemento = GameMemento(Some(game), StartState())
+            val gameMemento = GameMemento(game, StartState())
             "have a savestate" in {
                 gameMemento.savestate should be (StartState())
             }
             "have a savegame" in {
-                gameMemento.savegame should be (Some(game))
+                gameMemento.savegame should be (game)
             }
         }
     }

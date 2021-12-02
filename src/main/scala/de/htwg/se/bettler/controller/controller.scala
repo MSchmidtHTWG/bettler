@@ -29,13 +29,13 @@ case class Controller(var game : Option[Game]) extends Observable with Caretaker
         val newGame = p()
         newGame match
             case Some(newGame) => game = Some(newGame)
-            case None => println("")
+            case None => game = newGame
         notifyObservers
 
     def restore(p : () => Memento) : Unit =
         if !stack.isEmpty then
             game match
-                case Some(g) => game = g.restore(p())
+                case Some(g) => game = Some(g.restore(p()))
                 case None => game = None
             notifyObservers
 
