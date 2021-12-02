@@ -14,6 +14,7 @@ enum Value (value : String):
             case "Q" => 12
             case "K" => 13
             case "A" => 14
+            case _ => 0
         }
     case Seven extends Value("7")
     case Eight extends Value("8")

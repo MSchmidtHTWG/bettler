@@ -5,7 +5,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 
 class gameSpec extends AnyWordSpec {
-    "Game" should {
+    "A Game" should {
         "create a new Game with 2 players, each with 7 Cards and an empty field" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()

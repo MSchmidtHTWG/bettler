@@ -1,7 +1,7 @@
 package de.htwg.se.bettler
 package model
 
-case class Cards(cards : Set[Card]): //extends Set[Card]?
+case class Cards(cards : Set[Card]):
     def returnSet = cards
     def contains(c : Cards) = !c.cards.isEmpty && (c.cards -- cards).size == 0
     def isWorse(c: Cards) : Boolean =
