@@ -42,8 +42,8 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
     def getBoard() = board
     def getMessage() = msg
 
-    def save() : Memento = GameMemento(this, GameStateContext.getState())
-    def restore(m : Memento) : Game = 
+    def save() : Memento = GameMemento(Some(this), GameStateContext.getState())
+    def restore(m : Memento) : Option[Game] = 
         GameStateContext.setState(m.state())
         m.game()
 
@@ -58,5 +58,5 @@ object PvEGame:
             val board = Cards(Set.empty[Card])
             val s1 = d.draw()
             val s2 = d.draw()
-            GameStateContext.handle(Event.Start)
+            //GameStateContext.handle(Event.Start)
             return PvEGame(Vector(s1,s2), board, "Player 1 turn.")

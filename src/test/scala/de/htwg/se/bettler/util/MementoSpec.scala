@@ -8,13 +8,13 @@ import org.scalatest.wordspec.AnyWordSpec
 class MementoSpec extends AnyWordSpec with Matchers {
     "A GameMemento" when {
         "create a new GameMemento" should {
-            val game = Game()
-            val gameMemento = GameMemento(game, StartState())
+            val game = PvPGame()
+            val gameMemento = GameMemento(Some(game), StartState())
             "have a savestate" in {
                 gameMemento.savestate should be (StartState())
             }
             "have a savegame" in {
-                gameMemento.savegame should be (game)
+                gameMemento.savegame should be (Some(game))
             }
         }
     }

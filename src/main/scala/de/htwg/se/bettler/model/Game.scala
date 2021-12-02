@@ -12,7 +12,12 @@ trait Game extends Originator:
     def getMessage() : String
 
 object Game:
-    def apply() = PvPGame()
-    def apply(kind: String) = kind match
-        case "pvp" => PvPGame()
-        case "pve" => PvEGame()
+    def apply() : Option[Game] = None
+    def apply(kind: String) : Option[Game] = kind match
+        case "pvp" => 
+            GameStateContext.handle(Event.Start)
+            Some(PvPGame())
+        case "pve" => 
+            GameStateContext.handle(Event.Start)
+            Some(PvEGame())
+        case _ => None

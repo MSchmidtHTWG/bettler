@@ -5,7 +5,7 @@ import model._
 import aview.TUI
 
 @main def Main: Unit =
-  val game = PvPGame()
+  val game = Game()
   val controller = Controller(game)
   val tui = TUI(controller)
   tui.run
