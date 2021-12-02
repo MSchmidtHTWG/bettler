@@ -22,7 +22,7 @@ class cardSpec extends AnyWordSpec{
     set2 = set2 + card3
     set3 = set3 + card2
 
-    "have A Method for returning Cards "  in {
+    "have A Method for creating and returning Cards"  in {
       Card("C7") should be (Some(Card(Symbol.Clubs,Value.Seven)))
       Card("C8") should be (Some(Card(Symbol.Clubs,Value.Eight)))
       Card("C9") should be (Some(Card(Symbol.Clubs,Value.Nine)))
@@ -38,7 +38,7 @@ class cardSpec extends AnyWordSpec{
       Card("Q7") should be (None)
       Card("") shouldBe (None)
     }
-    "have A Method for finding out the Higher Card " in {
+    "have A Method for finding out the Higher Card" in {
       card1.isHigher(card2) shouldBe(false)
       card2.isHigher(card1) shouldBe(true)
       card2.isHigher(card3) shouldBe(true)

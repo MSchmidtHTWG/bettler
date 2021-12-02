@@ -33,10 +33,6 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
             GameStateContext.handle(Event.Skip)
         return copy(board = Cards(Set.empty[Card]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
-    
-    def newGame() : Game =
-        GameStateContext.setState(StartState())
-        return PvEGame()
 
     def getPlayers() = players
     def getBoard() = board
@@ -46,7 +42,7 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
     def restore(m : Memento) : Game = 
         GameStateContext.setState(m.state())
         m.game()
-        
+
     override def toString : String =
         val field = Field(this)
         return field.printField() + field.eol + msg
