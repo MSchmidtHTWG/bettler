@@ -6,6 +6,11 @@ import org.scalatest.wordspec.AnyWordSpec
 
 class GameStateContextSpec extends AnyWordSpec with Matchers {
     "A GameStateContext" when {
+        "initialized" should {
+            "have a state set to StartState" in {
+                GameStateContext.getState().isInstanceOf[StartState] shouldBe(true)
+            }
+        }
         "getting a state to be set" should {
             "save a state internally" in {
                 val state = StartState()
