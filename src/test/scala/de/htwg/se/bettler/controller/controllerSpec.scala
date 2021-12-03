@@ -51,5 +51,10 @@ class controllerSpec extends AnyWordSpec {
             controller.game match
                 case Some(g) => g.isInstanceOf[PvEGame] shouldBe(true)
         }
+        "have a method toString that returns the games string representation or a message, that the game is not initialized" in {
+            Controller(Game()).toString shouldBe("Currently no game running.")
+            val game = Game("pvp")
+            Controller(game).toString shouldBe(game.toString)
+        }
     }
 }

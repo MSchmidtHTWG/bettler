@@ -11,8 +11,6 @@ import org.scalatest.matchers.should.Matchers._
 import org.scalactic.Prettifier.default
 
 class FieldSpec extends AnyWordSpec {
-
-
   "Field" should {
     val game = PvPGame(Vector.empty[Cards], Cards(Set.empty[Card]), "")
     val field = Field(game)
@@ -38,9 +36,7 @@ class FieldSpec extends AnyWordSpec {
       val field2 = Field(game2)
       field2.printField() should be(field2.eol + field2.bar() + "Player 1" + field2.eol + "[D10]" + field2.eol + field2.bar() + "Player 2" + field2.eol + "[H9]" + field2.eol + field2.bar() + "[H7]" + field2.eol + field2.bar())
     }
- 
   }
-   
 }
 
 
