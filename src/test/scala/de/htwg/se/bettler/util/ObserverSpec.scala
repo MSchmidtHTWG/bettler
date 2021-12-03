@@ -6,7 +6,7 @@ import org.scalatest.wordspec.AnyWordSpec
 
 class ObserverSpec extends AnyWordSpec with Matchers {
   "An observable" when {
-    "added a new observer" should {
+    "adding a new observer" should {
       var updated = false
       val observable = new Observable {}
       val observer = new Observer {
@@ -21,6 +21,18 @@ class ObserverSpec extends AnyWordSpec with Matchers {
       "have subscriber removed" in {
         observable.remove(observer)
         observable.subscribers.contains(observer) should be(false)
+      }
+    }
+    "notifying observers" should {
+      "update all observers" in {
+        var updated = false
+        val observable = new Observable {}
+        val observer = new Observer {
+          override def update: Unit = updated = true
+        }
+        observable.add(observer)
+        observable.notifyObservers
+        updated shouldBe(true)
       }
     }
   }

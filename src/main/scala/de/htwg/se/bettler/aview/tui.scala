@@ -30,12 +30,17 @@ class TUI(controller : Controller) extends Observer:
             case "redo" => controller.redo
             case _ =>
                 if input.startsWith("play") then
-                    val s = input.split(" ")
-                    var l = Set.empty[Card]
-                    for (i <- 1 to s.size - 1)
-                        Card(s(i)) match
-                            case Success(c) => 
-                                l = l + c
-                                controller.doAndNotify(controller.play, Cards(l))
-                            case Failure(f) => println(f.getMessage)
+                    if !GameStateContext.getState().isInstanceOf[PlayerTurnState] then
+                        println("Start a game first.")
+                    else
+                        val s = input.split(" ")
+                        var l = Set.empty[Card]
+                        for (i <- 1 to s.size - 1)
+                            Card(s(i)) match
+                                case Success(c) => 
+                                    l = l + c
+                                    controller.doAndNotify(controller.play, Cards(l))
+                                case Failure(f) => println(f.getMessage)
+                else
+                    println("Unknown command.")
         TUI()
