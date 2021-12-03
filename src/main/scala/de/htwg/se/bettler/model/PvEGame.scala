@@ -15,24 +15,29 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
                 GameStateContext.handle(Event.Skip)
                 val currentAiPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
                 val aiPlayerCards = players(currentAiPlayer)
-                for (aiPlayerCard <- aiPlayerCards.returnSet)
-                    if newBoard.isWorse(Cards(Set(aiPlayerCard))) then
-                        val newAiPlayerCards = aiPlayerCards.remove(Cards(Set(aiPlayerCard)))
-                        val newAiBoard = Cards(Set(aiPlayerCard))
+                val aiCardsToPlay = aiPlayerCards.findPlayable(newBoard)
+                aiCardsToPlay match
+                    case Some(c) => 
+                        val newAiPlayerCards = aiPlayerCards.remove(c)
+                        val newAiBoard = c
                         val newAiPlayers = newPlayers.updated(currentAiPlayer, newAiPlayerCards)
                         GameStateContext.handle(Event.Skip)
                         return copy(players = newAiPlayers, board = newAiBoard, msg= "Player 1 turn.")
-                GameStateContext.handle(Event.Skip)
-                return copy(players = newPlayers, board = newBoard, msg = "Player 1 turn.")
+                    case None => 
+                        GameStateContext.handle(Event.Skip)
+                        return copy(players = newPlayers, board = Cards(Set.empty[Card]), msg = "Player 1 turn.")
             return copy(msg = "Cards are not playable.")
         return copy(msg = "It is not a players turn right now.")
 
-    
-
     def skip() : Game =
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
-            GameStateContext.handle(Event.Skip)
-        return copy(board = Cards(Set.empty[Card]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
+            if GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer == 0 then
+                val aiPlayerCards = players(1)
+                val lowestAiCards = players(1).findPlayable(Cards(Set.empty[Card]))
+                val newBoard = lowestAiCards.get
+                val newAiPlayers = players.updated(1, aiPlayerCards.remove(newBoard))
+                return copy(players = newAiPlayers, board = newBoard, msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
+        return this
 
     def getPlayers() = players
     def getBoard() = board
