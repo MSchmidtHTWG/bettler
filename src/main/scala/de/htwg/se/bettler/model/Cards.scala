@@ -38,7 +38,8 @@ case class Cards(cards : Set[Card]):
             for (card <- cards)
                 if card.value.getValue.equals(value) then
                     groupCards += card
-            group = group :+ Cards(groupCards)
+            if groupCards.nonEmpty then
+                group = group :+ Cards(groupCards)
         return group
 
     /*def findLowest : Cards =

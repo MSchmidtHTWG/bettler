@@ -55,5 +55,36 @@ class cardsSpec extends AnyWordSpec {
             cards2.isPlayable shouldBe(false)
             cards3.isPlayable shouldBe(false)
         }
+        "have a method to group the cards by value in a vector" in {
+            val card1 = Card("H8")
+            val card2 = Card("C8")
+            val card3 = Card("H9")
+            val cards = Cards(Set(card1.get, card2.get, card3.get))
+            val cardGroupVector = cards.groupBySameValue
+            cardGroupVector.size shouldBe(2)
+            cardGroupVector(0).contains(Cards(Set(card1.get))) shouldBe(true)
+            cardGroupVector(0).contains(Cards(Set(card2.get))) shouldBe(true)
+            cardGroupVector(0).contains(Cards(Set(card3.get))) shouldBe(false)
+            cardGroupVector(1).size shouldBe(1)
+            cardGroupVector(1).contains(Cards(Set(card3.get))) shouldBe(true)
+        }
+        "have a method to find a playable card" in {
+            val card1 = Card("H8")
+            val card2 = Card("C8")
+            val card3 = Card("H9")
+            val card4 = Card("C7")
+            val hand1 = Cards(Set(card1.get, card2.get))
+            val hand2 = Cards(Set(card3.get))
+            val board = Cards(Set(card4.get))
+            val board2 = Cards(Set(card3.get))
+            val h1p = hand1.findPlayable(board)
+            h1p.isDefined shouldBe(true)
+            h1p.get.size shouldBe(1)
+            val h2p = hand2.findPlayable(board)
+            h2p.isDefined shouldBe(true)
+            h2p.get.size shouldBe(1)
+            val h3p = hand1.findPlayable(board2)
+            h3p.isDefined shouldBe(false)
+        }
     }
 }
