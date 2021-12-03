@@ -3,6 +3,9 @@ package model
 
 import model.Symbol
 import scala.annotation.meta.setter
+import scala.util.Try
+import scala.util.Failure
+import scala.util.Success
 
 case class Card(symbol : Symbol, value : Value):
     override def toString = symbol.toString + value.toString
@@ -10,8 +13,8 @@ case class Card(symbol : Symbol, value : Value):
     def isHigher(card : Card) = this.value.getValue > card.value.getValue
 
 object Card :
-    def apply(input : String) : Option[Card] =
-        if input.length < 2 then return None
+    def apply(input : String) : Try[Card] =
+        if input.length < 2 || input.length > 4 then return Failure(NoCardException("The string is too short or too long to be a card."))
         val s = input(0)
         val v = input.slice(1, input.length)
         val sym = s match
@@ -30,7 +33,9 @@ object Card :
             case "K" => Value.King
             case "A" => Value.Ace
             case _ => Value.Empty
-        if (sym == Symbol.Empty || va == Value.Empty)
-            return None
-        else 
-            return Some(Card(sym, va))
+        if sym == Symbol.Empty || va == Value.Empty then Failure(NoCardException("The string is not a card."))
+        else return Success(Card(sym, va))
+
+//class NoCardException(message : String) extends Exception(message):
+    //def this() = this("The string is not a card.")
+case class NoCardException(message: String) extends Exception(message) 

@@ -1,6 +1,7 @@
 package de.htwg.se.bettler
 package aview
 
+import scala.util.{Try,Success,Failure}
 import scala.io.StdIn.readLine
 import controller.Controller
 import util.Observer
@@ -33,7 +34,8 @@ class TUI(controller : Controller) extends Observer:
                     var l = Set.empty[Card]
                     for (i <- 1 to s.size - 1)
                         Card(s(i)) match
-                            case Some(c) => l = l + c
-                            case None => println("")
-                    controller.doAndNotify(controller.play, Cards(l))
+                            case Success(c) => 
+                                l = l + c
+                                controller.doAndNotify(controller.play, Cards(l))
+                            case Failure(f) => println(f.getMessage)
         TUI()
