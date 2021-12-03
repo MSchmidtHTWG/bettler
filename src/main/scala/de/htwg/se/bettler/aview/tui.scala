@@ -25,7 +25,7 @@ class TUI(controller : Controller) extends Observer:
             case "exit" => return
             case "skip" => controller.doAndNotify(controller.skip)
             case "save" => controller.addMemento()
-            case "restore" => controller.restore(controller.getMemento)
+            case "restore" => controller.restore
             case "undo" => controller.undo
             case "redo" => controller.redo
             case _ =>

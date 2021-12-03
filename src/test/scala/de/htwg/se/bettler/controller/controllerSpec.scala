@@ -56,5 +56,15 @@ class controllerSpec extends AnyWordSpec {
             val game = Game("pvp")
             Controller(game).toString shouldBe(game.get.toString)
         }
+        "have a method to save a game and to restore the game from a saved game" in {
+            val game = Game("pvp")
+            val controller = Controller(game)
+            controller.stack.isEmpty shouldBe(true)
+            controller.addMemento()
+            controller.stack.isEmpty shouldBe(false)
+            controller.doAndNotify(controller.newGame, "pve")
+            controller.restore
+            controller.game shouldBe(game)
+        }
     }
 }
