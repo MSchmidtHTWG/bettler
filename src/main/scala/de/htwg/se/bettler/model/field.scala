@@ -17,7 +17,7 @@ case class Field(game : Game) {
     var i = 0
     for (players <- game.getPlayers())
       i += 1
-      r += eol + bar() + "Spieler " + i + eol
+      r += eol + bar() + "Player " + i + eol
       players.returnSet.foreach{r += printCard(_)}
     r += eol + bar()
     game.getBoard().returnSet.foreach{r+= printCard(_)}

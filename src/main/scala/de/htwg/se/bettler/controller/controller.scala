@@ -13,8 +13,12 @@ case class Controller(var game : Option[Game]) extends Observable with Caretaker
     val undomanager = UndoManager()
 
     def doAndNotify(p : (Cards) => Option[Game], cards : Cards) : Unit =
-        undomanager.doStep(PlayCommand(this))
-        game = p(cards)
+        val newGame = p(cards)
+        newGame match
+            case Some(newGame) => 
+                undomanager.doStep(PlayCommand(this))
+                game = Some(newGame)
+            case None => game = newGame
         notifyObservers
 
     def doAndNotify(p : (String) => Option[Game], kind : String) : Unit =
@@ -25,10 +29,11 @@ case class Controller(var game : Option[Game]) extends Observable with Caretaker
         notifyObservers
 
     def doAndNotify(p : () => Option[Game]) : Unit =
-        undomanager.doStep(PlayCommand(this))
         val newGame = p()
         newGame match
-            case Some(newGame) => game = Some(newGame)
+            case Some(newGame) => 
+                undomanager.doStep(PlayCommand(this))
+                game = Some(newGame)
             case None => game = newGame
         notifyObservers
 

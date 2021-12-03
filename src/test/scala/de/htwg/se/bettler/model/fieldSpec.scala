@@ -13,8 +13,8 @@ import org.scalactic.Prettifier.default
 class FieldSpec extends AnyWordSpec {
 
 
-  /*"Field" should {
-    val game = Game()
+  "Field" should {
+    val game = PvPGame(Vector.empty[Cards], Cards(Set.empty[Card]), "")
     val field = Field(game)
     "have a scalable bar" in {
       field.bar() should be ("--------------------------------------------------" + field.eol)
@@ -33,12 +33,13 @@ class FieldSpec extends AnyWordSpec {
       board = board + Card(Symbol.Hearts, Value.Seven)
       player2 = player2 + Card(Symbol.Hearts, Value.Nine)
       player1 = player1 + Card(Symbol.Diamonds, Value.Ten)
-      val game2 = Game(P1TurnState(), Cards(player1), Cards(player2), Cards(board), Deck(32), "")
+      GameStateContext.setState(PlayerTurnState(0, 2))
+      val game2 = PvPGame(Vector(Cards(player1), Cards(player2)), Cards(board), "")
       val field2 = Field(game2)
-      field2.printField() should be(field2.bar() + "Spieler 1" + field2.eol + "[D10]" + field2.eol + field2.bar()+"Spieler 2" + field2.eol + "[H9]" + field2.eol + field2.bar()+ "[H7]"+ field2.eol + field2.bar())
+      field2.printField() should be(field2.eol + field2.bar() + "Player 1" + field2.eol + "[D10]" + field2.eol + field2.bar() + "Player 2" + field2.eol + "[H9]" + field2.eol + field2.bar() + "[H7]" + field2.eol + field2.bar())
     }
  
-  }*/
+  }
    
 }
 
