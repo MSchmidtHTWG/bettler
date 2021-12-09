@@ -34,7 +34,7 @@ object Card :
             case "A" => Value.Ace
             case _ => Value.Empty
         if sym == Symbol.Empty || va == Value.Empty then Failure(NoCardException("The string is not a card."))
-        else return Success(Card(sym, va))
+        else Success(Card(sym, va))
 
 //class NoCardException(message : String) extends Exception(message):
     //def this() = this("The string is not a card.")

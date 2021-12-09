@@ -17,7 +17,6 @@ case class Cards(cards : Set[Card]):
         } return false
         return true
 
-
     def isPlayable : Boolean =
         if cards.isEmpty then return false
         for {

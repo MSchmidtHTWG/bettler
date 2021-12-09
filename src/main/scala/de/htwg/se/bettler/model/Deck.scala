@@ -5,6 +5,7 @@ import scala.util.Random
 
 case class Deck(size : Int):
     var deck = Set.empty[Card]
+
     if size == 32 then {
         deck = Set(Card(Symbol.Hearts, Value.Seven), Card(Symbol.Hearts, Value.Eight), Card(Symbol.Hearts, Value.Nine), Card(Symbol.Hearts, Value.Ten), Card(Symbol.Hearts, Value.Jack), Card(Symbol.Hearts, Value.Queen), Card(Symbol.Hearts, Value.King), Card(Symbol.Hearts, Value.Ace))
         deck = deck + Card(Symbol.Diamonds, Value.Seven) + Card(Symbol.Diamonds, Value.Eight) + Card(Symbol.Diamonds, Value.Nine) + Card(Symbol.Diamonds, Value.Ten) + Card(Symbol.Diamonds, Value.Jack) + Card(Symbol.Diamonds, Value.Queen) + Card(Symbol.Diamonds, Value.King) + Card(Symbol.Diamonds, Value.Ace)
@@ -22,6 +23,3 @@ case class Deck(size : Int):
         }
         deck = deck -- r
         return Cards(r)
-
-
-
