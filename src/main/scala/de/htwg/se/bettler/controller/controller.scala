@@ -4,6 +4,7 @@ package controller
 import model._
 import util._
 import scala.swing.Publisher
+import scala.swing.event.Event
 
 case class Controller(var game : Option[Game]) extends Publisher with Observable with Caretaker:
     override def toString = 
@@ -62,7 +63,9 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
     def newGame(kind : String) : Option[Game] =
         val newgame = Game(kind)
         newgame match
-            case Some(someGame) => Some(someGame)
+            case Some(someGame) => 
+                publish(new StartEvent())
+                Some(someGame)
             case None => None
 
     def addMemento() : Unit = 

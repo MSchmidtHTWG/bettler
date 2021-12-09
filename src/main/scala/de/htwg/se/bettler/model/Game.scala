@@ -14,9 +14,9 @@ object Game:
     def apply() : Option[Game] = None
     def apply(kind: String) : Option[Game] = kind match
         case "pvp" => 
-            GameStateContext.handle(Event.Start)
+            GameStateContext.handle(Events.Start)
             Some(PvPGame())
         case "pve" => 
-            GameStateContext.handle(Event.Start)
+            GameStateContext.handle(Events.Start)
             Some(PvEGame())
         case _ => None
