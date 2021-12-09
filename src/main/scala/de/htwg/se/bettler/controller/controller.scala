@@ -3,8 +3,9 @@ package controller
 
 import model._
 import util._
+import scala.swing.Publisher
 
-case class Controller(var game : Option[Game]) extends Observable with Caretaker:
+case class Controller(var game : Option[Game]) extends Publisher with Observable with Caretaker:
     override def toString = 
         game match
             case Some(g) => g.toString
