@@ -8,10 +8,10 @@ class EventSpec extends AnyWordSpec with Matchers {
     "An event" when {
         "returning a string representation" should {
             "return 'start' if its a Start event" in {
-                Event.Start.toString shouldBe("start")
+                Events.Start.toString shouldBe("start")
             }
             "return 'skip' if its a Skip event" in {
-                Event.Skip.toString shouldBe("skip")
+                Events.Skip.toString shouldBe("skip")
             }
         }
     }
