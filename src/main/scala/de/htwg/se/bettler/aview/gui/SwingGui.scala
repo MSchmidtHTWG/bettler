@@ -47,7 +47,7 @@ class SwingGui(controller: Controller) extends Frame{
     }
 
 
-    def ButtonPanel: GridPanel = new GridPanel(1,4):
+    def buttonPanel: GridPanel = new GridPanel(1,4):
         val playButton = new Button("Play")
         val skipButton = new Button("Skip")
         val undoButton = new Button("Undo")
@@ -62,9 +62,24 @@ class SwingGui(controller: Controller) extends Frame{
         listenTo(redoButton)
     
     def showCards(cards : Cards): BoxPanel = new BoxPanel(Orientation.Horizontal):
-        for(card <- cards.cards)
-            contents += new Label {
-                icon = new ImageIcon(card.image)}
+        var pics: ListBuffer[Image] = ListBuffer()
+        for(card <- cards.returnSet)
+            var f = card.image
+            pics.addOne(ImageIO.read(f).getScaledInstance(52,80,java.awt.Image.SCALE_SMOOTH))
+
+        override def paintComponent(g: java.awt.Graphics2D) =  {
+            super.paintComponent(g)
+            g.setColor(Color.DARK_GRAY)
+            g.fillRect(0,0,1300,140)
+            var x = 30
+            var i = 0
+            g.setColor(Color.WHITE)
+            for(pic <- pics)
+                g.drawImage(pic,x,10,null)
+                g.drawString(i.toString,x + 20, 110)
+                x = x + 60
+                i = i + 1
+        }
 
     def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):
         val startButton = new Button("Start Game")
@@ -88,6 +103,7 @@ class SwingGui(controller: Controller) extends Frame{
             contents += showCards(controller.game.get.getPlayers()(1))  
             contents += showCards(controller.game.get.getBoard())
             contents += showCards(controller.game.get.getPlayers()(0))
+            contents += buttonPanel
         }
 
         repaint()

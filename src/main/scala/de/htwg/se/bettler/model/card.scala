@@ -12,7 +12,7 @@ import java.awt.Image
 
 case class Card(symbol : Symbol, value : Value):
     override def toString = symbol.toString + value.toString
-    def image = "/cardpictures/" + symbol.toString + value.toString + ".png"
+    def image = new File("C:/SE/bettler-1/src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : Card) = this.value == card.value
     def isHigher(card : Card) = this.value.getValue > card.value.getValue
 
