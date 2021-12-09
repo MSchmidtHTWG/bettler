@@ -53,10 +53,14 @@ class SwingGui(controller: Controller) extends Frame{
         val skipButton = new Button("Skip")
         val undoButton = new Button("Undo")
         val redoButton = new Button("Redo")
+        val input = new TextArea("") 
+        
+        contents += input
         contents += playButton
         contents += skipButton 
         contents += undoButton 
         contents += redoButton
+        listenTo(input)       
         listenTo(playButton)
         listenTo(skipButton)
         listenTo(undoButton)
@@ -64,9 +68,16 @@ class SwingGui(controller: Controller) extends Frame{
 
         reactions +={
             case ButtonClicked(`playButton`) => 
-                print(cardsSelected)
-                controller.doAndNotify(controller.play, Cards(cardsSelected))
-                cardsSelected = Set.empty[Card]
+            
+            val s = input.text.split(" ")
+            var l = Set.empty[Card]
+                for (i <- 0 to s.size - 1)
+                    Card(s(i)) match
+                        case Success(c) => 
+                                l = l + c
+                        case Failure(f) => println(f.getMessage)   
+                controller.doAndNotify(controller.play, Cards(l))
+
             case ButtonClicked(`skipButton`) => controller.doAndNotify(controller.skip)
             case ButtonClicked(`undoButton`) => controller.undo
             case ButtonClicked(`redoButton`) => controller.redo
