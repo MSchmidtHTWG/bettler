@@ -10,3 +10,4 @@ case class PlayerTurnState(currentPlayer : Int, maxPlayers : Int) extends State:
                     return PlayerTurnState(0, maxPlayers)
                 return PlayerTurnState(nextPlayer, maxPlayers)
             case Events.Start => PlayerTurnState(0, maxPlayers)
+            case Events.Finished => FinishedState()

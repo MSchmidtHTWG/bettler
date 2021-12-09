@@ -12,6 +12,9 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
                 val newPlayerCards = playerCards.remove(cards)
                 val newPlayers = players.updated(currentPlayer, newPlayerCards)
                 val newBoard = cards
+                if newPlayerCards.size == 0 then
+                    GameStateContext.handle(Events.Finished)
+                    return copy(players = newPlayers, board = newBoard, msg = "Player " + (currentPlayer + 1) + " has won the game.")
                 GameStateContext.handle(Events.Skip)
                 val currentAiPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
                 val aiPlayerCards = players(currentAiPlayer)
@@ -21,6 +24,9 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
                         val newAiPlayerCards = aiPlayerCards.remove(c)
                         val newAiBoard = c
                         val newAiPlayers = newPlayers.updated(currentAiPlayer, newAiPlayerCards)
+                        if newAiPlayerCards.size == 0 then
+                            GameStateContext.handle(Events.Finished)
+                            return copy(players = newPlayers, board = newBoard, msg = "Player " + (currentAiPlayer + 1) + " has won the game.")
                         GameStateContext.handle(Events.Skip)
                         return copy(players = newAiPlayers, board = newAiBoard, msg= "Player 1 turn.")
                     case None => 
@@ -35,7 +41,11 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
                 val aiPlayerCards = players(1)
                 val lowestAiCards = players(1).findPlayable(Cards(Set.empty[Card]))
                 val newBoard = lowestAiCards.get
+                val newAiPlayerCards = aiPlayerCards.remove(lowestAiCards.get)
                 val newAiPlayers = players.updated(1, aiPlayerCards.remove(newBoard))
+                if newAiPlayerCards.size == 0 then
+                    GameStateContext.handle(Events.Finished)
+                    return copy(players = newAiPlayers, board = newBoard, msg = "Player 2 has won the game.")
                 return copy(players = newAiPlayers, board = newBoard, msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
         return this
 

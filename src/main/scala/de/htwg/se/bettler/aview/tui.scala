@@ -39,8 +39,8 @@ class TUI(controller : Controller) extends Observer:
                             Card(s(i)) match
                                 case Success(c) => 
                                     l = l + c
-                                    controller.doAndNotify(controller.play, Cards(l))
                                 case Failure(f) => println(f.getMessage)
+                        controller.doAndNotify(controller.play, Cards(l))
                 else
                     println("Unknown command.")
         TUI()

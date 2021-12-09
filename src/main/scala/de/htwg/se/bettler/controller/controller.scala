@@ -15,12 +15,15 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
     val undomanager = UndoManager()
 
     def doAndNotify(p : (Cards) => Option[Game], cards : Cards) : Unit =
+        undomanager.doStep(PlayCommand(this))
         val newGame = p(cards)
         newGame match
             case Some(newGame) => 
-                undomanager.doStep(PlayCommand(this))
+                //undomanager.doStep(PlayCommand(this))
                 game = Some(newGame)
-            case None => game = newGame
+            case None => 
+                //undomanager.doStep(PlayCommand(this))
+                game = newGame
         notifyObservers
         publish(new GameChanged())
 
@@ -33,12 +36,15 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
         publish(new GameChanged())
 
     def doAndNotify(p : () => Option[Game]) : Unit =
+        undomanager.doStep(PlayCommand(this))
         val newGame = p()
         newGame match
             case Some(newGame) => 
-                undomanager.doStep(PlayCommand(this))
+                //undomanager.doStep(PlayCommand(this))
                 game = Some(newGame)
-            case None => game = newGame
+            case None => 
+                //undomanager.doStep(PlayCommand(this))
+                game = newGame
         notifyObservers
         publish(new GameChanged())
 
@@ -51,15 +57,11 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
             publish(new GameChanged())
 
     def play(cards : Cards) : Option[Game] =
-        if !GameStateContext.state.isInstanceOf[PlayerTurnState] then
-            return None
         game match
             case Some(newGame) => Some(newGame.play(cards))
             case None => None
             
     def skip() : Option[Game] =
-        if GameStateContext.state.isInstanceOf[StartState] then
-            return None
         game match
             case Some(newGame) => Some(newGame.skip())
             case None => None
