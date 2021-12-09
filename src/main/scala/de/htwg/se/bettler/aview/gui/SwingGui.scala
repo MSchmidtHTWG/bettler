@@ -123,7 +123,7 @@ class SwingGui(controller: Controller) extends Frame{
             case ButtonClicked(`startButton`) => controller.doAndNotify(controller.newGame, "pvp")
             case ButtonClicked(`startButton2`) => controller.doAndNotify(controller.newGame, "pve")
         }
-        
+        //t
     def redraw: Unit =
         if !controller.game.isDefined then
             contents = new GridPanel(5,1):
