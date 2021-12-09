@@ -39,6 +39,7 @@ class SwingGui(controller: Controller) extends Frame{
         }
     }
     visible = true
+    centerOnScreen()
     redraw
 
 
@@ -69,7 +70,14 @@ class SwingGui(controller: Controller) extends Frame{
 
     def redraw: Unit = {
         if !controller.game.isDefined then
-            contents = new GridPanel(5,1)
+            contents = new GridPanel(5,1){
+                val startButton = new Button("Start Game") {
+                controller.newGame("pvp")                   
+            }
+                contents += startButton  
+                listenTo(startButton)}
+            return
+
         contents = new GridPanel(5,1) {
             contents += new Label(controller.game.get.getMessage())
             contents += showCards(controller.game.get.getPlayers()(1))  
