@@ -63,45 +63,39 @@ class SwingGui(controller: Controller) extends Frame{
         listenTo(redoButton)
 
         reactions +={
-            case ButtonClicked(playButton) => 
+            case ButtonClicked(`playButton`) => 
                 print(cardsSelected)
                 controller.doAndNotify(controller.play, Cards(cardsSelected))
                 cardsSelected = Set.empty[Card]
-            case ButtonClicked(skipButton) => controller.doAndNotify(controller.skip)
-            case ButtonClicked(undoButton) => controller.undo
-            case ButtonClicked(redoButton) => controller.redo
+            case ButtonClicked(`skipButton`) => controller.doAndNotify(controller.skip)
+            case ButtonClicked(`undoButton`) => controller.undo
+            case ButtonClicked(`redoButton`) => controller.redo
         }
 
     
     def showCards(cards : Cards): BoxPanel = new BoxPanel(Orientation.Horizontal):
-        var pics: ListBuffer[Image] = ListBuffer()
-        var cba = Vector[CheckBox]()
         for(card <- cards.returnSet)
             var f = card.image
             var pic = ImageIO.read(f).getScaledInstance(52,80,java.awt.Image.SCALE_SMOOTH)
             val cb = new CheckBox(card.toString)
-            cb.name = card.toString
-            cb.text = card.toString
-            cb.peer.setText(card.toString)
-            listenTo(cb)
             cb.selectedIcon = ImageIcon(pic)
             cb.disabledIcon = ImageIcon(ImageIO.read(f).getScaledInstance(46,72,java.awt.Image.SCALE_SMOOTH))
             cb.icon = cb.disabledIcon
             cb.selected = false
-            cb.reactions += {
+            contents += cb
+            listenTo(cb)
+            reactions += {
                 case SelectionChanged(`cb`) =>
                     if cb.selected then
-                        Card(cb.peer.getText) match
+                        Card(cb.text) match
                             case Success(s) => cardsSelected = cardsSelected + s
                             case Failure(f) => System.exit(0)
                         cb.icon = cb.selectedIcon
-                        print("hallo")
                     else 
-                        Card(cb.peer.getText) match
+                        Card(cb.text) match
                             case Success(s) => cardsSelected = cardsSelected - s
                         cb.icon = cb.disabledIcon
             }
-            contents += cb
 
     def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):
         val startButton = new Button("Start Game")
