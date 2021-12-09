@@ -64,7 +64,7 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
         val newgame = Game(kind)
         newgame match
             case Some(someGame) => 
-                publish(new StartEvent())
+                publish(new GameChanged())
                 Some(someGame)
             case None => None
 
