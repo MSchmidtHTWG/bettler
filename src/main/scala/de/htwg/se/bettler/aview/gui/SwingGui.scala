@@ -22,9 +22,12 @@ import java.io.File
 import scala.language.postfixOps
 import javax.swing.ImageIcon
 import javax.swing.JPanel
+import javax.swing.JCheckBox
+import scala.util.Success
+import scala.util.Failure
 
 class SwingGui(controller: Controller) extends Frame{
-    
+    var cardsSelected = Set.empty[Card]
     listenTo(controller)
     title = "HTWG-Bettler"
     menuBar = new MenuBar {
@@ -60,7 +63,10 @@ class SwingGui(controller: Controller) extends Frame{
         listenTo(redoButton)
 
         reactions +={
-            //case ButtonClicked(playButton) =>
+            case ButtonClicked(playButton) => 
+                print(cardsSelected)
+                controller.doAndNotify(controller.play, Cards(cardsSelected))
+                cardsSelected = Set.empty[Card]
             case ButtonClicked(skipButton) => controller.doAndNotify(controller.skip)
             case ButtonClicked(undoButton) => controller.undo
             case ButtonClicked(redoButton) => controller.redo
@@ -69,23 +75,33 @@ class SwingGui(controller: Controller) extends Frame{
     
     def showCards(cards : Cards): BoxPanel = new BoxPanel(Orientation.Horizontal):
         var pics: ListBuffer[Image] = ListBuffer()
+        var cba = Vector[CheckBox]()
         for(card <- cards.returnSet)
             var f = card.image
-            pics.addOne(ImageIO.read(f).getScaledInstance(52,80,java.awt.Image.SCALE_SMOOTH))
-
-        override def paintComponent(g: java.awt.Graphics2D) =  {
-            super.paintComponent(g)
-            g.setColor(Color.DARK_GRAY)
-            g.fillRect(0,0,1300,140)
-            var x = 30
-            var i = 0
-            g.setColor(Color.WHITE)
-            for(pic <- pics)
-                g.drawImage(pic,x,10,null)
-                g.drawString(i.toString,x + 20, 110)
-                x = x + 60
-                i = i + 1
-        }
+            var pic = ImageIO.read(f).getScaledInstance(52,80,java.awt.Image.SCALE_SMOOTH)
+            val cb = new CheckBox(card.toString)
+            cb.name = card.toString
+            cb.text = card.toString
+            cb.peer.setText(card.toString)
+            listenTo(cb)
+            cb.selectedIcon = ImageIcon(pic)
+            cb.disabledIcon = ImageIcon(ImageIO.read(f).getScaledInstance(46,72,java.awt.Image.SCALE_SMOOTH))
+            cb.icon = cb.disabledIcon
+            cb.selected = false
+            cb.reactions += {
+                case SelectionChanged(`cb`) =>
+                    if cb.selected then
+                        Card(cb.peer.getText) match
+                            case Success(s) => cardsSelected = cardsSelected + s
+                            case Failure(f) => System.exit(0)
+                        cb.icon = cb.selectedIcon
+                        print("hallo")
+                    else 
+                        Card(cb.peer.getText) match
+                            case Success(s) => cardsSelected = cardsSelected - s
+                        cb.icon = cb.disabledIcon
+            }
+            contents += cb
 
     def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):
         val startButton = new Button("Start Game")
@@ -94,10 +110,7 @@ class SwingGui(controller: Controller) extends Frame{
         reactions += {
             case ButtonClicked(`startButton`) => controller.doAndNotify(controller.newGame, "pvp")
         }
-
-    //def cardPanel(cards : Cards): GridPanel  = new GridPanel(1,1):
         
-
     def redraw: Unit =
         if !controller.game.isDefined then
             contents = new GridPanel(5,1):
