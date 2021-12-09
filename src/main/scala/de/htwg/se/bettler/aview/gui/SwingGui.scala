@@ -61,26 +61,28 @@ class SwingGui(controller: Controller) extends Frame{
         listenTo(undoButton)
         listenTo(redoButton)
     
-    def showCards(cards : Cards): BoxPanel = new BoxPanel(Orientation.Vertical):
+    def showCards(cards : Cards): BoxPanel = new BoxPanel(Orientation.Horizontal):
         for(card <- cards.cards)
             contents += new Label {
                 icon = new ImageIcon(card.image)}
 
-          
-
+    def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):
+        val startButton = new Button("Start Game")
+        contents += startButton  
+        listenTo(startButton)
+        reactions += {
+            case ButtonClicked(`startButton`) => controller.newGame("pve")
+        }
 
     //def cardPanel(cards : Cards): GridPanel  = new GridPanel(1,1):
         
 
     def redraw: Unit = {
         if !controller.game.isDefined then
-            contents = new GridPanel(5,1){
-                val startButton = new Button("Start Game") 
-                controller.newGame("pvp")
-                contents += startButton  
-                listenTo(startButton)}
+            contents = new GridPanel(5,1) {
+                contents += mainMenuPanel
+            }
             return
-
         contents = new GridPanel(5,1) {
             contents += new Label(controller.game.get.getMessage())
             contents += showCards(controller.game.get.getPlayers()(1))  
