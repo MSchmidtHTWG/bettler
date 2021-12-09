@@ -33,9 +33,13 @@ class SwingGui(controller: Controller) extends Frame{
     menuBar = new MenuBar {
     contents += new Menu("Option") {
         mnemonic = Key.F
-        contents += new MenuItem(Action("New") {
+        contents += new MenuItem(Action("New PvP") {
             controller.doAndNotify(controller.newGame, "pvp")
         })
+        contents += new MenuItem(Action("New PvE") {
+            controller.doAndNotify(controller.newGame, "pve")
+        })
+    
     
         contents += new MenuItem(Action("Quit") {System.exit(0)})
         }
@@ -110,10 +114,14 @@ class SwingGui(controller: Controller) extends Frame{
 
     def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):
         val startButton = new Button("Start Game")
+        val startButton2 = new Button("Start PvE")
         contents += startButton  
+        contents += startButton2 
         listenTo(startButton)
+        listenTo(startButton2)
         reactions += {
             case ButtonClicked(`startButton`) => controller.doAndNotify(controller.newGame, "pvp")
+            case ButtonClicked(`startButton2`) => controller.doAndNotify(controller.newGame, "pve")
         }
         
     def redraw: Unit =
