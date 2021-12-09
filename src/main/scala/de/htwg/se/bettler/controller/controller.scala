@@ -22,6 +22,7 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
                 game = Some(newGame)
             case None => game = newGame
         notifyObservers
+        publish(new GameChanged())
 
     def doAndNotify(p : (String) => Option[Game], kind : String) : Unit =
         val newGame = p(kind)
@@ -29,6 +30,7 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
             case Some(newGame) => game = Some(newGame)
             case None => game = None
         notifyObservers
+        publish(new GameChanged())
 
     def doAndNotify(p : () => Option[Game]) : Unit =
         val newGame = p()
@@ -38,6 +40,7 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
                 game = Some(newGame)
             case None => game = newGame
         notifyObservers
+        publish(new GameChanged())
 
     def restore : Unit =
         if !stack.isEmpty then
@@ -64,7 +67,6 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
         val newgame = Game(kind)
         newgame match
             case Some(someGame) => 
-                publish(new GameChanged())
                 Some(someGame)
             case None => None
 
