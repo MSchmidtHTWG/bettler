@@ -36,7 +36,7 @@ class gameSpec extends AnyWordSpec {
         "have a method to play cards" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
-            GameStateContext.handle(Event.Start)
+            GameStateContext.handle(Events.Start)
             val player1 = game.getPlayers()(0)
             val player2 = game.getPlayers()(1)
             val cards = Cards(Set(player1.returnSet.head))
@@ -63,7 +63,7 @@ class gameSpec extends AnyWordSpec {
         "have a method to skip turns" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
-            GameStateContext.handle(Event.Start)
+            GameStateContext.handle(Events.Start)
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
             GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             val game2 = game.skip()

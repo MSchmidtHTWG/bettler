@@ -15,7 +15,7 @@ class controllerSpec extends AnyWordSpec {
         "have a method play, that returns a Game" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
-            GameStateContext.handle(Event.Start)
+            GameStateContext.handle(Events.Start)
             val controller = Controller(Some(game))
             val player1 = game.getPlayers()(0)
             val player1HeadCard = Cards(Set(player1.returnSet.head))
@@ -33,7 +33,7 @@ class controllerSpec extends AnyWordSpec {
         "have a method skip to skip a turn" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
-            GameStateContext.handle(Event.Start)
+            GameStateContext.handle(Events.Start)
             val controller = Controller(Some(game))
 
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
