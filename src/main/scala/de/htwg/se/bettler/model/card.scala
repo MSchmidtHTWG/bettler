@@ -6,9 +6,13 @@ import scala.annotation.meta.setter
 import scala.util.Try
 import scala.util.Failure
 import scala.util.Success
+import javax.imageio.ImageIO
+import java.io.File
+import java.awt.Image
 
 case class Card(symbol : Symbol, value : Value):
     override def toString = symbol.toString + value.toString
+    def image : Image = ImageIO.read(new File("cardpictures\\" + symbol.toString + value.toString + ".png"))
     def sameValue(card : Card) = this.value == card.value
     def isHigher(card : Card) = this.value.getValue > card.value.getValue
 
