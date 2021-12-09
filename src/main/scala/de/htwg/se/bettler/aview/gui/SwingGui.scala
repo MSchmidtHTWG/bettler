@@ -33,6 +33,7 @@ class SwingGui(controller: Controller) extends Frame{
         contents += new MenuItem(Action("New") {
             controller.newGame("pvp")
             redraw
+            
         })
     
         contents += new MenuItem(Action("Quit") {System.exit(0)})
@@ -41,6 +42,9 @@ class SwingGui(controller: Controller) extends Frame{
     visible = true
     centerOnScreen()
     redraw
+    reactions += {
+        case event : GameChanged => redraw
+    }
 
 
     def ButtonPanel: GridPanel = new GridPanel(1,4):
@@ -71,9 +75,8 @@ class SwingGui(controller: Controller) extends Frame{
     def redraw: Unit = {
         if !controller.game.isDefined then
             contents = new GridPanel(5,1){
-                val startButton = new Button("Start Game") {
-                controller.newGame("pvp")                   
-            }
+                val startButton = new Button("Start Game") 
+                controller.newGame("pvp")
                 contents += startButton  
                 listenTo(startButton)}
             return
