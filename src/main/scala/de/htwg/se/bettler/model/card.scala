@@ -9,10 +9,16 @@ import scala.util.Success
 import javax.imageio.ImageIO
 import java.io.File
 import java.awt.Image
+import java.nio.file.Paths
 
 case class Card(symbol : Symbol, value : Value):
     override def toString = symbol.toString + value.toString
-    def image = new File("C:/SE/bettler-1/src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
+    def image = 
+        //C:\SE\bettler-1\src\main\scala\de\htwg\se\bettler\model\cardpictures\C8.png
+        //C:\SE\bettler-1\src\main\scala\de\htwg\se\bettler\cardpictures\C8.png
+        //val workingDir = System.getProperty("user.dir");
+        //val path = Paths.get(workingDir + "/src/main/scala/de/htwg/se/bettlermodel/cardpictures/" + symbol.toString + value.toString + ".png")
+        new File("C:/SE/bettler-1/src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : Card) = this.value == card.value
     def isHigher(card : Card) = this.value.getValue > card.value.getValue
 

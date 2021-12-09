@@ -48,6 +48,7 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
                 case Some(g) => game = Some(g.restore(this.getMemento()))
                 case None => game = None
             notifyObservers
+            publish(new GameChanged())
 
     def play(cards : Cards) : Option[Game] =
         if !GameStateContext.state.isInstanceOf[PlayerTurnState] then
@@ -81,7 +82,9 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
     def undo : Unit = 
         undomanager.undoStep
         notifyObservers
+        publish(new GameChanged())
 
     def redo : Unit =
         undomanager.redoStep
         notifyObservers
+        publish(new GameChanged())

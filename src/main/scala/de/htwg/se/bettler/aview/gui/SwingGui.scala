@@ -31,9 +31,7 @@ class SwingGui(controller: Controller) extends Frame{
     contents += new Menu("Option") {
         mnemonic = Key.F
         contents += new MenuItem(Action("New") {
-            controller.newGame("pvp")
-            redraw
-            
+            controller.doAndNotify(controller.newGame, "pvp")
         })
     
         contents += new MenuItem(Action("Quit") {System.exit(0)})
@@ -60,6 +58,14 @@ class SwingGui(controller: Controller) extends Frame{
         listenTo(skipButton)
         listenTo(undoButton)
         listenTo(redoButton)
+
+        reactions +={
+            //case ButtonClicked(playButton) =>
+            case ButtonClicked(skipButton) => controller.doAndNotify(controller.skip)
+            case ButtonClicked(undoButton) => controller.undo
+            case ButtonClicked(redoButton) => controller.redo
+        }
+
     
     def showCards(cards : Cards): BoxPanel = new BoxPanel(Orientation.Horizontal):
         var pics: ListBuffer[Image] = ListBuffer()
@@ -86,29 +92,22 @@ class SwingGui(controller: Controller) extends Frame{
         contents += startButton  
         listenTo(startButton)
         reactions += {
-            case ButtonClicked(`startButton`) => controller.newGame("pve")
+            case ButtonClicked(`startButton`) => controller.doAndNotify(controller.newGame, "pvp")
         }
 
     //def cardPanel(cards : Cards): GridPanel  = new GridPanel(1,1):
         
 
-    def redraw: Unit = {
+    def redraw: Unit =
         if !controller.game.isDefined then
-            contents = new GridPanel(5,1) {
+            contents = new GridPanel(5,1):
                 contents += mainMenuPanel
-            }
             return
-        contents = new GridPanel(5,1) {
+        contents = new GridPanel(5,1):
             contents += new Label(controller.game.get.getMessage())
             contents += showCards(controller.game.get.getPlayers()(1))  
             contents += showCards(controller.game.get.getBoard())
             contents += showCards(controller.game.get.getPlayers()(0))
             contents += buttonPanel
-        }
-
         repaint()
-    }
-
-
-    
 }
