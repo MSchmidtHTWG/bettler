@@ -1,6 +1,6 @@
 package de.htwg.se.bettler
 package model
-package fieldBaseImpl
+package fieldComponent
 
 import gameComponent._
 import cardComponent._

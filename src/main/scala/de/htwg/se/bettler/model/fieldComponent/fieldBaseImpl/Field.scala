@@ -5,13 +5,13 @@ package fieldBaseImpl
 
 import gameComponent._
 import cardComponent.cardBaseImpl.Cards
-import cardComponent.cardBaseImpl.Card
+import cardComponent._
 
 case class Field(game : Game) extends FieldInterface{
 
   val eol = sys.props("line.separator")  
 
-  def printCard(card : Card) : String =
+  def printCard(card : CardInterface) : String =
     var s = card.toString()
     s = s.filter(!"()".contains(_))
     var r = "[" + s + "]"
