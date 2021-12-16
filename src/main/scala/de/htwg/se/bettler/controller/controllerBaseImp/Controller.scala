@@ -9,11 +9,13 @@ import util._
 import scala.swing.Publisher
 import scala.swing.event.Event
 
-case class Controller(var game : Option[Game]) extends Publisher with Observable with Caretaker:
+case class Controller(var game : Option[Game]) extends ControllerInterface:
     override def toString = 
         game match
             case Some(g) => g.toString
             case None => "Currently no game running."
+
+    def returnGame = game
 
     val undomanager = util.UndoManager()
 

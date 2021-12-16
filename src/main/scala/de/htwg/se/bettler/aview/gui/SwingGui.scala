@@ -4,7 +4,7 @@ package gui
 
 import scala.swing.Swing.LineBorder
 import model.GameChanged
-import de.htwg.se.bettler.controller.controllerBaseImp._
+import de.htwg.se.bettler.controller.ControllerInterface
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Cards
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
 import scala.swing._
@@ -29,7 +29,7 @@ import javax.swing.JCheckBox
 import scala.util.Success
 import scala.util.Failure
 
-class SwingGui(controller: Controller) extends Frame{
+class SwingGui(controller: ControllerInterface) extends Frame{
     var cardsSelected = Set.empty[Card]
     listenTo(controller)
     title = "HTWG-Bettler"
@@ -128,15 +128,15 @@ class SwingGui(controller: Controller) extends Frame{
         }
         //t
     def redraw: Unit =
-        if !controller.game.isDefined then
+        if !controller.returnGame.isDefined then
             contents = new GridPanel(5,1):
                 contents += mainMenuPanel
             return
         contents = new GridPanel(5,1):
-            contents += new Label(controller.game.get.getMessage())
-            contents += showCards(controller.game.get.getPlayers()(1))  
-            contents += showCards(controller.game.get.getBoard())
-            contents += showCards(controller.game.get.getPlayers()(0))
+            contents += new Label(controller.returnGame.get.getMessage())
+            contents += showCards(controller.returnGame.get.getPlayers()(1))  
+            contents += showCards(controller.returnGame.get.getBoard())
+            contents += showCards(controller.returnGame.get.getPlayers()(0))
             contents += buttonPanel
         repaint()
 }

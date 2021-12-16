@@ -18,3 +18,4 @@ trait ControllerInterface extends Publisher with Observable with Caretaker:
     def newGame(kind : String) : Option[Game]
     def undo : Unit
     def redo : Unit
+    def returnGame : Option[Game]
