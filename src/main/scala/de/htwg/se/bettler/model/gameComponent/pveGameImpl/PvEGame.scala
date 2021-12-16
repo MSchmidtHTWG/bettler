@@ -10,8 +10,8 @@ import de.htwg.se.bettler.util._
 import stateComponent.stateBaseImpl._
 import fieldComponent.fieldBaseImpl._
 
-case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends Game:
-    def play(cards : Cards) : Game =
+case class PvEGame(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
+    def play(cards : CardsInterface) : Game =
         if GameStateContext.state.isInstanceOf[PlayerTurnState] then
             val currentPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
             val playerCards = players(currentPlayer)
@@ -46,7 +46,7 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
             if GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer == 0 then
                 val aiPlayerCards = players(1)
-                val lowestAiCards = players(1).findPlayable(Cards(Set.empty[Card]))
+                val lowestAiCards = players(1).findPlayable(CardsInterface(Set.empty[CardInterface]))
                 val newBoard = lowestAiCards.get
                 val newAiPlayerCards = aiPlayerCards.remove(lowestAiCards.get)
                 val newAiPlayers = players.updated(1, aiPlayerCards.remove(newBoard))
@@ -72,8 +72,8 @@ case class PvEGame(players : Vector[Cards], board : Cards, msg : String) extends
 
 object PvEGame:
         def apply() : Game =
-            val d = Deck(32)
-            val board = Cards(Set.empty[Card])
+            val d = DeckInterface(32)
+            val board = Cards(Set.empty[CardInterface])
             val s1 = d.draw()
             val s2 = d.draw()
             //GameStateContext.handle(Event.Start)
