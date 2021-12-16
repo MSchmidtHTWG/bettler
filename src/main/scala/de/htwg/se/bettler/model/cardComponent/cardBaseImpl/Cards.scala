@@ -38,7 +38,7 @@ case class Cards(cards : Set[CardInterface]) extends CardsInterface:
     def groupBySameValue : Vector[Cards] =
         var group = Vector.empty[Cards]
         for (value <- 7 to 14)
-            var groupCards = Set.empty[Card]
+            var groupCards = Set.empty[CardInterface]
             for (card <- cards)
                 //if card.value.getValue.equals(value) then
                 if card.getValue.equals(value) then
@@ -60,7 +60,7 @@ case class Cards(cards : Set[CardInterface]) extends CardsInterface:
             if board.isWorse(c) then return Some(c)
         for (c <- this.groupBySameValue)
             if c.size > board.size then
-                var reducedCards = Set.empty[Card]
+                var reducedCards = Set.empty[CardInterface]
                 c.returnSet.toArray.slice(0, board.size).foreach{x => reducedCards = reducedCards + x}
                 if board.isWorse(Cards(reducedCards)) then return Some(Cards(reducedCards))
         return None
