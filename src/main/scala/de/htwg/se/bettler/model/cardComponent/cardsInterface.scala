@@ -11,3 +11,5 @@ trait CardsInterface:
     def size:Int
     def groupBySameValue : Vector[CardsInterface]
     def findPlayable(board : CardsInterface) : Option[CardsInterface]
+
+abstract class ACards extends CardsInterface

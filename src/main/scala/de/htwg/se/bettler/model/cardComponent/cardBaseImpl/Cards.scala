@@ -6,10 +6,10 @@ package cardBaseImpl
 import model.cardComponent.cardBaseImpl.Card
 
 
-case class Cards(cards : Set[CardInterface]) extends CardsInterface:
+case class Cards(cards : Set[CardInterface]) extends ACards:
     def returnSet = cards
 
-    def contains(c : Cards) = !c.cards.isEmpty && (c.cards -- cards).size == 0
+    def contains(c : CardsInterface) = !c.returnSet.isEmpty && (c.returnSet -- cards).size == 0
 
     def isWorse(c: Cards) : Boolean =
         if c.cards.isEmpty then return false

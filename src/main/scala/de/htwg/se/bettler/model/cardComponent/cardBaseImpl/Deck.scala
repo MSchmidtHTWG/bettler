@@ -6,7 +6,7 @@ package cardBaseImpl
 import scala.util.Random
 
 case class Deck(size : Int) extends DeckInterface:
-    var deck = Set.empty[Card]
+    var deck = Set.empty[CardInterface]
 
     if size == 32 then {
         deck = Set(Card(Symbol.Hearts, Value.Seven), Card(Symbol.Hearts, Value.Eight), Card(Symbol.Hearts, Value.Nine), Card(Symbol.Hearts, Value.Ten), Card(Symbol.Hearts, Value.Jack), Card(Symbol.Hearts, Value.Queen), Card(Symbol.Hearts, Value.King), Card(Symbol.Hearts, Value.Ace))
@@ -17,7 +17,7 @@ case class Deck(size : Int) extends DeckInterface:
     def draw() : Cards = 
         val ran = Random()
         //ran.setSeed(DeckStrategy.execute(DeckStrategy.strategy2))
-        var l : List[Card] = deck.toList
+        var l : List[CardInterface] = deck.toList
         l = ran.shuffle(l).slice(0, 7)
         var r = Set.empty[CardInterface]
         for (ll <- l) {
