@@ -3,10 +3,9 @@ package model
 package fieldBaseImpl
 
 import gameComponent._
-import cardComponent.cardBaseImpl.Cards
-import cardComponent.cardBaseImpl.Card
+import cardComponent._
 
 trait FieldInterface:
-    def printCard(card : Card) : String
+    def printCard(card : CardInterface) : String
     def printField() : String
     def bar(cellwidth: Int) : String

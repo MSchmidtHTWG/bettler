@@ -7,7 +7,7 @@ import gameComponent._
 import cardComponent.cardBaseImpl.Cards
 import cardComponent.cardBaseImpl.Card
 
-case class Field(game : Game) {
+case class Field(game : Game) extends FieldInterface{
 
   val eol = sys.props("line.separator")  
 

@@ -7,6 +7,7 @@ import model.GameChanged
 import de.htwg.se.bettler.controller.ControllerInterface
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Cards
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
+import de.htwg.se.bettler.model.cardComponent._
 import scala.swing._
 import scala.swing.event._
 import scala.swing.Swing.LineBorder
@@ -77,7 +78,7 @@ class SwingGui(controller: ControllerInterface) extends Frame{
             case ButtonClicked(`playButton`) => 
             
             val s = input.text.split(" ")
-            var l = Set.empty[Card]
+            var l = Set.empty[CardInterface]
                 for (i <- 0 to s.size - 1)
                     Card(s(i)) match
                         case Success(c) => 
@@ -91,7 +92,7 @@ class SwingGui(controller: ControllerInterface) extends Frame{
         }
 
     
-    def showCards(cards : Cards): BoxPanel = new BoxPanel(Orientation.Horizontal):
+    def showCards(cards : CardsInterface): BoxPanel = new BoxPanel(Orientation.Horizontal):
         for(card <- cards.returnSet)
             var f = card.image
             var pic = ImageIO.read(f).getScaledInstance(52,80,java.awt.Image.SCALE_SMOOTH)
