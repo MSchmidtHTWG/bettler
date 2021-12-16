@@ -13,7 +13,8 @@ import java.io.File
 import java.awt.Image
 import java.nio.file.Paths
 
-case class Card(symbol : Symbol, value : Value):
+
+case class Card(symbol : Symbol, value : Value) extends CardInterface:
     override def toString = symbol.toString + value.toString
     def image = 
         //C:\SE\bettler-1\src\main\scala\de\htwg\se\bettler\model\cardpictures\C8.png
@@ -23,6 +24,8 @@ case class Card(symbol : Symbol, value : Value):
         new File("C:/Users/lukas/bettler/src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : Card) = this.value == card.value
     def isHigher(card : Card) = this.value.getValue > card.value.getValue
+    def getSymbol = symbol
+    def getValue = value
 
 object Card :
     def apply(input : String) : Try[Card] =

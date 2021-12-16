@@ -5,7 +5,7 @@ package cardBaseImpl
 
 import scala.util.Random
 
-case class Deck(size : Int):
+case class Deck(size : Int) extends DeckInterface:
     var deck = Set.empty[Card]
 
     if size == 32 then {

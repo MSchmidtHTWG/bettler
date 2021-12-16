@@ -3,9 +3,10 @@ package model
 package gameComponent
 package pveGameImpl
 
+import cardComponent._
+import model.cardComponent.cardBaseImpl.Deck
 import model.cardComponent.cardBaseImpl.Cards
 import model.cardComponent.cardBaseImpl.Card
-import model.cardComponent.cardBaseImpl.Deck
 import de.htwg.se.bettler.util._
 import stateComponent.stateBaseImpl._
 import fieldComponent.fieldBaseImpl._
@@ -46,7 +47,7 @@ case class PvEGame(players : Vector[CardsInterface], board : CardsInterface, msg
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
             if GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer == 0 then
                 val aiPlayerCards = players(1)
-                val lowestAiCards = players(1).findPlayable(CardsInterface(Set.empty[CardInterface]))
+                val lowestAiCards = players(1).findPlayable(Cards(Set.empty[Card]))
                 val newBoard = lowestAiCards.get
                 val newAiPlayerCards = aiPlayerCards.remove(lowestAiCards.get)
                 val newAiPlayers = players.updated(1, aiPlayerCards.remove(newBoard))
@@ -72,8 +73,8 @@ case class PvEGame(players : Vector[CardsInterface], board : CardsInterface, msg
 
 object PvEGame:
         def apply() : Game =
-            val d = DeckInterface(32)
-            val board = Cards(Set.empty[CardInterface])
+            val d = Deck(32)
+            val board = Cards(Set.empty[Card])
             val s1 = d.draw()
             val s2 = d.draw()
             //GameStateContext.handle(Event.Start)

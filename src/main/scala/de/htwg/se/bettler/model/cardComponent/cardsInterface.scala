@@ -3,7 +3,7 @@ package model
 package cardComponent
 
 trait CardsInterface:
-    def returnSet:Set[CardsInterface]
+    def returnSet:Set[CardInterface]
     def contains(c : CardsInterface):Boolean
     def isWorse(c: CardsInterface):Boolean
     def isPlayable : Boolean

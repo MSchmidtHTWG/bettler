@@ -3,7 +3,10 @@ package model
 package cardComponent
 package cardBaseImpl
 
-case class Cards(cards : Set[Card]):
+import model.cardComponent.cardBaseImpl.Card
+
+
+case class Cards(cards : Set[CardInterface]) extends CardsInterface:
     def returnSet = cards
 
     def contains(c : Cards) = !c.cards.isEmpty && (c.cards -- cards).size == 0
@@ -37,7 +40,8 @@ case class Cards(cards : Set[Card]):
         for (value <- 7 to 14)
             var groupCards = Set.empty[Card]
             for (card <- cards)
-                if card.value.getValue.equals(value) then
+                //if card.value.getValue.equals(value) then
+                if card.getValue.equals(value) then
                     groupCards += card
             if groupCards.nonEmpty then
                 group = group :+ Cards(groupCards)
