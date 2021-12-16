@@ -2,16 +2,16 @@ package de.htwg.se.bettler
 package model
 package gameComponent
 
-import cardComponent.cardBaseImpl.Cards
+import cardComponent._
 import de.htwg.se.bettler.util._
 import pveGameImpl._
 import pvpGameImpl._
 
 trait Game extends Originator:
-    def play(cards : Cards) : Game
+    def play(cards : CardsInterface) : Game
     def skip() : Game
-    def getPlayers() : Vector[Cards]
-    def getBoard() : Cards
+    def getPlayers() : Vector[CardsInterface]
+    def getBoard() : CardsInterface
     def getMessage() : String
 
 object Game:

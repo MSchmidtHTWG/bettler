@@ -4,7 +4,7 @@ package controllerBaseImp
 
 import model.GameChanged
 import model.gameComponent.Game
-import model.cardComponent.cardBaseImpl._
+import model.cardComponent._
 import util._
 import scala.swing.Publisher
 import scala.swing.event.Event
@@ -19,7 +19,7 @@ case class Controller(var game : Option[Game]) extends ControllerInterface:
 
     val undomanager = util.UndoManager()
 
-    def doAndNotify(p : (Cards) => Option[Game], cards : Cards) : Unit =
+    def doAndNotify(p : (CardsInterface) => Option[Game], cards : CardsInterface) : Unit =
         undomanager.doStep(PlayCommand(this))
         val newGame = p(cards)
         newGame match
@@ -61,7 +61,7 @@ case class Controller(var game : Option[Game]) extends ControllerInterface:
             notifyObservers
             publish(new GameChanged())
 
-    def play(cards : Cards) : Option[Game] =
+    def play(cards : CardsInterface) : Option[Game] =
         game match
             case Some(newGame) => Some(newGame.play(cards))
             case None => None
