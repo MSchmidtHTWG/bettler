@@ -21,7 +21,7 @@ case class Card(symbol : Symbol, value : Value) extends CardInterface:
         //C:\SE\bettler-1\src\main\scala\de\htwg\se\bettler\cardpictures\C8.png
         //val workingDir = System.getProperty("user.dir");
         //val path = Paths.get(workingDir + "/src/main/scala/de/htwg/se/bettlermodel/cardpictures/" + symbol.toString + value.toString + ".png")
-        new File("C:/SE/bettler-1/src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
+        new File(f"src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : CardInterface) = this.value == card.getValue
     def isHigher(card : CardInterface) = this.value.getValue > card.getValue.getValue
     def getSymbol = symbol
