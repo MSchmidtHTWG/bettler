@@ -1,7 +1,9 @@
 package de.htwg.se.bettler
 package controller
+package controllerBaseImp
 
 import model._
+import model.gameComponent._
 import util._
 import scala.swing.Publisher
 import scala.swing.event.Event
@@ -12,7 +14,7 @@ case class Controller(var game : Option[Game]) extends Publisher with Observable
             case Some(g) => g.toString
             case None => "Currently no game running."
 
-    val undomanager = UndoManager()
+    val undomanager = util.UndoManager()
 
     def doAndNotify(p : (Cards) => Option[Game], cards : Cards) : Unit =
         undomanager.doStep(PlayCommand(this))

@@ -1,7 +1,10 @@
 package de.htwg.se.bettler
 package model
+package gameComponent
 
 import de.htwg.se.bettler.util._
+import pveGameImpl._
+import pvpGameImpl._
 
 trait Game extends Originator:
     def play(cards : Cards) : Game

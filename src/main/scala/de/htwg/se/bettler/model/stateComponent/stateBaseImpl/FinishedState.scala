@@ -1,5 +1,7 @@
 package de.htwg.se.bettler
 package model
+package stateComponent
+package stateBaseImpl
 
 case class FinishedState() extends State:
     def handle(e: Events) : State =

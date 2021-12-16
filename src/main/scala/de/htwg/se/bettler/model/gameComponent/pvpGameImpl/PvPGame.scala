@@ -1,7 +1,11 @@
 package de.htwg.se.bettler
 package model
+package gameComponent
+package pvpGameImpl
 
 import de.htwg.se.bettler.util._
+import stateComponent.stateBaseImpl._
+import fieldComponent.fieldBaseImpl._
 
 case class PvPGame(players : Vector[Cards], board : Cards, msg : String) extends Game:
     def play(cards : Cards) : Game =

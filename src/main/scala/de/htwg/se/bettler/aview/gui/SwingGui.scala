@@ -1,7 +1,7 @@
 package de.htwg.se.bettler.aview.gui
 
 import scala.swing.Swing.LineBorder
-import de.htwg.se.bettler.controller._
+import de.htwg.se.bettler.controller.controllerBaseImp._
 import de.htwg.se.bettler.model.Cards._
 import de.htwg.se.bettler.model._
 import scala.swing._

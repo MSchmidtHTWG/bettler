@@ -1,5 +1,9 @@
 package de.htwg.se.bettler
 package model
+package fieldComponent
+package fieldBaseImpl
+
+import gameComponent._
 
 case class Field(game : Game) {
 

@@ -3,9 +3,10 @@ package aview
 
 import scala.util.{Try,Success,Failure}
 import scala.io.StdIn.readLine
-import controller.Controller
+import de.htwg.se.bettler.controller.controllerBaseImp._
 import util.Observer
 import model._
+import model.stateComponent.stateBaseImpl._
 
 class TUI(controller : Controller) extends Observer:
     controller.add(this)

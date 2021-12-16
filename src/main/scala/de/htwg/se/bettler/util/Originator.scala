@@ -1,7 +1,7 @@
 package de.htwg.se.bettler
 package util
 
-import de.htwg.se.bettler.model.Game
+import de.htwg.se.bettler.model.gameComponent.Game
 
 trait Originator:
     def save() : Memento

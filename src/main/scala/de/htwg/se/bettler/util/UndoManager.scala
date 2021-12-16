@@ -1,5 +1,5 @@
 package de.htwg.se.bettler
-package controller
+package util
 
 class UndoManager:
   private var undoStack: List[Command] = Nil

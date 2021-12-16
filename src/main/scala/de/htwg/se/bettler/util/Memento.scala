@@ -1,7 +1,8 @@
 package de.htwg.se.bettler
 package util
 
-import de.htwg.se.bettler.model._
+import de.htwg.se.bettler.model.gameComponent.Game
+import de.htwg.se.bettler.model.stateComponent._
 
 trait Memento:
     def state() : State

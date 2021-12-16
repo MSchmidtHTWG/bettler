@@ -1,8 +1,9 @@
 package de.htwg.se.bettler
 
 
-import controller.Controller
+import de.htwg.se.bettler.controller.controllerBaseImp._
 import model._
+import model.gameComponent._
 import aview.TUI
 import aview.gui._
 

@@ -1,5 +1,7 @@
 package de.htwg.se.bettler
 package model
+package stateComponent
+package stateBaseImpl
 
 case class PlayerTurnState(currentPlayer : Int, maxPlayers : Int) extends State:
     def handle(e: Events) : State =

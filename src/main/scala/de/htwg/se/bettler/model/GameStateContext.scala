@@ -1,8 +1,7 @@
 package de.htwg.se.bettler
 package model
-
-trait State:
-    def handle(e: Events) : State
+import stateComponent._
+import stateComponent.stateBaseImpl._
 
 object GameStateContext:
     var state : State = StartState()

@@ -1,5 +1,5 @@
 package de.htwg.se.bettler
-package controller
+package util
 
 trait Command:
     def doStep: Unit
