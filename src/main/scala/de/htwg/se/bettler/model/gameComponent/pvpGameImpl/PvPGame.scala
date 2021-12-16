@@ -10,8 +10,8 @@ import de.htwg.se.bettler.util._
 import stateComponent.stateBaseImpl._
 import fieldComponent.fieldBaseImpl._
 
-case class PvPGame(players : Vector[Cards], board : Cards, msg : String) extends Game:
-    def play(cards : Cards) : Game =
+case class PvPGame(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
+    def play(cards : CardsInterface) : Game =
         if GameStateContext.state.isInstanceOf[PlayerTurnState] then
             val currentPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
             val playerCards = players(currentPlayer)
@@ -31,7 +31,7 @@ case class PvPGame(players : Vector[Cards], board : Cards, msg : String) extends
     def skip() : Game =
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
             GameStateContext.handle(Events.Skip)
-            return copy(board = Cards(Set.empty[Card]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
+            return copy(board = CardsInterface(Set.empty[CardInterface]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
         return this
 
     def getPlayers() = players
@@ -49,8 +49,8 @@ case class PvPGame(players : Vector[Cards], board : Cards, msg : String) extends
 
 object PvPGame:
         def apply() : Game =
-            val d = Deck(32)
-            val board = Cards(Set.empty[Card])
+            val d = DeckInterface(32)
+            val board = CardsInterface(Set.empty[CardInterface])
             val s1 = d.draw()
             val s2 = d.draw()
             //GameStateContext.handle(Event.Start)

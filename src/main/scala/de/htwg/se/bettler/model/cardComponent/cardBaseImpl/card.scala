@@ -20,7 +20,7 @@ case class Card(symbol : Symbol, value : Value):
         //C:\SE\bettler-1\src\main\scala\de\htwg\se\bettler\cardpictures\C8.png
         //val workingDir = System.getProperty("user.dir");
         //val path = Paths.get(workingDir + "/src/main/scala/de/htwg/se/bettlermodel/cardpictures/" + symbol.toString + value.toString + ".png")
-        new File("C:/SE/bettler-1/src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
+        new File("C:/Users/lukas/bettler/src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : Card) = this.value == card.value
     def isHigher(card : Card) = this.value.getValue > card.value.getValue
 
