@@ -19,7 +19,7 @@ case class Deck(size : Int) extends DeckInterface:
         //ran.setSeed(DeckStrategy.execute(DeckStrategy.strategy2))
         var l : List[Card] = deck.toList
         l = ran.shuffle(l).slice(0, 7)
-        var r = Set.empty[Card]
+        var r = Set.empty[CardInterface]
         for (ll <- l) {
             r = r + ll
         }
