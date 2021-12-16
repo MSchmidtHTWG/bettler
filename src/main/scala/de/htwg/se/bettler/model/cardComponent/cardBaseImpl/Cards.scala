@@ -11,13 +11,13 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
 
     def contains(c : CardsInterface) = !c.returnSet.isEmpty && (c.returnSet -- cards).size == 0
 
-    def isWorse(c: Cards) : Boolean =
-        if c.cards.isEmpty then return false
+    def isWorse(c: CardsInterface) : Boolean =
+        if c.returnSet.isEmpty then return false
         if cards.size == 0 then return true
-        if c.cards.size != cards.size then return false
+        if c.returnSet.size != cards.size then return false
         for {
             c1 <- cards
-            c2 <- c.cards
+            c2 <- c.returnSet
             if !c2.isHigher(c1)
         } return false
         return true
@@ -31,11 +31,11 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
         } return false
         return true
 
-    def remove(c : Cards) = Cards(this.cards -- c.cards)
+    def remove(c : CardsInterface) = Cards(this.cards -- c.returnSet)
 
     def size = cards.size
 
-    def groupBySameValue : Vector[Cards] =
+    def groupBySameValue : Vector[CardsInterface] =
         var group = Vector.empty[Cards]
         for (value <- 7 to 14)
             var groupCards = Set.empty[CardInterface]
@@ -55,7 +55,7 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
                 i += 1
         return Cards(Set(cardList(i)))*/
 
-    def findPlayable(board : Cards) : Option[Cards] =
+    def findPlayable(board : CardsInterface) : Option[CardsInterface] =
         for (c <- this.groupBySameValue)
             if board.isWorse(c) then return Some(c)
         for (c <- this.groupBySameValue)

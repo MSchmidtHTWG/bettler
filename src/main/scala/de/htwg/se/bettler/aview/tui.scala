@@ -8,6 +8,7 @@ import util.Observer
 import model.GameStateContext
 import model.cardComponent.cardBaseImpl.Card
 import model.cardComponent.cardBaseImpl.Cards
+import model.cardComponent._
 import model.stateComponent.stateBaseImpl._
 
 class TUI(controller : ControllerInterface) extends Observer:
@@ -37,7 +38,7 @@ class TUI(controller : ControllerInterface) extends Observer:
                         println("Start a game first.")
                     else
                         val s = input.split(" ")
-                        var l = Set.empty[Card]
+                        var l = Set.empty[CardInterface]
                         for (i <- 1 to s.size - 1)
                             Card(s(i)) match
                                 case Success(c) => 
