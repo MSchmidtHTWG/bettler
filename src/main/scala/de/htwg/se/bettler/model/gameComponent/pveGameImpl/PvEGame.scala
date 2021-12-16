@@ -39,7 +39,7 @@ case class PvEGame(players : Vector[CardsInterface], board : CardsInterface, msg
                         return copy(players = newAiPlayers, board = newAiBoard, msg= "Player 1 turn.")
                     case None => 
                         GameStateContext.handle(Events.Skip)
-                        return copy(players = newPlayers, board = Cards(Set.empty[Card]), msg = "Player 1 turn.")
+                        return copy(players = newPlayers, board = Cards(Set.empty[CardInterface]), msg = "Player 1 turn.")
             return copy(msg = "Cards are not playable.")
         return copy(msg = "It is not a players turn right now.")
 
@@ -47,7 +47,7 @@ case class PvEGame(players : Vector[CardsInterface], board : CardsInterface, msg
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
             if GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer == 0 then
                 val aiPlayerCards = players(1)
-                val lowestAiCards = players(1).findPlayable(Cards(Set.empty[Card]))
+                val lowestAiCards = players(1).findPlayable(Cards(Set.empty[CardInterface]))
                 val newBoard = lowestAiCards.get
                 val newAiPlayerCards = aiPlayerCards.remove(lowestAiCards.get)
                 val newAiPlayers = players.updated(1, aiPlayerCards.remove(newBoard))
@@ -74,7 +74,7 @@ case class PvEGame(players : Vector[CardsInterface], board : CardsInterface, msg
 object PvEGame:
         def apply() : Game =
             val d = Deck(32)
-            val board = Cards(Set.empty[Card])
+            val board = Cards(Set.empty[CardInterface])
             val s1 = d.draw()
             val s2 = d.draw()
             //GameStateContext.handle(Event.Start)

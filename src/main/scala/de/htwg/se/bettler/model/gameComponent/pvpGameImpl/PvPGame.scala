@@ -32,7 +32,7 @@ case class PvPGame(players : Vector[CardsInterface], board : CardsInterface, msg
     def skip() : Game =
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
             GameStateContext.handle(Events.Skip)
-            return copy(board = Cards(Set.empty[Card]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
+            return copy(board = Cards(Set.empty[CardInterface]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
         return this
 
     def getPlayers() = players
@@ -51,7 +51,7 @@ case class PvPGame(players : Vector[CardsInterface], board : CardsInterface, msg
 object PvPGame:
         def apply() : Game =
             val d = Deck(32)
-            val board = Cards(Set.empty[Card])
+            val board = Cards(Set.empty[CardInterface])
             val s1 = d.draw()
             val s2 = d.draw()
             //GameStateContext.handle(Event.Start)
