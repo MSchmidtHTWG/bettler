@@ -12,10 +12,7 @@ import java.io.File
 import java.awt.Image
 import java.nio.file.Paths
 
-trait CardInterface{
-
+trait CardInterface:
     def image:File
     def sameValue(card : CardInterface):Boolean
     def isHigher(card : CardInterface):Boolean
-
-}

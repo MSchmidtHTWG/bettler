@@ -1,11 +1,8 @@
 package de.htwg.se.bettler
 package model
 package cardComponent
-package cardBaseImpl
 
-
-trait CardsInterface {
-
+trait CardsInterface:
     def returnSet:Set[CardsInterface]
     def contains(c : CardsInterface):Boolean
     def isWorse(c: CardsInterface):Boolean
@@ -14,4 +11,3 @@ trait CardsInterface {
     def size:Int
     def groupBySameValue : Vector[CardsInterface]
     def findPlayable(board : CardsInterface) : Option[CardsInterface]
-}

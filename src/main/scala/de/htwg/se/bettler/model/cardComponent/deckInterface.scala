@@ -2,15 +2,8 @@ package de.htwg.se.bettler
 package model
 package cardComponent
 
+import cardComponent.CardsInterface
 
-import scala.util.Random
-import cardsInterface._
-
-
-
-trait deckInterface{
-    
+trait DeckInterface:
     def draw() : CardsInterface
-
-}
 
