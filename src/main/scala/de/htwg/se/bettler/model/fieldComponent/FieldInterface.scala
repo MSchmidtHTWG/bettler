@@ -9,3 +9,4 @@ trait FieldInterface:
     def printCard(card : CardInterface) : String
     def printField() : String
     def bar(cellwidth: Int) : String
+    def eol : String

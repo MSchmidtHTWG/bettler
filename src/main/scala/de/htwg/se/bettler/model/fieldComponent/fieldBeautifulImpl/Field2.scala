@@ -1,20 +1,20 @@
 package de.htwg.se.bettler
 package model
 package fieldComponent
-package fieldBaseImpl
+package fieldBeautifulImpl
 
 import gameComponent._
 import cardComponent.cardBaseImpl.Cards
 import cardComponent._
 
-case class Field(game : Game) extends FieldInterface{
+case class Field2(game : Game) extends FieldInterface{
 
   def eol = sys.props("line.separator")  
 
   def printCard(card : CardInterface) : String =
     var s = card.toString()
     s = s.filter(!"()".contains(_))
-    var r = "[" + s + "]"
+    var r = "{" + s + "}"
     return r
 
 
