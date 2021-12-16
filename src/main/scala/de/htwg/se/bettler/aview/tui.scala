@@ -3,9 +3,11 @@ package aview
 
 import scala.util.{Try,Success,Failure}
 import scala.io.StdIn.readLine
-import de.htwg.se.bettler.controller.controllerBaseImp._
+import de.htwg.se.bettler.controller.controllerBaseImp.Controller
 import util.Observer
-import model._
+import model.GameStateContext
+import model.cardComponent.cardBaseImpl.Card
+import model.cardComponent.cardBaseImpl.Cards
 import model.stateComponent.stateBaseImpl._
 
 class TUI(controller : Controller) extends Observer:

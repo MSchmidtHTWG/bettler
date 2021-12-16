@@ -3,6 +3,9 @@ package model
 package gameComponent
 package pvpGameImpl
 
+import cardComponent.cardBaseImpl.Cards
+import cardComponent.cardBaseImpl.Card
+import model.cardComponent.cardBaseImpl.Deck
 import de.htwg.se.bettler.util._
 import stateComponent.stateBaseImpl._
 import fieldComponent.fieldBaseImpl._

@@ -2,7 +2,7 @@ package de.htwg.se.bettler
 package controller
 package controllerBaseImp
 
-import controller._
+import controllerBaseImp.Controller
 import util._
 import model._
 

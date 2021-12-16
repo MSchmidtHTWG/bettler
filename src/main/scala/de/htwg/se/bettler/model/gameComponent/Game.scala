@@ -2,6 +2,7 @@ package de.htwg.se.bettler
 package model
 package gameComponent
 
+import cardComponent.cardBaseImpl.Cards
 import de.htwg.se.bettler.util._
 import pveGameImpl._
 import pvpGameImpl._

@@ -2,8 +2,9 @@ package de.htwg.se.bettler
 package controller
 package controllerBaseImp
 
-import model._
-import model.gameComponent._
+import model.GameChanged
+import model.gameComponent.Game
+import model.cardComponent.cardBaseImpl._
 import util._
 import scala.swing.Publisher
 import scala.swing.event.Event

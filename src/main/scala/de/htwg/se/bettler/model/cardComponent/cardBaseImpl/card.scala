@@ -1,5 +1,7 @@
 package de.htwg.se.bettler
 package model
+package cardComponent
+package cardBaseImpl
 
 import model.Symbol
 import scala.annotation.meta.setter

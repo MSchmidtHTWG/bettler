@@ -1,9 +1,12 @@
-package de.htwg.se.bettler.aview.gui
+package de.htwg.se.bettler
+package aview 
+package gui
 
 import scala.swing.Swing.LineBorder
+import model.GameChanged
 import de.htwg.se.bettler.controller.controllerBaseImp._
-import de.htwg.se.bettler.model.Cards._
-import de.htwg.se.bettler.model._
+import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Cards
+import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
 import scala.swing._
 import scala.swing.event._
 import scala.swing.Swing.LineBorder

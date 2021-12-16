@@ -4,6 +4,8 @@ package fieldComponent
 package fieldBaseImpl
 
 import gameComponent._
+import cardComponent.cardBaseImpl.Cards
+import cardComponent.cardBaseImpl.Card
 
 case class Field(game : Game) {
 

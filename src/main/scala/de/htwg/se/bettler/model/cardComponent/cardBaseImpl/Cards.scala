@@ -1,5 +1,7 @@
 package de.htwg.se.bettler
 package model
+package cardComponent
+package cardBaseImpl
 
 case class Cards(cards : Set[Card]):
     def returnSet = cards
