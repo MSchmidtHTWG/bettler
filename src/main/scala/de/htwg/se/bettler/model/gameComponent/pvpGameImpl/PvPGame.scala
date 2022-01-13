@@ -4,14 +4,18 @@ package gameComponent
 package pvpGameImpl
 
 import cardComponent._
+import fieldComponent._
 import model.cardComponent.cardBaseImpl.Deck
 import model.cardComponent.cardBaseImpl.Cards
 import model.cardComponent.cardBaseImpl.Card
 import de.htwg.se.bettler.util._
 import stateComponent.stateBaseImpl._
-import fieldComponent.fieldBaseImpl._
+import fieldComponent.fieldBaseImpl.Field
+import fieldComponent.fieldBeautifulImpl._
 
 case class PvPGame(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
+    var field : FieldInterface = Field(this)
+    def setBeautifulField : Unit = field = Field2(this)
     def play(cards : CardsInterface) : Game =
         if GameStateContext.state.isInstanceOf[PlayerTurnState] then
             val currentPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
@@ -45,7 +49,6 @@ case class PvPGame(players : Vector[CardsInterface], board : CardsInterface, msg
         m.game()
 
     override def toString : String =
-        val field = Field(this)
         return field.printField() + field.eol + msg
 
 object PvPGame:
