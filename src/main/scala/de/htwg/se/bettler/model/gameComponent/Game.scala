@@ -16,12 +16,11 @@ trait Game extends Originator:
     def setBeautifulField : Unit
 
 object Game:
-    def apply() : Option[Game] = None
-    def apply(kind: String) : Option[Game] = kind match
+    def apply() : Game = Game("pvp")
+    def apply(kind: String) : Game = kind match
         case "pvp" => 
             GameStateContext.handle(Events.Start)
-            Some(PvPGame())
+            PvPGame()
         case "pve" => 
             GameStateContext.handle(Events.Start)
-            Some(PvEGame())
-        case _ => None
+            PvEGame()

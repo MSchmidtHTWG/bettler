@@ -3,6 +3,9 @@ package model
 package cardComponent
 package cardBaseImpl
 
+import com.google.inject.name.Names
+import com.google.inject.{Guice, Inject}
+import net.codingwell.scalaguice.InjectorExtensions._
 import model.Symbol
 import scala.annotation.meta.setter
 import scala.util.Try
@@ -12,15 +15,10 @@ import javax.imageio.ImageIO
 import java.io.File
 import java.awt.Image
 import java.nio.file.Paths
-
-
+    
 case class Card(symbol : Symbol, value : Value) extends CardInterface:
     override def toString = symbol.toString + value.toString
     def image = 
-        //C:\SE\bettler-1\src\main\scala\de\htwg\se\bettler\model\cardpictures\C8.png
-        //C:\SE\bettler-1\src\main\scala\de\htwg\se\bettler\cardpictures\C8.png
-        //val workingDir = System.getProperty("user.dir");
-        //val path = Paths.get(workingDir + "/src/main/scala/de/htwg/se/bettlermodel/cardpictures/" + symbol.toString + value.toString + ".png")
         new File(f"src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : CardInterface) = this.value == card.getValue
     def isHigher(card : CardInterface) = this.value.getValue > card.getValue.getValue

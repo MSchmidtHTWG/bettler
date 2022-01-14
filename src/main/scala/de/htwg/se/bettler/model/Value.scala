@@ -1,7 +1,7 @@
 package de.htwg.se.bettler
 package model
 
-enum Value (value : String):
+enum Value(value : String):
     override def toString = value
 
     def getValue =

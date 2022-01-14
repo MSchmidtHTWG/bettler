@@ -2,6 +2,9 @@ package de.htwg.se.bettler
 package controller
 package controllerBaseImp
 
+import com.google.inject.name.Names
+import com.google.inject.{Guice, Inject}
+import de.htwg.se.bettler.BettlerModule
 import model.GameChanged
 import model.gameComponent.Game
 import model.cardComponent._
@@ -9,7 +12,7 @@ import util._
 import scala.swing.Publisher
 import scala.swing.event.Event
 
-case class Controller(var game : Option[Game]) extends ControllerInterface:
+case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
     def setBeautifulField : Unit = 
         game.get.setBeautifulField
         notifyObservers
@@ -76,10 +79,10 @@ case class Controller(var game : Option[Game]) extends ControllerInterface:
 
     def newGame(kind : String) : Option[Game] =
         val newgame = Game(kind)
-        newgame match
-            case Some(someGame) => 
-                Some(someGame)
-            case None => None
+        kind match
+            case "pve" => Some(newgame)
+            case "pvp" => Some(newgame)
+            case _ => None
 
     def addMemento() : Unit = 
         game match

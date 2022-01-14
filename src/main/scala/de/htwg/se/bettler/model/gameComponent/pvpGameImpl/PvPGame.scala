@@ -12,8 +12,11 @@ import de.htwg.se.bettler.util._
 import stateComponent.stateBaseImpl._
 import fieldComponent.fieldBaseImpl.Field
 import fieldComponent.fieldBeautifulImpl._
+import com.google.inject.name.Names
+import com.google.inject.{Guice, Inject}
+import net.codingwell.scalaguice.InjectorExtensions._
 
-case class PvPGame(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
+case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
     var field : FieldInterface = Field(this)
     def setBeautifulField : Unit = field = Field2(this)
     def play(cards : CardsInterface) : Game =
@@ -52,7 +55,7 @@ case class PvPGame(players : Vector[CardsInterface], board : CardsInterface, msg
         return field.printField() + field.eol + msg
 
 object PvPGame:
-        def apply() : Game =
+        def apply() : PvPGame =
             val d = Deck(32)
             val board = Cards(Set.empty[CardInterface])
             val s1 = d.draw()
