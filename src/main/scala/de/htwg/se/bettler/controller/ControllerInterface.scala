@@ -12,6 +12,7 @@ trait ControllerInterface extends Publisher with Observable with Caretaker:
     def doAndNotify(p : (CardsInterface) => Option[Game], cards : CardsInterface) : Unit
     def doAndNotify(p : (String) => Option[Game], kind : String) : Unit
     def doAndNotify(p : () => Option[Game]) : Unit
+    def nextRound() : Option[Game]
     def restore : Unit
     def play(cards : CardsInterface) : Option[Game]
     def skip() : Option[Game]

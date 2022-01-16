@@ -14,6 +14,7 @@ trait Game extends Originator:
     def getBoard() : CardsInterface
     def getMessage() : String
     def setBeautifulField : Unit
+    def nextRound : Game
 
 object Game:
     def apply() : Game = Game("pvp")

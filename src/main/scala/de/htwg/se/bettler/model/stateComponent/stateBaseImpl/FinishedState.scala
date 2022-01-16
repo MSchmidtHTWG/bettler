@@ -3,8 +3,8 @@ package model
 package stateComponent
 package stateBaseImpl
 
-case class FinishedState() extends State:
+case class FinishedState(winner : Int, loser : Int) extends State:
     def handle(e: Events) : State =
         e match
-            case Events.Start => PlayerTurnState(0, 2)
+            case Events.Start => PlayerTurnState(loser, 2)
             case _ => this

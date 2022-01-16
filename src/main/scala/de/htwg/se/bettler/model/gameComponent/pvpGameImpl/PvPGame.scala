@@ -42,6 +42,26 @@ case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInte
             return copy(board = Cards(Set.empty[CardInterface]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
         return this
 
+    def nextRound : Game =
+        if !GameStateContext.getState().isInstanceOf[FinishedState] then
+            return this
+        val newGame = PvPGame()
+        val winnerIndex = GameStateContext.state.asInstanceOf[FinishedState].winner
+        val loserIndex = GameStateContext.state.asInstanceOf[FinishedState].loser
+        val winnerCards = newGame.getPlayers()(winnerIndex)
+        val loserCards = newGame.getPlayers()(loserIndex)
+        val winnerWorstCard = winnerCards.worstCards
+        val loserBestCard = loserCards.bestCards
+        val newWinnerCards = winnerCards.remove(winnerWorstCard).add(loserBestCard)
+        val newLoserCards = loserCards.remove(loserBestCard).add(winnerWorstCard)
+        var newPlayers = newGame.getPlayers().updated(winnerIndex, newWinnerCards)
+        val newMsg = "Player " + (loserIndex + 1) + " turn."
+        newPlayers = newPlayers.updated(loserIndex, newLoserCards)
+        GameStateContext.handle(Events.Start)
+        return PvPGame(newPlayers, newGame.getBoard(), newMsg)
+
+        
+
     def getPlayers() = players
     def getBoard() = board
     def getMessage() = msg

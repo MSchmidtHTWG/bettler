@@ -32,6 +32,8 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
         return true
 
     def remove(c : CardsInterface) = Cards(this.cards -- c.returnSet)
+    
+    def add(c : CardsInterface) = Cards(this.cards ++ c.returnSet)
 
     def size = cards.size
 
@@ -47,13 +49,6 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
                 group = group :+ Cards(groupCards)
         return group
 
-    /*def findLowest : Cards =
-        val cardList = cards.toList
-        var i = 0
-        for (card <- cardList)
-            if card.value.getValue < cardList(i).value.getValue then
-                i += 1
-        return Cards(Set(cardList(i)))*/
 
     def findPlayable(board : CardsInterface) : Option[CardsInterface] =
         for (c <- this.groupBySameValue)
@@ -64,3 +59,17 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
                 c.returnSet.toArray.slice(0, board.size).foreach{x => reducedCards = reducedCards + x}
                 if board.isWorse(Cards(reducedCards)) then return Some(Cards(reducedCards))
         return None
+
+    def bestCards : CardsInterface = 
+        var tmp : CardInterface = Card(Symbol.Empty, Value.Empty)
+        for (card <- cards)
+            if card.isHigher(tmp) then
+                tmp = card
+        return Cards(Set(tmp))
+
+    def worstCards : CardsInterface = 
+        var tmp = cards.head
+        for (card <- cards)
+            if tmp.isHigher(card) then
+                tmp = card
+        return Cards(Set(tmp))

@@ -11,5 +11,5 @@ import aview.gui._
   val injector = Guice.createInjector(new BettlerModule)
   val controller = injector.getInstance(classOf[ControllerInterface])
   val tui = TUI(controller)
-  val gui = SwingGui(controller)
+  //val gui = SwingGui(controller)
   tui.run

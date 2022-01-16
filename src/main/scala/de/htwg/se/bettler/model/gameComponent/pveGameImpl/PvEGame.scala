@@ -14,7 +14,6 @@ import fieldComponent.fieldBaseImpl.Field
 import fieldComponent.fieldBeautifulImpl._
 import com.google.inject.name.Names
 import com.google.inject.{Guice, Inject}
-import net.codingwell.scalaguice.InjectorExtensions._
 
 case class PvEGame @Inject()(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
     var field : FieldInterface = Field(this)
@@ -63,6 +62,24 @@ case class PvEGame @Inject()(players : Vector[CardsInterface], board : CardsInte
                     return copy(players = newAiPlayers, board = newBoard, msg = "Player 2 has won the game.")
                 return copy(players = newAiPlayers, board = newBoard, msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
         return this
+
+    def nextRound : Game =
+        if !GameStateContext.getState().isInstanceOf[FinishedState] then
+            return this
+        val newGame = PvEGame()
+        val winnerIndex = GameStateContext.state.asInstanceOf[FinishedState].winner
+        val loserIndex = GameStateContext.state.asInstanceOf[FinishedState].loser
+        val winnerCards = newGame.getPlayers()(winnerIndex)
+        val loserCards = newGame.getPlayers()(loserIndex)
+        val winnerWorstCard = winnerCards.worstCards
+        val loserBestCard = loserCards.bestCards
+        val newWinnerCards = winnerCards.remove(winnerWorstCard).add(loserBestCard)
+        val newLoserCards = loserCards.remove(loserBestCard).add(winnerWorstCard)
+        var newPlayers = newGame.getPlayers().updated(winnerIndex, newWinnerCards)
+        val newMsg = "Player " + loserIndex + " turn."
+        newPlayers = newPlayers.updated(loserIndex, newLoserCards)
+        GameStateContext.handle(Events.Start)
+        return PvEGame(newPlayers, newGame.getBoard(), newMsg)
 
     def getPlayers() = players
     def getBoard() = board

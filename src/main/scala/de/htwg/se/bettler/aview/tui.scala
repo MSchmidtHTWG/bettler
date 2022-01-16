@@ -33,6 +33,7 @@ class TUI(controller : ControllerInterface) extends Observer:
             case "undo" => controller.undo
             case "redo" => controller.redo
             case "beautify" => controller.setBeautifulField
+            case "next" => controller.doAndNotify(controller.nextRound)
             case _ =>
                 if input.startsWith("play") then
                     if !GameStateContext.getState().isInstanceOf[PlayerTurnState] then

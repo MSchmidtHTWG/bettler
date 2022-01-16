@@ -83,7 +83,10 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
             case "pve" => Some(newgame)
             case "pvp" => Some(newgame)
             case _ => None
-
+    def nextRound() : Option[Game] =
+        game match
+            case Some(newGame) => Some(newGame.nextRound)
+            case None => None
     def addMemento() : Unit = 
         game match
             case Some(g) => stack.push(g.save())
