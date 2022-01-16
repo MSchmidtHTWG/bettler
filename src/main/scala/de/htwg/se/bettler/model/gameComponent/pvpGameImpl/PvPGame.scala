@@ -55,7 +55,7 @@ case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInte
         val newWinnerCards = winnerCards.remove(winnerWorstCard).add(loserBestCard)
         val newLoserCards = loserCards.remove(loserBestCard).add(winnerWorstCard)
         var newPlayers = newGame.getPlayers().updated(winnerIndex, newWinnerCards)
-        val newMsg = "Player " + (loserIndex + 1) + " turn."
+        val newMsg = "Player " + (loserIndex + 1) + " gave Player " + (winnerIndex + 1) + " " + loserBestCard.toString + " and received " + winnerWorstCard.toString + ".\n" + "Player " + (loserIndex + 1) + " turn."
         newPlayers = newPlayers.updated(loserIndex, newLoserCards)
         GameStateContext.handle(Events.Start)
         return PvPGame(newPlayers, newGame.getBoard(), newMsg)

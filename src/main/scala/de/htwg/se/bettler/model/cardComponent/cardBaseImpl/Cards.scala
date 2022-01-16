@@ -7,6 +7,11 @@ import model.cardComponent.cardBaseImpl.Card
 
 
 case class Cards(cards : Set[CardInterface]) extends ACards:
+    override def toString =
+        var string = ""
+        cards.foreach(c => string += c.toString)
+        string
+
     def returnSet = cards
 
     def contains(c : CardsInterface) = !c.returnSet.isEmpty && (c.returnSet -- cards).size == 0
@@ -42,7 +47,6 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
         for (value <- 7 to 14)
             var groupCards = Set.empty[CardInterface]
             for (card <- cards)
-                //if card.value.getValue.equals(value) then
                 if card.getValue.equals(value) then
                     groupCards += card
             if groupCards.nonEmpty then
@@ -61,7 +65,7 @@ case class Cards(cards : Set[CardInterface]) extends ACards:
         return None
 
     def bestCards : CardsInterface = 
-        var tmp : CardInterface = Card(Symbol.Empty, Value.Empty)
+        var tmp = cards.head
         for (card <- cards)
             if card.isHigher(tmp) then
                 tmp = card

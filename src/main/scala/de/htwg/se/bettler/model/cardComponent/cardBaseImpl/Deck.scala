@@ -18,7 +18,7 @@ case class Deck(size : Int) extends DeckInterface:
         val ran = Random()
         //ran.setSeed(DeckStrategy.execute(DeckStrategy.strategy2))
         var l : List[CardInterface] = deck.toList
-        l = ran.shuffle(l).slice(0, 7)
+        l = ran.shuffle(l).slice(0, 2)
         var r = Set.empty[CardInterface]
         for (ll <- l) {
             r = r + ll
