@@ -29,10 +29,20 @@ import javax.swing.JPanel
 import javax.swing.JCheckBox
 import scala.util.Success
 import scala.util.Failure
+import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
-class SwingGui(controller: ControllerInterface) extends Frame{
+import scala.swing.Publisher
+import scala.swing.event.Event
+import model._
+
+class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
     var cardsSelected = Set.empty[Card]
     listenTo(controller)
+    peer.setDefaultCloseOperation(EXIT_ON_CLOSE)
+    reactions += {
+        case e : CloseEvent => this.close()
+    }
+
     title = "HTWG-Bettler"
     menuBar = new MenuBar {
     contents += new Menu("Option") {
@@ -45,7 +55,7 @@ class SwingGui(controller: ControllerInterface) extends Frame{
         })
     
     
-        contents += new MenuItem(Action("Quit") {System.exit(0)})
+        contents += new MenuItem(Action("Quit") {controller.exit})
         }
     }
     visible = true
@@ -61,6 +71,7 @@ class SwingGui(controller: ControllerInterface) extends Frame{
         val skipButton = new Button("Skip")
         val undoButton = new Button("Undo")
         val redoButton = new Button("Redo")
+        val nextRoundButton = new Button("Next Round")
         val input = new TextArea("") 
         
         contents += input
@@ -68,11 +79,13 @@ class SwingGui(controller: ControllerInterface) extends Frame{
         contents += skipButton 
         contents += undoButton 
         contents += redoButton
+        contents += nextRoundButton
         listenTo(input)       
         listenTo(playButton)
         listenTo(skipButton)
         listenTo(undoButton)
         listenTo(redoButton)
+        listenTo(nextRoundButton)
 
         reactions +={
             case ButtonClicked(`playButton`) => 
@@ -89,6 +102,7 @@ class SwingGui(controller: ControllerInterface) extends Frame{
             case ButtonClicked(`skipButton`) => controller.doAndNotify(controller.skip)
             case ButtonClicked(`undoButton`) => controller.undo
             case ButtonClicked(`redoButton`) => controller.redo
+            case ButtonClicked(`nextRoundButton`) => controller.doAndNotify(controller.nextRound)
         }
 
     
@@ -127,7 +141,7 @@ class SwingGui(controller: ControllerInterface) extends Frame{
             case ButtonClicked(`startButton`) => controller.doAndNotify(controller.newGame, "pvp")
             case ButtonClicked(`startButton2`) => controller.doAndNotify(controller.newGame, "pve")
         }
-        
+
     def redraw: Unit =
         if !controller.returnGame.isDefined then
             contents = new GridPanel(5,1):

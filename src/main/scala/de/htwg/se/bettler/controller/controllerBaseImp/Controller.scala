@@ -11,6 +11,7 @@ import model.cardComponent._
 import util._
 import scala.swing.Publisher
 import scala.swing.event.Event
+import model._
 
 case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
     def setBeautifulField : Unit = 
@@ -103,3 +104,6 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
         undomanager.redoStep
         notifyObservers
         publish(new GameChanged())
+
+    def exit : Unit =
+        publish(new model.CloseEvent)

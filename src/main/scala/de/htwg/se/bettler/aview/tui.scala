@@ -10,9 +10,20 @@ import model.cardComponent.cardBaseImpl.Card
 import model.cardComponent.cardBaseImpl.Cards
 import model.cardComponent._
 import model.stateComponent.stateBaseImpl._
+import scala.swing.Reactor
 
-class TUI(controller : ControllerInterface) extends Observer:
+import scala.swing.Publisher
+import scala.swing.event.Event
+import model._
+
+class TUI(controller : ControllerInterface) extends Observer with Reactor:
+    var exit = false
     controller.add(this)
+    listenTo(controller)
+    reactions += {
+        case e : CloseEvent => exit = true
+    }
+    
     def run =
         println("Willkommen zu Bettler. Tippe 'start' ein um das Spiel zu starten.")
         println("Mit 'exit' kannst du jederzeit das Spiel beenden.")
@@ -26,7 +37,7 @@ class TUI(controller : ControllerInterface) extends Observer:
         input match
             case "start pvp" => controller.doAndNotify(controller.newGame, "pvp")
             case "start pve" => controller.doAndNotify(controller.newGame, "pve")
-            case "exit" => return
+            case "exit" => controller.exit
             case "skip" => controller.doAndNotify(controller.skip)
             case "save" => controller.addMemento()
             case "restore" => controller.restore
@@ -49,4 +60,5 @@ class TUI(controller : ControllerInterface) extends Observer:
                         controller.doAndNotify(controller.play, Cards(l))
                 else
                     println("Unknown command.")
-        TUI()
+        if !exit then 
+            TUI()

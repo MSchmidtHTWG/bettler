@@ -5,6 +5,7 @@ import scala.swing.event.Event
 class StartEvent extends Event
 class SkipEvent extends Event
 class GameChanged extends Event
+class CloseEvent extends Event
 
 enum Events(name : String):
     override def toString = name
