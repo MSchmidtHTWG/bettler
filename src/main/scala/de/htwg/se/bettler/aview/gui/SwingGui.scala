@@ -36,7 +36,7 @@ import scala.swing.event.Event
 import model._
 
 class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
-    var cardsSelected = Set.empty[Card]
+    var cardsSelected = Set.empty[CardInterface]
     listenTo(controller)
     peer.setDefaultCloseOperation(EXIT_ON_CLOSE)
     reactions += {
@@ -89,15 +89,17 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
 
         reactions +={
             case ButtonClicked(`playButton`) => 
+                controller.doAndNotify(controller.play, Cards(cardsSelected))
+                cardsSelected = Set.empty[CardInterface]
             
-            val s = input.text.split(" ")
+            /*val s = input.text.split(" ")
             var l = Set.empty[CardInterface]
                 for (i <- 0 to s.size - 1)
                     Card(s(i)) match
                         case Success(c) => 
                                 l = l + c
                         case Failure(f) => println(f.getMessage)   
-                controller.doAndNotify(controller.play, Cards(l))
+                controller.doAndNotify(controller.play, Cards(l))*/
 
             case ButtonClicked(`skipButton`) => controller.doAndNotify(controller.skip)
             case ButtonClicked(`undoButton`) => controller.undo
@@ -110,7 +112,7 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
         for(card <- cards.returnSet)
             var f = card.image
             var pic = ImageIO.read(f).getScaledInstance(52,80,java.awt.Image.SCALE_SMOOTH)
-            val cb = new CheckBox(card.toString)
+            val cb = new ToggleButton(card.toString)
             cb.selectedIcon = ImageIcon(pic)
             cb.disabledIcon = ImageIcon(ImageIO.read(f).getScaledInstance(46,72,java.awt.Image.SCALE_SMOOTH))
             cb.icon = cb.disabledIcon
@@ -118,16 +120,15 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
             contents += cb
             listenTo(cb)
             reactions += {
-                case SelectionChanged(`cb`) =>
+                case ButtonClicked(`cb`) =>
                     if cb.selected then
                         Card(cb.text) match
                             case Success(s) => cardsSelected = cardsSelected + s
                             case Failure(f) => System.exit(0)
-                        cb.icon = cb.selectedIcon
                     else 
                         Card(cb.text) match
                             case Success(s) => cardsSelected = cardsSelected - s
-                        cb.icon = cb.disabledIcon
+                            case Failure(f) => System.exit(0)
             }
 
     def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):

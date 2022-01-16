@@ -6,7 +6,7 @@ package cardBaseImpl
 import model.cardComponent.cardBaseImpl.Card
 
 
-case class Cards(cards : Set[CardInterface]) extends ACards:
+case class Cards(cards : Set[CardInterface]) extends CardsInterface:
     override def toString =
         var string = ""
         cards.foreach(c => string += c.toString)
