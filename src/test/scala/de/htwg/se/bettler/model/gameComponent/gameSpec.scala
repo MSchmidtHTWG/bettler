@@ -11,7 +11,7 @@ import de.htwg.se.bettler.util.GameMemento
 import de.htwg.se.bettler.model.stateComponent.GameStateContext
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 
-class gameSpec extends AnyWordSpec {
+/*class gameSpec extends AnyWordSpec {
     "A Game" should {
         "have a factory method to create a pve or pvp game" in {
             val pvpGame = Game("pvp")
@@ -110,4 +110,4 @@ class gameSpec extends AnyWordSpec {
             )*/
         }
     }
-}
+}*/

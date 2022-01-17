@@ -5,7 +5,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 import model._
 
-class controllerSpec extends AnyWordSpec {
+/*class controllerSpec extends AnyWordSpec {
     "Controller" should {
         GameStateContext.setState(StartState())
         val game = PvPGame()
@@ -67,4 +67,4 @@ class controllerSpec extends AnyWordSpec {
             controller.game shouldBe(game)
         }
     }
-}
+}*/

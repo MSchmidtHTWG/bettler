@@ -4,7 +4,7 @@ package model
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-class GameStateContextSpec extends AnyWordSpec with Matchers {
+/*class GameStateContextSpec extends AnyWordSpec with Matchers {
     "A GameStateContext" when {
         "initialized" should {
             "have a state set to StartState" in {
@@ -19,4 +19,4 @@ class GameStateContextSpec extends AnyWordSpec with Matchers {
             }
         }
     }
-}
+}*/

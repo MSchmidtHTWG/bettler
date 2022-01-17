@@ -4,7 +4,7 @@ package model
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-class EventSpec extends AnyWordSpec with Matchers {
+/*class EventSpec extends AnyWordSpec with Matchers {
     "An event" when {
         "returning a string representation" should {
             "return 'start' if its a Start event" in {
@@ -15,4 +15,4 @@ class EventSpec extends AnyWordSpec with Matchers {
             }
         }
     }
-}
+}*/

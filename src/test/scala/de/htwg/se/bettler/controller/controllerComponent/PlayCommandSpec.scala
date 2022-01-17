@@ -5,7 +5,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 import model._
 
-class PlayCommandSpec extends AnyWordSpec {
+/*class PlayCommandSpec extends AnyWordSpec {
     "A PlayCommand" should {
         val state = GameStateContext.getState()
         val game = PvPGame()
@@ -30,4 +30,4 @@ class PlayCommandSpec extends AnyWordSpec {
             playCommand.memento.savestate shouldBe(GameStateContext.getState())
         }
     }
-}
+}*/
