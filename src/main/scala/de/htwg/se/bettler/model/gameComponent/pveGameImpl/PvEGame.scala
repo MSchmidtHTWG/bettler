@@ -25,9 +25,9 @@ case class PvEGame @Inject()(players : Vector[CardsInterface], board : CardsInte
                 val newPlayers = players.updated(currentPlayer, newPlayerCards)
                 val newBoard = cards
                 if newPlayerCards.size == 0 then
-                    GameStateContext.handle(Events.Finished)
+                    GameStateContext.handle(GameStateEvents.Finished)
                     return copy(players = newPlayers, board = newBoard, msg = "Player " + (currentPlayer + 1) + " has won the game.")
-                GameStateContext.handle(Events.Skip)
+                GameStateContext.handle(GameStateEvents.Skip)
                 val currentAiPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
                 val aiPlayerCards = players(currentAiPlayer)
                 val aiCardsToPlay = aiPlayerCards.findPlayable(newBoard)
@@ -37,12 +37,12 @@ case class PvEGame @Inject()(players : Vector[CardsInterface], board : CardsInte
                         val newAiBoard = c
                         val newAiPlayers = newPlayers.updated(currentAiPlayer, newAiPlayerCards)
                         if newAiPlayerCards.size == 0 then
-                            GameStateContext.handle(Events.Finished)
+                            GameStateContext.handle(GameStateEvents.Finished)
                             return copy(players = newPlayers, board = newBoard, msg = "Player " + (currentAiPlayer + 1) + " has won the game.")
-                        GameStateContext.handle(Events.Skip)
+                        GameStateContext.handle(GameStateEvents.Skip)
                         return copy(players = newAiPlayers, board = newAiBoard, msg= "Player 1 turn.")
                     case None => 
-                        GameStateContext.handle(Events.Skip)
+                        GameStateContext.handle(GameStateEvents.Skip)
                         return copy(players = newPlayers, board = Cards(Set.empty[CardInterface]), msg = "Player 1 turn.")
             return copy(msg = "Cards are not playable.")
         return copy(msg = "It is not a players turn right now.")
@@ -56,7 +56,7 @@ case class PvEGame @Inject()(players : Vector[CardsInterface], board : CardsInte
                 val newAiPlayerCards = aiPlayerCards.remove(lowestAiCards.get)
                 val newAiPlayers = players.updated(1, aiPlayerCards.remove(newBoard))
                 if newAiPlayerCards.size == 0 then
-                    GameStateContext.handle(Events.Finished)
+                    GameStateContext.handle(GameStateEvents.Finished)
                     return copy(players = newAiPlayers, board = newBoard, msg = "Player 2 has won the game.")
                 return copy(players = newAiPlayers, board = newBoard, msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
         return this
@@ -76,7 +76,7 @@ case class PvEGame @Inject()(players : Vector[CardsInterface], board : CardsInte
         var newPlayers = newGame.getPlayers().updated(winnerIndex, newWinnerCards)
         val newMsg = "Player " + loserIndex + " turn."
         newPlayers = newPlayers.updated(loserIndex, newLoserCards)
-        GameStateContext.handle(Events.Start)
+        GameStateContext.handle(GameStateEvents.Start)
         return PvEGame(newPlayers, newGame.getBoard(), newMsg)
 
     def getPlayers() = players

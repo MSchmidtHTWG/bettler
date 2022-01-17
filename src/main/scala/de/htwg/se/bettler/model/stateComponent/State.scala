@@ -3,4 +3,4 @@ package model
 package stateComponent
 
 trait State:
-    def handle(e: Events) : State
+    def handle(event: GameStateEvents) : State

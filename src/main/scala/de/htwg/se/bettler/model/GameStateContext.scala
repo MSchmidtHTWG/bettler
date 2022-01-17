@@ -6,6 +6,6 @@ import stateComponent.stateBaseImpl._
 object GameStateContext:
     var state : State = StartState()
     var maxplayers = 2
-    def handle(e: Events) = state = state.handle(e)
+    def handle(e: GameStateEvents) = state = state.handle(e)
     def getState() = state
     def setState(s : State) = state = s

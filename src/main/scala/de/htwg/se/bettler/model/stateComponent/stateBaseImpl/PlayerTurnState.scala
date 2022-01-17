@@ -4,15 +4,15 @@ package stateComponent
 package stateBaseImpl
 
 case class PlayerTurnState(currentPlayer : Int, maxPlayers : Int) extends State:
-    def handle(e: Events) : State =
-        e match
-            case Events.Skip => 
+    def handle(event: GameStateEvents) : State =
+        event match
+            case GameStateEvents.Skip => 
                 val nextPlayer = currentPlayer + 1
                 if currentPlayer + 1 >= maxPlayers then
                     return PlayerTurnState(0, maxPlayers)
                 return PlayerTurnState(nextPlayer, maxPlayers)
-            case Events.Start => PlayerTurnState(0, maxPlayers)
-            case Events.Finished =>
+            case GameStateEvents.Start => PlayerTurnState(0, maxPlayers)
+            case GameStateEvents.Finished =>
                 var loser = currentPlayer + 1
                 if loser >= maxPlayers then
                     loser = 0

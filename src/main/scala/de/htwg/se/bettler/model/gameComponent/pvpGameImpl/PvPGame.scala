@@ -24,17 +24,17 @@ case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInte
                 val newPlayers = players.updated(currentPlayer, newPlayerCards)
                 val newBoard = cards
                 if newPlayerCards.size == 0 then
-                    GameStateContext.handle(Events.Finished)
+                    GameStateContext.handle(GameStateEvents.Finished)
                     return copy(players = newPlayers, board = newBoard, msg = "Player " + (currentPlayer + 1) + " has won the game.")
                 else
-                    GameStateContext.handle(Events.Skip)
+                    GameStateContext.handle(GameStateEvents.Skip)
                     return copy(players = newPlayers, board = newBoard, msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
             return copy(msg = "Cards are not playable.")
         return copy(msg = "It is not a players turn right now.")
 
     def skip() : Game =
         if GameStateContext.getState().isInstanceOf[PlayerTurnState] then
-            GameStateContext.handle(Events.Skip)
+            GameStateContext.handle(GameStateEvents.Skip)
             return copy(board = Cards(Set.empty[CardInterface]), msg = "Player " + (GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer + 1) + " turn.")
         return this
 
@@ -52,7 +52,7 @@ case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInte
         val newLoserCards = loserCards.remove(loserBestCard).add(winnerWorstCard)
         var newPlayers = newGame.getPlayers().updated(winnerIndex, newWinnerCards).updated(loserIndex, newLoserCards)
         val newMsg = "Player " + (loserIndex + 1) + " gave Player " + (winnerIndex + 1) + " " + loserBestCard.toString + " and received " + winnerWorstCard.toString + ".\n" + "Player " + (loserIndex + 1) + " turn."
-        GameStateContext.handle(Events.Start)
+        GameStateContext.handle(GameStateEvents.Start)
         return PvPGame(newPlayers, newGame.getBoard(), newMsg)
 
         

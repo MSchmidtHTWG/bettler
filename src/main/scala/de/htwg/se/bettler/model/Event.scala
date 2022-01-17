@@ -7,8 +7,8 @@ class SkipEvent extends Event
 class GameChanged extends Event
 class CloseEvent extends Event
 
-enum Events(name : String):
+enum GameStateEvents(name : String):
     override def toString = name
-    case Start extends Events("start")
-    case Skip extends Events("skip")
-    case Finished extends Events("finished")
+    case Start extends GameStateEvents("start")
+    case Skip extends GameStateEvents("skip")
+    case Finished extends GameStateEvents("finished")
