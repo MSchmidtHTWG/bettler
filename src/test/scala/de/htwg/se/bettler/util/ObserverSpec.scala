@@ -4,53 +4,33 @@ package util
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-class ObserverSpec extends AnyWordSpec with Matchers {
-  "An obersvable" should {
-    "have a function to add an observer" in {
-      
-    }
+
+
+class ObserverSpec extends AnyWordSpec with Matchers:
+  var updated = false
+  val observable = new Observable {}
+  val observer = new Observer {
+    override def update: Unit = updated = true
   }
-
-  "An observable" when {
-    "adding a new observer" should {
-      var updated = false
-      val observable = new Observable {}
-      val observer = new Observer {
-        override def update: Unit = updated = true
-      }
-
+  "An observable" should {
+    "have a function to add an observer" in {
       observable.add(observer)
-
-      "have a subscriber" in {
-        observable.subscribers.contains(observer) should be(true)
-      }
-      "have subscriber removed" in {
-        observable.remove(observer)
-        observable.subscribers.contains(observer) should be(false)
-      }
+      observable.subscribers.contains(observer) should be(true)
     }
-    "notifying observers" should {
-      "update all observers" in {
-        var updated = false
-        val observable = new Observable {}
-        val observer = new Observer {
-          override def update: Unit = updated = true
-        }
-        observable.add(observer)
-        observable.notifyObservers
-        updated shouldBe(true)
-      }
+    "have a function to remove an observer" in {
+      observable.remove(observer)
+      observable.subscribers.contains(observer) should be(false)
+    }
+    "have a function to notify each observer" in {
+      observable.notifyObservers
+      updated should be(true)
     }
   }
 
   "An Observer" should {
-    "have a funtion update which calls a function update for each observable" in {
-      var updated = false
-      val observer = new Observer {
-        override def update: Unit = updated = true
-      }
+    "have a function update to change accordingly" in {
+      updated = false
       observer.update
       updated shouldBe(true)
     }
   }
-}

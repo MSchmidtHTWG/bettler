@@ -5,7 +5,6 @@ package controllerBaseImp
 import com.google.inject.name.Names
 import com.google.inject.{Guice, Inject}
 import de.htwg.se.bettler.BettlerModule
-import model.GameChanged
 import model.gameComponent.Game
 import model.cardComponent._
 import util._

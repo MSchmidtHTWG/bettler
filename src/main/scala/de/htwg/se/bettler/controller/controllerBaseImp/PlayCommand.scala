@@ -4,7 +4,7 @@ package controllerBaseImp
 
 import controllerBaseImp.Controller
 import util._
-import model._
+import model.stateComponent.GameStateContext
 
 class PlayCommand(controller : Controller) extends Command:
     assert(controller.game.isDefined)

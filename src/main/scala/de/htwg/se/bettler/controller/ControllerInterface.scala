@@ -1,7 +1,6 @@
 package de.htwg.se.bettler
 package controller
 
-import model.GameChanged
 import model.gameComponent.Game
 import model.cardComponent._
 import util._

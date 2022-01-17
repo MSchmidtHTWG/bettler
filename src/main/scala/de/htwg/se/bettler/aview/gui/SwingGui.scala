@@ -3,7 +3,6 @@ package aview
 package gui
 
 import scala.swing.Swing.LineBorder
-import model.GameChanged
 import de.htwg.se.bettler.controller.ControllerInterface
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Cards
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
@@ -31,11 +30,10 @@ import scala.util.Success
 import scala.util.Failure
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
-
-
 import scala.swing.Publisher
 import scala.swing.event.Event
 import de.htwg.se.bettler.controller.CloseEvent
+import de.htwg.se.bettler.controller.GameChanged
 
 
 class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
