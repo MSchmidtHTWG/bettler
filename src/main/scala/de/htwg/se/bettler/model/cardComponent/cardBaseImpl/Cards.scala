@@ -5,7 +5,6 @@ package cardBaseImpl
 
 import model.cardComponent.cardBaseImpl.Card
 
-
 case class Cards(cards : Set[CardInterface]) extends CardsInterface:
     override def toString =
         var string = ""
@@ -13,6 +12,11 @@ case class Cards(cards : Set[CardInterface]) extends CardsInterface:
         string
 
     def returnSet = cards
+
+    def add(card : CardInterface) = Cards(cards + card)
+    def add(cards : CardsInterface) = Cards(this.cards ++ cards.returnSet)
+    def remove(card : CardInterface) = Cards(cards - card)
+    def remove(cards : CardsInterface) = Cards(this.cards -- cards.returnSet)
 
     def contains(c : CardsInterface) = !c.returnSet.isEmpty && (c.returnSet -- cards).size == 0
 
@@ -35,10 +39,6 @@ case class Cards(cards : Set[CardInterface]) extends CardsInterface:
             if !c1.sameValue(c2)
         } return false
         return true
-
-    def remove(c : CardsInterface) = Cards(this.cards -- c.returnSet)
-    
-    def add(c : CardsInterface) = Cards(this.cards ++ c.returnSet)
 
     def size = cards.size
 

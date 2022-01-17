@@ -1,13 +1,11 @@
 package de.htwg.se.bettler
 package model
-package fieldComponent
-package fieldBaseImpl
 
 import gameComponent._
 import cardComponent.cardBaseImpl.Cards
 import cardComponent._
 
-case class Field(game : Game) extends FieldInterface{
+case class Field(game : Game):
 
   def eol = sys.props("line.separator")  
 
@@ -19,7 +17,7 @@ case class Field(game : Game) extends FieldInterface{
 
 
   def printField() : String =
-    var r = "" // val StringBuilder?
+    var r = ""
     var i = 0
     for (players <- game.getPlayers())
       i += 1
@@ -33,4 +31,3 @@ case class Field(game : Game) extends FieldInterface{
 
   def bar(cellwidth: Int = 50) =
     "-" * cellwidth + eol
-}

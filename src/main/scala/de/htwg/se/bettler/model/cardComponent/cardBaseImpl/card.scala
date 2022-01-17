@@ -3,27 +3,31 @@ package model
 package cardComponent
 package cardBaseImpl
 
+import com.google.inject.Guice
+import com.google.inject.Inject
 import com.google.inject.name.Names
-import com.google.inject.{Guice, Inject}
 import net.codingwell.scalaguice.InjectorExtensions._
-import model.Symbol
+
+import java.awt.Image
+import java.io.File
+import java.nio.file.Paths
+import javax.imageio.ImageIO
 import scala.annotation.meta.setter
-import scala.util.Try
 import scala.util.Failure
 import scala.util.Success
-import javax.imageio.ImageIO
-import java.io.File
-import java.awt.Image
-import java.nio.file.Paths
+import scala.util.Try
+
+import model.Symbol
     
 case class Card(symbol : Symbol, value : Value) extends CardInterface:
     override def toString = symbol.toString + value.toString
-    def image = 
-        new File(f"src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
+    def image = new File(f"src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : CardInterface) = this.value == card.getValue
     def isHigher(card : CardInterface) = this.value.getValue > card.getValue.getValue
+    def toCards = Cards(Set(this))
     def getSymbol = symbol
     def getValue = value
+    def intValue = value.getValue
 
 object Card :
     def apply(input : String) : Try[Card] =

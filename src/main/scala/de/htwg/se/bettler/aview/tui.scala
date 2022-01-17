@@ -12,6 +12,9 @@ import model.cardComponent._
 import model.stateComponent.stateBaseImpl._
 import scala.swing.Reactor
 
+import scala.sys.process._
+import java.nio.charset.StandardCharsets
+
 import scala.swing.Publisher
 import scala.swing.event.Event
 import model._
@@ -34,6 +37,7 @@ class TUI(controller : ControllerInterface) extends Observer with Reactor:
 
     def TUI(): Unit =
         val input = readLine
+        if exit then return
         input match
             case "start pvp" => controller.doAndNotify(controller.newGame, "pvp")
             case "start pve" => controller.doAndNotify(controller.newGame, "pve")
@@ -43,7 +47,6 @@ class TUI(controller : ControllerInterface) extends Observer with Reactor:
             case "restore" => controller.restore
             case "undo" => controller.undo
             case "redo" => controller.redo
-            case "beautify" => controller.setBeautifulField
             case "next" => controller.doAndNotify(controller.nextRound)
             case _ =>
                 if input.startsWith("play") then

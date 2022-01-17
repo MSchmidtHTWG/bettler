@@ -13,7 +13,6 @@ trait Game extends Originator:
     def getPlayers() : Vector[CardsInterface]
     def getBoard() : CardsInterface
     def getMessage() : String
-    def setBeautifulField : Unit
     def nextRound : Game
 
 object Game:

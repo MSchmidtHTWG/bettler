@@ -3,22 +3,18 @@ package model
 package gameComponent
 package pvpGameImpl
 
+import com.google.inject.Guice
+import com.google.inject.Inject
+import com.google.inject.name.Names
+import de.htwg.se.bettler.util._
+
 import cardComponent._
-import fieldComponent._
 import model.cardComponent.cardBaseImpl.Deck
 import model.cardComponent.cardBaseImpl.Cards
 import model.cardComponent.cardBaseImpl.Card
-import de.htwg.se.bettler.util._
 import stateComponent.stateBaseImpl._
-import fieldComponent.fieldBaseImpl.Field
-import fieldComponent.fieldBeautifulImpl._
-import com.google.inject.name.Names
-import com.google.inject.{Guice, Inject}
-import net.codingwell.scalaguice.InjectorExtensions._
 
 case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
-    var field : FieldInterface = Field(this)
-    def setBeautifulField : Unit = field = Field2(this)
     def play(cards : CardsInterface) : Game =
         if GameStateContext.state.isInstanceOf[PlayerTurnState] then
             val currentPlayer = GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer
@@ -54,9 +50,8 @@ case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInte
         val loserBestCard = loserCards.bestCards
         val newWinnerCards = winnerCards.remove(winnerWorstCard).add(loserBestCard)
         val newLoserCards = loserCards.remove(loserBestCard).add(winnerWorstCard)
-        var newPlayers = newGame.getPlayers().updated(winnerIndex, newWinnerCards)
+        var newPlayers = newGame.getPlayers().updated(winnerIndex, newWinnerCards).updated(loserIndex, newLoserCards)
         val newMsg = "Player " + (loserIndex + 1) + " gave Player " + (winnerIndex + 1) + " " + loserBestCard.toString + " and received " + winnerWorstCard.toString + ".\n" + "Player " + (loserIndex + 1) + " turn."
-        newPlayers = newPlayers.updated(loserIndex, newLoserCards)
         GameStateContext.handle(Events.Start)
         return PvPGame(newPlayers, newGame.getBoard(), newMsg)
 
@@ -72,6 +67,7 @@ case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInte
         m.game()
 
     override def toString : String =
+        val field = Field(this)
         return field.printField() + field.eol + msg
 
 object PvPGame:
@@ -80,5 +76,4 @@ object PvPGame:
             val board = Cards(Set.empty[CardInterface])
             val s1 = d.draw()
             val s2 = d.draw()
-            //GameStateContext.handle(Event.Start)
             return PvPGame(Vector(s1,s2), board, "Player 1 turn.")

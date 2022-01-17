@@ -31,6 +31,8 @@ import scala.util.Success
 import scala.util.Failure
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
+
+
 import scala.swing.Publisher
 import scala.swing.event.Event
 import model._
@@ -91,16 +93,6 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
             case ButtonClicked(`playButton`) => 
                 controller.doAndNotify(controller.play, Cards(cardsSelected))
                 cardsSelected = Set.empty[CardInterface]
-            
-            /*val s = input.text.split(" ")
-            var l = Set.empty[CardInterface]
-                for (i <- 0 to s.size - 1)
-                    Card(s(i)) match
-                        case Success(c) => 
-                                l = l + c
-                        case Failure(f) => println(f.getMessage)   
-                controller.doAndNotify(controller.play, Cards(l))*/
-
             case ButtonClicked(`skipButton`) => controller.doAndNotify(controller.skip)
             case ButtonClicked(`undoButton`) => controller.undo
             case ButtonClicked(`redoButton`) => controller.redo

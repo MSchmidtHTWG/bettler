@@ -14,9 +14,6 @@ import scala.swing.event.Event
 import model._
 
 case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
-    def setBeautifulField : Unit = 
-        game.get.setBeautifulField
-        notifyObservers
 
     override def toString = 
         game match

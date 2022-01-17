@@ -7,15 +7,13 @@ lazy val root = project
     version := "0.1.0-SNAPSHOT",
 
     scalaVersion := scala3Version,
-
-    //libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test",
+    
     libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.10",
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.10" % "test",
     libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "3.0.0",
     libraryDependencies += "com.google.inject" % "guice" % "4.2.3",
     libraryDependencies += ("net.codingwell" %% "scala-guice" % "5.0.2").cross(CrossVersion.for3Use2_13),
-    //libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.11",
-    //libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.11",
+
     jacocoCoverallsServiceName := "github-actions", 
     jacocoCoverallsBranch := sys.env.get("CI_BRANCH"),
     jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
@@ -23,18 +21,3 @@ lazy val root = project
   )
 .enablePlugins(JacocoCoverallsPlugin)
 parallelExecution in Test := false
-/*name := "bettler"
-version := "0.2.0-SNAPSHOT"
-scala3Version := "3.0.2"
-scalaVersion := scala3Version
-
-//libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test",
-libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.10"
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.10" % "test"
-libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "3.0.0"
-libraryDependencies += "com.google.inject" % "guice" % "4.2.3"
-libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.11"
-jacocoCoverallsServiceName := "github-actions"
-jacocoCoverallsBranch := sys.env.get("CI_BRANCH")
-jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME")
-jacocoCoverallsRepoToken := sys.env.get("COVERALLS_REPO_TOKEN")*/

@@ -2,15 +2,18 @@ package de.htwg.se.bettler
 package model
 package cardComponent
 
-import model.Symbol
+import java.awt.Image
+import java.io.File
+import java.nio.file.Paths
+
+import javax.imageio.ImageIO
 import scala.annotation.meta.setter
-import scala.util.Try
 import scala.util.Failure
 import scala.util.Success
-import javax.imageio.ImageIO
-import java.io.File
-import java.awt.Image
-import java.nio.file.Paths
+import scala.util.Try
+
+import model.Symbol
+
 
 trait CardInterface:
     def image:File
@@ -18,3 +21,4 @@ trait CardInterface:
     def isHigher(card : CardInterface):Boolean
     def getSymbol:Symbol
     def getValue:Value
+    def intValue:Int

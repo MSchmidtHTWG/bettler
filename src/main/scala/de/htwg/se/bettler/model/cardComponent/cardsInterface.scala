@@ -9,6 +9,8 @@ trait CardsInterface:
     def isPlayable : Boolean
     def remove(c : CardsInterface):CardsInterface
     def add(c : CardsInterface):CardsInterface
+    def remove(c : CardInterface):CardsInterface
+    def add(c : CardInterface):CardsInterface
     def size:Int
     def groupBySameValue : Vector[CardsInterface]
     def findPlayable(board : CardsInterface) : Option[CardsInterface]
