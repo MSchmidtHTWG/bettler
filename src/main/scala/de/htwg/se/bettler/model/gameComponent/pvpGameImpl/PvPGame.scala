@@ -13,6 +13,7 @@ import model.cardComponent.cardBaseImpl.Deck
 import model.cardComponent.cardBaseImpl.Cards
 import model.cardComponent.cardBaseImpl.Card
 import stateComponent.stateBaseImpl._
+import stateComponent._
 
 case class PvPGame @Inject()(players : Vector[CardsInterface], board : CardsInterface, msg : String) extends Game:
     def play(cards : CardsInterface) : Game =

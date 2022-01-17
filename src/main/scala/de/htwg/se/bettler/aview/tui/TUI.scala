@@ -1,11 +1,12 @@
 package de.htwg.se.bettler
 package aview
+package tui
 
 import scala.util.{Try,Success,Failure}
 import scala.io.StdIn.readLine
 import de.htwg.se.bettler.controller._
 import util.Observer
-import model.GameStateContext
+import model.stateComponent.GameStateContext
 import model.cardComponent.cardBaseImpl.Card
 import model.cardComponent.cardBaseImpl.Cards
 import model.cardComponent._

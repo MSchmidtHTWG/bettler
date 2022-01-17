@@ -1,5 +1,6 @@
 package de.htwg.se.bettler
 package model
+package stateComponent
 
 enum GameStateEvents(name : String):
     override def toString = name

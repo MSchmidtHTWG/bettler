@@ -6,6 +6,8 @@ import cardComponent._
 import de.htwg.se.bettler.util._
 import pveGameImpl._
 import pvpGameImpl._
+import model.stateComponent._
+
 
 trait Game extends Originator:
     def play(cards : CardsInterface) : Game

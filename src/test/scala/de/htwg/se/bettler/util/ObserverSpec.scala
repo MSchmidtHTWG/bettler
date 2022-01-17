@@ -5,6 +5,12 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class ObserverSpec extends AnyWordSpec with Matchers {
+  "An obersvable" should {
+    "have a function to add an observer" in {
+      
+    }
+  }
+
   "An observable" when {
     "adding a new observer" should {
       var updated = false
@@ -36,8 +42,9 @@ class ObserverSpec extends AnyWordSpec with Matchers {
       }
     }
   }
+
   "An Observer" should {
-    "have a funtion update" in {
+    "have a funtion update which calls a function update for each observable" in {
       var updated = false
       val observer = new Observer {
         override def update: Unit = updated = true
