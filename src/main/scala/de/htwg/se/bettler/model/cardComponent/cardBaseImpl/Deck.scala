@@ -4,6 +4,7 @@ package cardComponent
 package cardBaseImpl
 
 import scala.util.Random
+import cardComponent.Symbol
 
 case class Deck(size : Int) extends DeckInterface:
     var deck = Set.empty[CardInterface]
@@ -16,7 +17,6 @@ case class Deck(size : Int) extends DeckInterface:
     }
     def draw() : Cards = 
         val ran = Random()
-        //ran.setSeed(DeckStrategy.execute(DeckStrategy.strategy2))
         var l : List[CardInterface] = deck.toList
         l = ran.shuffle(l).slice(0, 2)
         var r = Set.empty[CardInterface]

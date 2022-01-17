@@ -12,7 +12,7 @@ import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
 
-import model.Symbol
+import cardComponent.Symbol
 
 
 trait CardInterface:

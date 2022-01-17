@@ -1,5 +1,6 @@
 package de.htwg.se.bettler
 package model
+package cardComponent
 
 enum Symbol (symbol : String):
     override def toString = symbol

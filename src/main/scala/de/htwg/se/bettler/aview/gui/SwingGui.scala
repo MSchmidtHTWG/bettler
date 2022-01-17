@@ -35,7 +35,8 @@ import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
 import scala.swing.Publisher
 import scala.swing.event.Event
-import model._
+import de.htwg.se.bettler.controller.CloseEvent
+
 
 class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
     var cardsSelected = Set.empty[CardInterface]
@@ -64,7 +65,7 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
     centerOnScreen()
     redraw
     reactions += {
-        case event : GameChanged => redraw
+        case e : GameChanged => redraw
     }
 
 

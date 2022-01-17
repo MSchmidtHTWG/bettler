@@ -1,5 +1,6 @@
 package de.htwg.se.bettler
 package model
+package cardComponent
 
 enum Value(value : String):
     override def toString = value

@@ -17,7 +17,6 @@ import java.nio.charset.StandardCharsets
 
 import scala.swing.Publisher
 import scala.swing.event.Event
-import model._
 
 class TUI(controller : ControllerInterface) extends Observer with Reactor:
     var exit = false

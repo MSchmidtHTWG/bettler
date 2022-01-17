@@ -16,12 +16,11 @@ import scala.annotation.meta.setter
 import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
-
-import model.Symbol
+import cardComponent.Symbol
     
 case class Card(symbol : Symbol, value : Value) extends CardInterface:
     override def toString = symbol.toString + value.toString
-    def image = new File(f"src/main/scala/de/htwg/se/bettler/model/cardpictures/" + symbol.toString + value.toString + ".png")
+    def image = new File(f"src/main/scala/de/htwg/se/bettler/model/cardcomponent/cardpictures/" + symbol.toString + value.toString + ".png")
     def sameValue(card : CardInterface) = this.value == card.getValue
     def isHigher(card : CardInterface) = this.value.getValue > card.getValue.getValue
     def toCards = Cards(Set(this))

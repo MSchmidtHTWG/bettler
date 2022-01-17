@@ -103,4 +103,4 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
         publish(new GameChanged())
 
     def exit : Unit =
-        publish(new model.CloseEvent)
+        publish(new CloseEvent)

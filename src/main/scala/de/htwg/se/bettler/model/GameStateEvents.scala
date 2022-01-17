@@ -1,11 +1,5 @@
 package de.htwg.se.bettler
 package model
-import scala.swing.event.Event
-
-class StartEvent extends Event
-class SkipEvent extends Event
-class GameChanged extends Event
-class CloseEvent extends Event
 
 enum GameStateEvents(name : String):
     override def toString = name
