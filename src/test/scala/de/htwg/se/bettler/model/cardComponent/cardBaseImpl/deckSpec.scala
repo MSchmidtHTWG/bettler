@@ -1,5 +1,7 @@
 package de.htwg.se.bettler
 package model
+package cardComponent
+package cardBaseImpl
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._

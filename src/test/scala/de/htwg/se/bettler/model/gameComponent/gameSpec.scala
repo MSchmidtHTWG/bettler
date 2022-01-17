@@ -1,36 +1,38 @@
 package de.htwg.se.bettler
 package model
+package gameComponent
 
+import cardComponent.cardBaseImpl._
+import pveGameImpl._
+import pvpGameImpl._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 import de.htwg.se.bettler.util.GameMemento
+import de.htwg.se.bettler.model.stateComponent.GameStateContext
+import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 
 class gameSpec extends AnyWordSpec {
     "A Game" should {
         "have a factory method to create a pve or pvp game" in {
             val pvpGame = Game("pvp")
             val pveGame = Game("pve")
-            val game = Game()
-            val game2 = Game("")
-            pvpGame.isDefined shouldBe(true)
-            pvpGame.get.isInstanceOf[PvPGame] shouldBe(true)
-            pveGame.isDefined shouldBe(true)
-            pveGame.get.isInstanceOf[PvEGame] shouldBe(true)
-            game.isDefined shouldBe(false)
-            game2.isDefined shouldBe(false)
+
+            pvpGame.isInstanceOf[PvPGame] shouldBe(true)
+            pveGame.isInstanceOf[PvEGame] shouldBe(true)
+
         }
         "create a new Game with 2 players, each with 7 Cards and an empty field" in {
             val game = PvPGame()
             game.getPlayers().size shouldBe(2)
-            game.getBoard().cards.isEmpty shouldBe(true)
+            game.getBoard().returnSet.isEmpty shouldBe(true)
             for (p <- game.getPlayers()) {
-                p.cards.size shouldBe(7)
+                p.returnSet.size shouldBe(7)
             }
             val game2 = PvEGame()
             game2.getPlayers().size shouldBe(2)
-            game2.getBoard().cards.isEmpty shouldBe(true)
+            game2.getBoard().returnSet.isEmpty shouldBe(true)
             for (p <- game2.getPlayers()) {
-                p.cards.size shouldBe(7)
+                p.returnSet.size shouldBe(7)
             }
         }
         "have a method to play cards" in {

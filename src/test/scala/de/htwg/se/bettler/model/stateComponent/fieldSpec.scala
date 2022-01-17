@@ -1,18 +1,26 @@
 package de.htwg.se.bettler
 package model
 
-import Field._
-import Card._
 
+
+import cardComponent.cardBaseImpl.Cards
+import gameComponent.pvpGameImpl.PvPGame
+import cardComponent.cardBaseImpl.Card
+import stateComponent.stateBaseImpl.PlayerTurnState
 
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 import org.scalactic.Prettifier.default
+import de.htwg.se.bettler.model.cardComponent.CardInterface
+import de.htwg.se.bettler.model.cardComponent.Value
+import de.htwg.se.bettler.model.cardComponent.Symbol
+import de.htwg.se.bettler.model.stateComponent.GameStateContext
+
 
 class FieldSpec extends AnyWordSpec {
   "Field" should {
-    val game = PvPGame(Vector.empty[Cards], Cards(Set.empty[Card]), "")
+    val game = PvPGame(Vector.empty[Cards], Cards(Set.empty[CardInterface]), "")
     val field = Field(game)
     "have a scalable bar" in {
       field.bar() should be ("--------------------------------------------------" + field.eol)
@@ -25,9 +33,9 @@ class FieldSpec extends AnyWordSpec {
     }
      
     "have a printable Board" in {
-      var board = Set.empty[Card]
-      var player1 = Set.empty[Card]
-      var player2 = Set.empty[Card]
+      var board = Set.empty[CardInterface]
+      var player1 = Set.empty[CardInterface]
+      var player2 = Set.empty[CardInterface]
       board = board + Card(Symbol.Hearts, Value.Seven)
       player2 = player2 + Card(Symbol.Hearts, Value.Nine)
       player1 = player1 + Card(Symbol.Diamonds, Value.Ten)

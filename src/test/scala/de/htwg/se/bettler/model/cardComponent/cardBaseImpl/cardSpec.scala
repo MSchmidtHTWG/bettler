@@ -1,7 +1,9 @@
 package de.htwg.se.bettler
 package model
+package cardComponent
+package cardBaseImpl
 
-import Card._
+
 
 import Value._
 import Symbol._

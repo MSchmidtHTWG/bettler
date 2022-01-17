@@ -1,5 +1,7 @@
 package de.htwg.se.bettler
 package model
+package cardComponent
+package cardBaseImpl
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
@@ -7,7 +9,8 @@ import org.scalatest.matchers.should.Matchers._
 class cardsSpec extends AnyWordSpec {
     "Cards" should {
         "have a method to return the Set of Cards (Set[Card])" in {
-            val set = Set(Card(Symbol.Hearts, Value.Ace))
+
+            val set = Set[CardInterface(CardSymbol.Hearts, Value.Ace)]
             val cards = Cards(set)
             cards.returnSet.equals(set) shouldBe(true)
         }
@@ -24,7 +27,7 @@ class cardsSpec extends AnyWordSpec {
             val set2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
             val set3 = Cards(Set(Card(Symbol.Clubs, Value.Seven)))
             val cards = set
-            val cards2 = Cards(Set.empty[Card])
+            val cards2 = Cards(Set.empty[CardInterface])
             val cards3 = set3
             cards.isWorse(set) shouldBe(false)
             cards.isWorse(set2) shouldBe(false)
@@ -37,8 +40,8 @@ class cardsSpec extends AnyWordSpec {
             cards.isWorse(set) shouldBe(false)
             cards.isWorse(set2) shouldBe(false)
             cards.isWorse(set3) shouldBe(false)
-            cards.isWorse(Cards(Set.empty[Card])) shouldBe(false)
-            cards2.isWorse(Cards(Set.empty[Card])) shouldBe(false)
+            cards.isWorse(Cards(Set.empty[CardInterface])) shouldBe(false)
+            cards2.isWorse(Cards(Set.empty[CardInterface])) shouldBe(false)
             cards2.isWorse(set) shouldBe(true)
             cards2.isWorse(set2) shouldBe(true)
             cards2.isWorse(set2) shouldBe(true)

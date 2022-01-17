@@ -1,5 +1,7 @@
 package de.htwg.se.bettler
 package model
+package gameComponent
+package pvpGameImpl
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
