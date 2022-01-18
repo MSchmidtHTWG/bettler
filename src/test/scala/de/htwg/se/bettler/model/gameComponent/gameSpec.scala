@@ -23,6 +23,7 @@ class gameSpec extends AnyWordSpec:
             pveGame.isInstanceOf[PvEGame] shouldBe(true)
             game.isInstanceOf[PvPGame] shouldBe(true)
         }
+    }
         /*"create a new Game with 2 players, each with 7 Cards and an empty field" in {
             val game = PvPGame()
             game.getPlayers().size shouldBe(2)
