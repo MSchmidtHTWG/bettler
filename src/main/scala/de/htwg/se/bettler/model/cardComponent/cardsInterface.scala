@@ -17,4 +17,4 @@ trait CardsInterface:
     def bestCards : CardsInterface
     def worstCards : CardsInterface
 
-abstract class ACards extends CardsInterface
+//abstract class ACards extends CardsInterface
