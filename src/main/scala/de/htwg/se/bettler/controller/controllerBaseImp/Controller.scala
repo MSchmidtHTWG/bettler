@@ -70,10 +70,9 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
             case None => None
 
     def newGame(kind : String) : Option[Game] =
-        val newgame = Game(kind)
         kind match
-            case "pve" => Some(newgame)
-            case "pvp" => Some(newgame)
+            case "pve" => Some(Game(kind))
+            case "pvp" => Some(Game(kind))
             case _ => None
 
     def nextRound() : Option[Game] =
