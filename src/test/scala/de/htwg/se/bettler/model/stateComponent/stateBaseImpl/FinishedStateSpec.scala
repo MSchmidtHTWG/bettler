@@ -12,6 +12,6 @@ class FinishedStateSpec extends AnyWordSpec with Matchers:
             val newState = FinishedState(0,1).handle(GameStateEvents.Start).asInstanceOf[PlayerTurnState].currentPlayer should be(1)
         }
         "return itself when called to handle any other event" in {
-            FinishedState(0,1).isInstanceOf[FinishedState] should be(true)
+            FinishedState(0,1).handle(GameStateEvents.Skip).isInstanceOf[FinishedState] should be(true)
         }
     }
