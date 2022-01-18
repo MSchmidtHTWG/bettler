@@ -84,5 +84,18 @@ class controllerSpec extends AnyWordSpec {
             controller.restore
             controller.game.get should be(game)
         }
+
+        "have a method to start the Next Round" in {
+            GameStateContext.setState(StartState())
+            val game = PvPGame()
+            val controller = Controller(Some(game))
+
+            controller.doAndNotify(controller.newGame,"pvp")
+            controller.doAndNotify(controller.nextRound)
+
+            controller.game.get.isInstanceOf[PvPGame] shouldBe(true)
+            controller.game.get.isInstanceOf[PvEGame] shouldBe(false)
+
+        }
     }
 }
