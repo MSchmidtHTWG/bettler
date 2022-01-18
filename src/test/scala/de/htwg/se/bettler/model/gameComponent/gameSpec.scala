@@ -13,9 +13,9 @@ import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.StartState
 import de.htwg.se.bettler.model.stateComponent.GameStateEvents
 
-/*class gameSpec extends AnyWordSpec:
+class gameSpec extends AnyWordSpec:
     "A Game" should {
-        "have a factory method to create a pve or pvp game" in {
+        "have a factory method to create a pve or pvp game, or a pvp game if not specified" in {
             val pvpGame = Game("pvp")
             val pveGame = Game("pve")
             val game = Game()
@@ -23,7 +23,7 @@ import de.htwg.se.bettler.model.stateComponent.GameStateEvents
             pveGame.isInstanceOf[PvEGame] shouldBe(true)
             game.isInstanceOf[PvPGame] shouldBe(true)
         }
-        "create a new Game with 2 players, each with 7 Cards and an empty field" in {
+        /*"create a new Game with 2 players, each with 7 Cards and an empty field" in {
             val game = PvPGame()
             game.getPlayers().size shouldBe(2)
             game.getBoard().returnSet.isEmpty shouldBe(true)
