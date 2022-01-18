@@ -18,7 +18,7 @@ case class Deck(size : Int) extends DeckInterface:
     def draw() : Cards = 
         val ran = Random()
         var l : List[CardInterface] = deck.toList
-        l = ran.shuffle(l).slice(0, 2)
+        l = ran.shuffle(l).slice(0, 7)
         var r = Set.empty[CardInterface]
         for (ll <- l) {
             r = r + ll
