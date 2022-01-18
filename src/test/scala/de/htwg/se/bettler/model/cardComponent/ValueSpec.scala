@@ -8,7 +8,7 @@ import org.scalatest.wordspec.AnyWordSpec
 class ValueSpec extends AnyWordSpec with Matchers {
 
     "Value" should {
-        "have A method getValue to return the Value" in {
+        "have a method getValue to return the value" in {
             Value.Seven.getValue shouldBe(7)
             Value.Eight.getValue shouldBe(8)
             Value.Nine.getValue shouldBe(9)
@@ -20,7 +20,7 @@ class ValueSpec extends AnyWordSpec with Matchers {
             Value.Empty.getValue shouldBe(0)
             
         }
-        "have A method getValue to return theString Represantation of a Value" in {
+        "have a method toString to return the string representation of a value" in {
             Value.Seven.toString shouldBe("7")
             Value.Eight.toString shouldBe("8")
             Value.Nine.toString shouldBe("9")

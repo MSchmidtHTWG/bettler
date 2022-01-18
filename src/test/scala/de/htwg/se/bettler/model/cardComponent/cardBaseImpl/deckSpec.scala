@@ -10,7 +10,7 @@ class deckSpec extends AnyWordSpec {
    "Deck" should {
       var deck = Deck(32)
       var deck2 = Deck(32)
-      "Have a Method for drawning from a deck" in {
+      "Have a method for drawing seven cards from a deck" in {
          deck.draw().size should be (7)
       }
       "be subset" in {
