@@ -17,6 +17,7 @@ class PvPGameSpec extends AnyWordSpec {
     GameStateContext.setState(PlayerTurnState(0,2))
     "A PvPGame" should {
         "have a factory method that creates a random new PvPGame with 2 players" in {
+            val testgame = PvPGame()
             game.getBoard().size shouldBe(0)
             game.getPlayers().foreach(x => x.size shouldBe(7))
             game.getPlayers().size should be(2)
