@@ -14,6 +14,7 @@ lazy val root = project
     libraryDependencies += "com.google.inject" % "guice" % "4.2.3",
     libraryDependencies += ("net.codingwell" %% "scala-guice" % "5.0.2").cross(CrossVersion.for3Use2_13),
 
+    jacocoExcludes := Seq("*aview.*"),
     jacocoCoverallsServiceName := "github-actions", 
     jacocoCoverallsBranch := sys.env.get("CI_BRANCH"),
     jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
