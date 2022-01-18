@@ -20,7 +20,6 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
             case None => "Currently no game running."
 
     def returnGame = game
-
     val undomanager = util.UndoManager()
 
     def doAndNotify(p : (CardsInterface) => Option[Game], cards : CardsInterface) : Unit =
