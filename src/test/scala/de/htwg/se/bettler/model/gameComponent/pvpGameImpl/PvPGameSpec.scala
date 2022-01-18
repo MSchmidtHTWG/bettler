@@ -10,6 +10,7 @@ import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Cards
 import de.htwg.se.bettler.model.stateComponent.GameStateContext
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.StartState
+import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.FinishedState
 
 class PvPGameSpec extends AnyWordSpec {
     val game = PvPGame()
@@ -43,6 +44,34 @@ class PvPGameSpec extends AnyWordSpec {
             GameStateContext.setState(StartState())
             val gameSkipNotAPlayersTurn = game.skip()
             gameSkipNotAPlayersTurn.equals(game) should be(true)
+        }
+        "have a method nextround, returning a new game starting with the loser, if in a finishedstate. The loser exchanges his best card for the winners worst card automatically" in {
+            GameStateContext.setState(FinishedState(0,1))
+            val nextRound = game.nextRound
+            GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer should be(1)
+        }
+        "have a method to return a vector of cards representing the players hands" in {
+            game.getPlayers().size should be(2)
+        }
+        "have a method to return cards, representing the board" in {
+            game.getBoard().size should be(0)
+        }
+        "have a method to return a message to display the games state and errors" in {
+            game.getMessage().equals("Player 1 turn.") should be(true)
+        }
+        "have a method save to make a single savegame by returning a memento of itself" in {
+            GameStateContext.setState(PlayerTurnState(0,2))
+            val saveGame = game.save()
+            saveGame.game().equals(game) should be(true)
+            saveGame.state().isInstanceOf[PlayerTurnState] should be(true)
+        }
+        "have a method to restore a state from a saved memento and returning the saved game" in {
+            GameStateContext.setState(PlayerTurnState(0,2))
+            val saveGame = game.save()
+            GameStateContext.setState(StartState())
+            val restoredGame = game.restore(saveGame)
+            restoredGame.equals(game) should be(true)
+            GameStateContext.state.isInstanceOf[PlayerTurnState] should be(true)
         }
     }
 }
