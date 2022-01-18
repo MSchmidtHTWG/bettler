@@ -9,6 +9,7 @@ import Value._
 import Symbol._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
+import java.io.File
 
 class cardSpec extends AnyWordSpec{
   "Card" should {
@@ -24,7 +25,7 @@ class cardSpec extends AnyWordSpec{
     set2 = set2 + card3
     set3 = set3 + card2
 
-    "have A Method for creating and returning Cards"  in {
+    "have a method for creating a card from a string, failing if the string does not represent a card" in {
       Card("C7").get should be (Card(Symbol.Clubs,Value.Seven))
       Card("C8").get should be (Card(Symbol.Clubs,Value.Eight))
       Card("C9").get should be (Card(Symbol.Clubs,Value.Nine))
@@ -40,13 +41,13 @@ class cardSpec extends AnyWordSpec{
       Card("Q7").isFailure should be (true)
       Card("").isFailure should be (true)
     }
-    "have A Method for finding out the Higher Card" in {
+    "have a method for finding out if a card is higher in value than another card" in {
       card1.isHigher(card2) shouldBe(false)
       card2.isHigher(card1) shouldBe(true)
       card2.isHigher(card3) shouldBe(true)
       card1.isHigher(card1) shouldBe(false)
     }
-    "have A Method for finding out if the value is the same" in {
+    "have a method for finding out if the value of two cards is the same" in {
       card2.sameValue(card1) shouldBe(false)
       card1.sameValue(card2) shouldBe(false)
       card2.sameValue(card2) shouldBe(true)
@@ -54,26 +55,37 @@ class cardSpec extends AnyWordSpec{
       card1.sameValue(card4) shouldBe(true)
       card4.sameValue(card1) shouldBe(true)
     }
-    "have a string representation of a Card" in {
+    "have a string representation of a card" in {
       card1.toString() shouldBe("C7")
       card2.toString() shouldBe("SK")
       card3.toString() shouldBe("DQ")
       card4.toString() shouldBe("H7")
     }
-    "A Method for getting The Value of a Card" in {
+    "have a method for returning the value of a card" in {
       card1.getValue shouldBe(Value.Seven)
       card2.getValue shouldBe(Value.King)
       card3.getValue shouldBe(Value.Queen)
       card4.getValue shouldBe(Value.Seven)
 
     }
-    "A Method for getting The Symbol of a Card" in {
+    "have a method for getting the symbol of a card" in {
       card1.getSymbol shouldBe(Symbol.Clubs)
       card2.getSymbol shouldBe(Symbol.Spades)
       card3.getSymbol shouldBe(Symbol.Diamonds)
       card4.getSymbol shouldBe(Symbol.Hearts)
 
     }
-
+    "have a method to return the corresponding number for ordering of a card's value" in {
+      card1.intValue should be(7)
+    }
+    "have a method to return itself as cards holding a set containing only itself" in {
+      val cards = card1.toCards
+      cards.cards.contains(card1) should be(true)
+      cards.size should be(1)
+    }
+    "have a method to return a file containing a picture to represent the card" in {
+      val file = card1.image
+      file.isInstanceOf[File] should be(true)
+    }
   }
 }
