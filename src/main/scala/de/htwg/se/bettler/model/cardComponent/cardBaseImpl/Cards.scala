@@ -47,7 +47,7 @@ case class Cards(cards : Set[CardInterface]) extends CardsInterface:
         for (value <- 7 to 14)
             var groupCards = Set.empty[CardInterface]
             for (card <- cards)
-                if card.getValue.equals(value) then
+                if card.intValue.equals(value) then
                     groupCards += card
             if groupCards.nonEmpty then
                 group = group :+ Cards(groupCards)
