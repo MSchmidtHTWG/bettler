@@ -3,14 +3,17 @@ package model
 package cardComponent
 package cardBaseImpl
 
+
+import Value._
+import Symbol._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 
-/*class cardsSpec extends AnyWordSpec {
+class cardsSpec extends AnyWordSpec {
     "Cards" should {
         "have a method to return the Set of Cards (Set[Card])" in {
 
-            val set = Set[CardInterface(CardSymbol.Hearts, Value.Ace)]
+            val set = (Set[CardInterface](Card(Symbol.Hearts, Value.Ace)))
             val cards = Cards(set)
             cards.returnSet.equals(set) shouldBe(true)
         }
@@ -49,11 +52,11 @@ import org.scalatest.matchers.should.Matchers._
             cards3.isWorse(cards) shouldBe(true)
         }
         "have a method to check if all the Cards in the Set have the same value" in {
-            val set = Set(Card(Symbol.Hearts, Value.Ace), Card(Symbol.Diamonds, Value.Ace))
-            val set2 = Set(Card(Symbol.Hearts, Value.Ace), Card(Symbol.Diamonds, Value.King))
+            val set = Set[CardInterface](Card(Symbol.Hearts, Value.Ace), Card(Symbol.Diamonds, Value.Ace))
+            val set2 = Set[CardInterface](Card(Symbol.Hearts, Value.Ace), Card(Symbol.Diamonds, Value.King))
             val cards = Cards(set)
             val cards2 = Cards(set2)
-            val cards3 = Cards(Set.empty[Card])
+            val cards3 = Cards(Set.empty[CardInterface])
             cards.isPlayable shouldBe(true)
             cards2.isPlayable shouldBe(false)
             cards3.isPlayable shouldBe(false)
@@ -90,4 +93,4 @@ import org.scalatest.matchers.should.Matchers._
             h3p.isDefined shouldBe(false)
         }
     }
-}*/
+}
