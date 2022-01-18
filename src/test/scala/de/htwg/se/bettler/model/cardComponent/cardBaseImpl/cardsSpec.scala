@@ -88,7 +88,32 @@ class cardsSpec extends AnyWordSpec {
             val h2p = hand2.findPlayable(board)
             h2p.size shouldBe(1)
             val h3p = hand1.findPlayable(board2)
-
         }
+        "Have a Method for adding a Card to Cards" in {
+            val set:CardsInterface = Cards(Set(Card(Symbol.Hearts, Value.Ace)))
+            val set2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
+            val card1 = Cards(Set(Card(Symbol.Diamonds, Value.Eight)))
+            val newCards = set.add(card1)
+     
+
+            set.contains(set2) shouldBe(false)
+            newCards.contains(card1) shouldBe(true)
+
+        
+        }    
+         "Have a Method for removing a Card " in {
+            val set:CardsInterface = Cards(Set(Card(Symbol.Hearts, Value.Ace)))
+            val set2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
+            val card1 = Cards(Set(Card(Symbol.Diamonds, Value.Eight)))
+            val newCards = set.add(card1)
+            newCards.contains(card1) shouldBe(true)
+            val removedCards = set.remove(card1)
+            removedCards.contains(card1) shouldBe(false)
+
+
+        }    
+
+
+        
     }
 }
