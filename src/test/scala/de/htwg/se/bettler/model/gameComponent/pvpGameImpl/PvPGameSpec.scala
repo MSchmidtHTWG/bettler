@@ -12,7 +12,7 @@ import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.StartState
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.FinishedState
 
-class PvPGameSpec extends AnyWordSpec {
+class PvPGameSpec extends AnyWordSpec:
     val game = PvPGame()
     GameStateContext.setState(PlayerTurnState(0,2))
     "A PvPGame" should {
@@ -75,4 +75,3 @@ class PvPGameSpec extends AnyWordSpec {
             GameStateContext.state.isInstanceOf[PlayerTurnState] should be(true)
         }
     }
-}

@@ -123,7 +123,7 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
             }
 
     def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):
-        val startButton = new Button("Start Game")
+        val startButton = new Button("Start PvP")
         val startButton2 = new Button("Start PvE")
         contents += startButton  
         contents += startButton2 
