@@ -89,7 +89,7 @@ class cardsSpec extends AnyWordSpec {
             h2p.size shouldBe(1)
             val h3p = hand1.findPlayable(board2)
         }
-        "Have a Method for adding a Card to Cards" in {
+        "Have a Method for adding  Cards to Cards" in {
             val set:CardsInterface = Cards(Set(Card(Symbol.Hearts, Value.Ace)))
             val set2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
             val card1 = Cards(Set(Card(Symbol.Diamonds, Value.Eight)))
@@ -100,8 +100,21 @@ class cardsSpec extends AnyWordSpec {
             newCards.contains(card1) shouldBe(true)
 
         
-        }    
-        "Have a Method for removing a Card " in {
+        }   
+        "Have a Method for adding a Card to Cards" in {
+            val set:CardsInterface = Cards(Set(Card(Symbol.Hearts, Value.Ace)))           
+            val set2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
+            val card1 = Card(Symbol.Diamonds, Value.Eight)
+            val card2 = Cards(Set(Card(Symbol.Diamonds, Value.Eight)))
+            val newCards = set.add(card1)
+     
+
+            set.contains(set2) shouldBe(false)
+            newCards.contains(card2) shouldBe(true)
+
+        
+        }  
+        "Have a Method for removing Cards from Cards " in {
             val set:CardsInterface = Cards(Set(Card(Symbol.Hearts, Value.Ace)))
             val set2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
             val card1 = Cards(Set(Card(Symbol.Diamonds, Value.Eight)))
@@ -111,7 +124,19 @@ class cardsSpec extends AnyWordSpec {
             removedCards.contains(card1) shouldBe(false)
 
 
-        }    
+        }  
+        "Have a Method for removing a Card from Cards " in {
+            val set:CardsInterface = Cards(Set(Card(Symbol.Hearts, Value.Ace)))
+            val set2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
+            val card1 = Card(Symbol.Diamonds, Value.Eight)
+            val card2 = Cards(Set(Card(Symbol.Diamonds, Value.Eight)))
+            val newCards = set.add(card1)
+            newCards.contains(card2) shouldBe(true)
+            val removedCards = set.remove(card1)
+            removedCards.contains(card2) shouldBe(false)
+
+
+        }     
 
         "Have a Method for finding the best Card" in {
             val set:CardsInterface = Cards(Set(Card(Symbol.Hearts, Value.Ace),Card(Symbol.Hearts, Value.Seven)))
@@ -127,6 +152,20 @@ class cardsSpec extends AnyWordSpec {
             val set3 = set.worstCards
             set.contains(set3) shouldBe(true)
             set3.contains(Cards(Set(Card(Symbol.Hearts, Value.Seven)))) shouldBe(true)
+        }
+
+        "Have Method to convert Cards to Srting" in {
+            val card1 = Cards(Set(Card(Symbol.Diamonds, Value.Eight)))
+            val card2 = Cards(Set(Card(Symbol.Clubs, Value.Ace)))
+            val card3 = Cards(Set(Card(Symbol.Spades, Value.King)))
+
+            val card1s = card1.toString
+            val card2s = card2.toString
+            val card3s = card3.toString
+
+            card1s shouldBe("D8")
+            card2s shouldBe("CA")
+            card3s shouldBe("SK")
         }
 
 
