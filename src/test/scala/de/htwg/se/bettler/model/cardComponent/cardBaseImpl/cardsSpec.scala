@@ -84,13 +84,11 @@ class cardsSpec extends AnyWordSpec {
             val board = Cards(Set(card4.get))
             val board2 = Cards(Set(card3.get))
             val h1p = hand1.findPlayable(board)
-            h1p.isDefined shouldBe(true)
-            h1p.get.size shouldBe(1)
+            h1p.size shouldBe(1)
             val h2p = hand2.findPlayable(board)
-            h2p.isDefined shouldBe(true)
-            h2p.get.size shouldBe(1)
+            h2p.size shouldBe(1)
             val h3p = hand1.findPlayable(board2)
-            h3p.isDefined shouldBe(false)
+
         }
     }
 }

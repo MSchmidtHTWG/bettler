@@ -60,5 +60,20 @@ class cardSpec extends AnyWordSpec{
       card3.toString() shouldBe("DQ")
       card4.toString() shouldBe("H7")
     }
+    "A Method for getting The Value of a Card" in {
+      card1.getValue shouldBe(Value.Seven)
+      card2.getValue shouldBe(Value.King)
+      card3.getValue shouldBe(Value.Queen)
+      card4.getValue shouldBe(Value.Seven)
+
+    }
+    "A Method for getting The Symbol of a Card" in {
+      card1.getSymbol shouldBe(Symbol.Clubs)
+      card2.getSymbol shouldBe(Symbol.Spades)
+      card3.getSymbol shouldBe(Symbol.Diamonds)
+      card4.getSymbol shouldBe(Symbol.Hearts)
+
+    }
+
   }
 }
