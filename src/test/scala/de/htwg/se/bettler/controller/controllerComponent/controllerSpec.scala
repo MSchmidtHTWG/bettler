@@ -59,11 +59,21 @@ class controllerSpec extends AnyWordSpec {
             controller.doAndNotify(controller.newGame, "pve")
             controller.game.get.isInstanceOf[PvEGame] shouldBe(true)
         }
+
+        "throw back none when no game is speciefied" in {
+            GameStateContext.setState(StartState())
+            val game = PvPGame()
+            val controller = Controller(Some(game))
+
+            controller.doAndNotify(controller.newGame,"")
+            controller.game.isDefined shouldBe(false)
+        }
         "have a method toString that returns the games string representation or a message, that the game is not initialized" in {
             Controller(None).toString shouldBe("Currently no game running.")
             val game = Game("pvp")
             Controller(Some(game)).toString.equals(game.toString) should be(true)
         }
+
         "have a method to save a game and to restore the game from a saved game" in {
             val game = Game("pvp")
             val controller = Controller(Some(game))
