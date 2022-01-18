@@ -13,14 +13,13 @@ import scala.swing.event.Event
 import model._
 
 case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
-
+    val undomanager = util.UndoManager()
     override def toString = 
         game match
             case Some(g) => g.toString
             case None => "Currently no game running."
 
     def returnGame = game
-    val undomanager = util.UndoManager()
 
     def doAndNotify(p : (CardsInterface) => Option[Game], cards : CardsInterface) : Unit =
         undomanager.doStep(PlayCommand(this))
