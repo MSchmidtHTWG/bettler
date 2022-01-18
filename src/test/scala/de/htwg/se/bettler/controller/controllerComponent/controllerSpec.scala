@@ -1,11 +1,20 @@
 package de.htwg.se.bettler
 package controller
+package controllerBaseImp
 
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 import model._
+import de.htwg.se.bettler.model.stateComponent.GameStateContext
+import de.htwg.se.bettler.model.gameComponent.pvpGameImpl.PvPGame
+import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.StartState
+import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Cards
+import de.htwg.se.bettler.model.stateComponent.GameStateEvents
+import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
+import de.htwg.se.bettler.model.gameComponent.pveGameImpl.PvEGame
+import de.htwg.se.bettler.model.gameComponent.Game
 
-/*class controllerSpec extends AnyWordSpec {
+class controllerSpec extends AnyWordSpec {
     "Controller" should {
         GameStateContext.setState(StartState())
         val game = PvPGame()
@@ -15,7 +24,7 @@ import model._
         "have a method play, that returns a Game" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
-            GameStateContext.handle(Events.Start)
+            GameStateContext.handle(GameStateEvents.Start)
             val controller = Controller(Some(game))
             val player1 = game.getPlayers()(0)
             val player1HeadCard = Cards(Set(player1.returnSet.head))
@@ -33,7 +42,7 @@ import model._
         "have a method skip to skip a turn" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
-            GameStateContext.handle(Events.Start)
+            GameStateContext.handle(GameStateEvents.Start)
             val controller = Controller(Some(game))
 
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
@@ -48,23 +57,22 @@ import model._
             val controller = Controller(Some(game))
 
             controller.doAndNotify(controller.newGame, "pve")
-            controller.game match
-                case Some(g) => g.isInstanceOf[PvEGame] shouldBe(true)
+            controller.game.get.isInstanceOf[PvEGame] shouldBe(true)
         }
         "have a method toString that returns the games string representation or a message, that the game is not initialized" in {
-            Controller(Game()).toString shouldBe("Currently no game running.")
+            Controller(None).toString shouldBe("Currently no game running.")
             val game = Game("pvp")
-            Controller(game).toString shouldBe(game.get.toString)
+            Controller(Some(game)).toString.equals(game.toString) should be(true)
         }
         "have a method to save a game and to restore the game from a saved game" in {
             val game = Game("pvp")
-            val controller = Controller(game)
+            val controller = Controller(Some(game))
             controller.stack.isEmpty shouldBe(true)
             controller.addMemento()
             controller.stack.isEmpty shouldBe(false)
             controller.doAndNotify(controller.newGame, "pve")
             controller.restore
-            controller.game shouldBe(game)
+            controller.game.get should be(game)
         }
     }
-}*/
+}
