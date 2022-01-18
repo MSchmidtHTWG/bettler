@@ -10,5 +10,3 @@ enum Symbol (symbol : String):
     case Spades extends Symbol("S")
     case Empty extends Symbol("")
 
-object Symbol:
-    def apply() = Symbol
