@@ -11,9 +11,11 @@ import util._
 import scala.swing.Publisher
 import scala.swing.event.Event
 import model._
+import de.htwg.se.bettler.model.fileIOComponent.fileIOXml.FileIOXml
 
 case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
     val undomanager = util.UndoManager()
+    val fileIO = FileIOXml()
     override def toString = 
         game match
             case Some(g) => g.toString
@@ -100,3 +102,12 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
 
     def exit : Unit =
         publish(new CloseEvent)
+
+    def saveXML : Unit =
+        game match
+            case Some(g) => fileIO.save(g)
+            case None => return
+    def loadXML : Unit =
+        game = Some(fileIO.load)
+        notifyObservers
+        publish(new GameChanged())

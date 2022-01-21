@@ -1,0 +1,6 @@
+<game>
+    <player1> C10 CQ D9 D10 DA CK </player1>
+    <player2> C7 DK SJ HK DQ HJ DJ </player2>
+    <board> S7 </board>
+    <message message="Player 2 turn."> </message>
+</game>

@@ -20,6 +20,8 @@ trait ControllerInterface extends Publisher with Observable with Caretaker:
     def redo : Unit
     def returnGame : Option[Game]
     def exit : Unit
+    def saveXML : Unit
+    def loadXML : Unit
 
 class CloseEvent extends Event
 class GameChanged extends Event
