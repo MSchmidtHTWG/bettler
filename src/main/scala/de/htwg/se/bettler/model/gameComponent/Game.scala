@@ -7,6 +7,8 @@ import de.htwg.se.bettler.util._
 import pveGameImpl._
 import pvpGameImpl._
 import model.stateComponent._
+import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
+
 
 
 trait Game extends Originator:

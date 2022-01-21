@@ -13,7 +13,7 @@ import scala.util.Success
 import scala.util.Try
 
 import cardComponent.Symbol
-
+import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
 
 trait CardInterface:
     def image:File

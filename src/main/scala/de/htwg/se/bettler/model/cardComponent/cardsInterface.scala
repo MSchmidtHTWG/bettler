@@ -16,5 +16,3 @@ trait CardsInterface:
     def findPlayable(board : CardsInterface) : Option[CardsInterface]
     def bestCards : CardsInterface
     def worstCards : CardsInterface
-
-//abstract class ACards extends CardsInterface

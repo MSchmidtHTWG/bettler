@@ -12,10 +12,12 @@ import scala.swing.Publisher
 import scala.swing.event.Event
 import model._
 import de.htwg.se.bettler.model.fileIOComponent.fileIOXml.FileIOXml
+import de.htwg.se.bettler.model.fileIOComponent.fileIOJson.FileIOJSon
 
 case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
     val undomanager = util.UndoManager()
     val fileIO = FileIOXml()
+    val fileIOj = FileIOJSon()
     override def toString = 
         game match
             case Some(g) => g.toString
@@ -109,5 +111,13 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
             case None => return
     def loadXML : Unit =
         game = Some(fileIO.load)
+        notifyObservers
+        publish(new GameChanged())
+    def saveJSON : Unit =
+        game match
+            case Some(g) => fileIOj.save(g)
+            case None => return
+    def loadJSON : Unit =
+        game = Some(fileIOj.load)
         notifyObservers
         publish(new GameChanged())

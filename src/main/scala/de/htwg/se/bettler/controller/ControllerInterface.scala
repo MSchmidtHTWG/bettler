@@ -22,6 +22,8 @@ trait ControllerInterface extends Publisher with Observable with Caretaker:
     def exit : Unit
     def saveXML : Unit
     def loadXML : Unit
+    def saveJSON : Unit
+    def loadJSON : Unit
 
 class CloseEvent extends Event
 class GameChanged extends Event

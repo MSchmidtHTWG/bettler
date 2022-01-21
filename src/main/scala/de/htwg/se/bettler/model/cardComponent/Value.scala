@@ -2,6 +2,8 @@ package de.htwg.se.bettler
 package model
 package cardComponent
 
+import org.checkerframework.checker.units.qual.K
+
 enum Value(value : String):
     override def toString = value
 
@@ -26,3 +28,15 @@ enum Value(value : String):
     case King extends Value("K")
     case Ace extends Value("A")
     case Empty extends Value("")
+
+object Value:
+    def apply(value : String) =
+        value match
+            case "7" => Seven
+            case "8" => Eight
+            case "9" => Nine
+            case "10" => Ten
+            case "J" => Jack
+            case "Q" => Queen
+            case "K" => King
+            case "A" => Ace

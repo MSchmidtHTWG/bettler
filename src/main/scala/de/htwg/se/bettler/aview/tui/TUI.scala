@@ -51,6 +51,8 @@ class TUI(controller : ControllerInterface) extends Observer with Reactor:
             case "next" => controller.doAndNotify(controller.nextRound)
             case "save xml" => controller.saveXML
             case "load xml" => controller.loadXML
+            case "save json" => controller.saveJSON
+            case "load json" => controller.loadJSON
             case _ =>
                 if input.startsWith("play") then
                     if !GameStateContext.getState().isInstanceOf[PlayerTurnState] then
