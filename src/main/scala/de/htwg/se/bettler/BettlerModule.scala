@@ -15,9 +15,9 @@ import java.util.ResourceBundle.Control
 import model.fileIOComponent.FileIOInterface
 import model.fileIOComponent._
 
-class BettlerModule extends AbstractModule {
+class BettlerModule extends AbstractModule:
     override def configure() = {
         bind(classOf[ControllerInterface]).toInstance(Controller(None))
-        //bind(classOf[FileIOInterface]).toInstance(fileIOJSon.FileIO())
+        //bind(classOf[FileIOInterface]).to(classOf[fileIOJson.FileIO])
+        bind(classOf[FileIOInterface]).toInstance(fileIOJson.FileIO())
     }
-}

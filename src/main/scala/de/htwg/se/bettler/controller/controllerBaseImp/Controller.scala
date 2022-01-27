@@ -12,9 +12,12 @@ import scala.swing.Publisher
 import scala.swing.event.Event
 import model._
 import de.htwg.se.bettler.model.fileIOComponent.FileIOInterface
+import net.codingwell.scalaguice.InjectorExtensions._
 
-case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
+case class Controller(var game : Option[Game]) extends ControllerInterface:
     val undomanager = util.UndoManager()
+    /*val injector = Guice.createInjector(new BettlerModule)
+    val fileIO = injector.getInstance(classOf[FileIOInterface])*/
     val fileIO = FileIOInterface()
     override def toString = 
         game match
