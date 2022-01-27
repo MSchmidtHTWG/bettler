@@ -12,8 +12,9 @@ import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.StartState
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.FinishedState
 
-class PvEGameSpec extends AnyWordSpec {
+class PvEGameSpec extends AnyWordSpec:
     val game = PvEGame()
+    GameStateContext.setState(PlayerTurnState(0,2))
     "A PvEGame" should {
         "have a factory method that creates a random new PvEGame with 2 players" in {
             val game = PvEGame.apply()
@@ -73,4 +74,3 @@ class PvEGameSpec extends AnyWordSpec {
             GameStateContext.state.isInstanceOf[PlayerTurnState] should be(true)
         }
     }
-}

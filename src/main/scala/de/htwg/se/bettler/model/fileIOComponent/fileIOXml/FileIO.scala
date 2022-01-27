@@ -15,6 +15,8 @@ import de.htwg.se.bettler.model.gameComponent.pvpGameImpl.PvPGame
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
 import scala.util.Success
 import scala.util.Failure
+import de.htwg.se.bettler.model.stateComponent.GameStateContext
+import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 
 class FileIO extends FileIOInterface:
     override def load: Game =
@@ -25,6 +27,7 @@ class FileIO extends FileIOInterface:
         val message = (file \\ "game" \ "message" \ "@message")
         val player1 = (file \\ "game" \ "player1")
         val player2 = (file \\ "game" \ "player2")
+        GameStateContext.setState(PlayerTurnState((file \\ "game" \ "turn" \ "@turn").text.toInt, (file \\ "game" \ "maxplayer" \ "@maxplayer").text.toInt))
         val p1 = player1.text.split(" ")
         val p2 = player2.text.split(" ")
         println(p1(1))
@@ -45,8 +48,11 @@ class FileIO extends FileIOInterface:
         val xml = prettyPrinter.format(gameToXML(game))
         pw.write(xml)
         pw.close
+
     def gameToXML(game : Game) =
         <game>
+            <turn turn= {GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer.toString}> </turn>
+            <maxplayer maxplayer= {GameStateContext.state.asInstanceOf[PlayerTurnState].maxPlayers.toString}> </maxplayer>
             <player1>
                 {
                    for (cp<-game.getPlayers()(0).returnSet) yield cp.toString + " "
