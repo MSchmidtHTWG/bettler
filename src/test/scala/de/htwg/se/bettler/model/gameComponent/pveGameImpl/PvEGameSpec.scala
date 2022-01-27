@@ -23,10 +23,8 @@ class PvEGameSpec extends AnyWordSpec:
         }
         "have a method to play cards, returning the changed game or itself, should the cards not be playable or should the state not be a playerturnstate" in {
             val gamePlayed = game.play(Cards(Set(game.getPlayers()(0).returnSet.head)))
-            gamePlayed.getBoard().size should be(1)
             gamePlayed.getPlayers()(0).size should be(6)
             gamePlayed.getPlayers()(0).contains(gamePlayed.getBoard()) should be(false)
-            //gamePlayed.getMessage().equals("Player 2 turn.") should be(true)
 
             GameStateContext.setState(PlayerTurnState(0,2))
             val gameCantPlay = game.play(Cards(Set(game.getPlayers()(1).returnSet.head)))
