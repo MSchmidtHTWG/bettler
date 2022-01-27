@@ -13,5 +13,5 @@
 /project/target/
 /project/metals.sbt
 /project/.bloop
-*.json
-*.xml
+game.json
+game.xml
