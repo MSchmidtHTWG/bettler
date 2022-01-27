@@ -14,7 +14,7 @@ import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 import de.htwg.se.bettler.model.gameComponent.pveGameImpl.PvEGame
 import de.htwg.se.bettler.model.gameComponent.Game
 
-class controllerSpec extends AnyWordSpec {
+class controllerSpec extends AnyWordSpec:
     "Controller" should {
         GameStateContext.setState(StartState())
         val game = PvPGame()
@@ -28,7 +28,6 @@ class controllerSpec extends AnyWordSpec {
             val controller = Controller(Some(game))
             val player1 = game.getPlayers()(0)
             val player1HeadCard = Cards(Set(player1.returnSet.head))
-
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
             GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             controller.game match
@@ -46,7 +45,6 @@ class controllerSpec extends AnyWordSpec {
             val game = PvPGame()
             GameStateContext.handle(GameStateEvents.Start)
             val controller = Controller(Some(game))
-
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
             GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             controller.doAndNotify(controller.skip)
@@ -61,7 +59,6 @@ class controllerSpec extends AnyWordSpec {
             controller.doAndNotify(controller.newGame, "pve")
             controller.game.get.isInstanceOf[PvEGame] shouldBe(true)
         }
-
         "throw back none when no game is speciefied" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
@@ -75,7 +72,6 @@ class controllerSpec extends AnyWordSpec {
             val game = Game("pvp")
             Controller(Some(game)).toString.equals(game.toString) should be(true)
         }
-
         "have a method to save a game and to restore the game from a saved game" in {
             val game = Game("pvp")
             val controller = Controller(Some(game))
@@ -86,18 +82,48 @@ class controllerSpec extends AnyWordSpec {
             controller.restore
             controller.game.get should be(game)
         }
-
         "have a method to start the Next Round" in {
             GameStateContext.setState(StartState())
             val game = PvPGame()
             val controller = Controller(Some(game))
-
             controller.doAndNotify(controller.newGame,"pvp")
             controller.doAndNotify(controller.nextRound)
-
             controller.game.get.isInstanceOf[PvPGame] shouldBe(true)
             controller.game.get.isInstanceOf[PvEGame] shouldBe(false)
-
+        }
+        "have a method to undo a turn" in {
+            GameStateContext.setState(StartState())
+            val game = PvPGame()
+            val controller = Controller(Some(game))
+            GameStateContext.handle(GameStateEvents.Start)
+            controller.doAndNotify(controller.play, (Cards(Set(controller.game.get.getPlayers()(0).returnSet.head))))
+            controller.undo
+            GameStateContext.state.isInstanceOf[PlayerTurnState] should be(true)
+            GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer should be(0)
+        }
+        "have a method to redo a turn" in {
+            GameStateContext.setState(StartState())
+            val game = PvPGame()
+            val controller = Controller(Some(game))
+            GameStateContext.handle(GameStateEvents.Start)
+            controller.doAndNotify(controller.play, (Cards(Set(controller.game.get.getPlayers()(0).returnSet.head))))
+            controller.undo
+            GameStateContext.state.isInstanceOf[PlayerTurnState] should be(true)
+            GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer should be(0)
+            controller.redo
+            GameStateContext.state.isInstanceOf[PlayerTurnState] should be(true)
+            GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer should be(1)
+        }
+        "have a method to save and load a game and state in a json or xml file" in {
+            GameStateContext.setState(StartState())
+            val game = PvPGame()
+            var controller = Controller(Some(game))
+            GameStateContext.handle(GameStateEvents.Start)
+            controller.save
+            controller = Controller(None)
+            GameStateContext.setState(StartState())
+            controller.load
+            GameStateContext.state.isInstanceOf[PlayerTurnState] should be(true)
+            GameStateContext.state.asInstanceOf[PlayerTurnState].currentPlayer should be(0)
         }
     }
-}
