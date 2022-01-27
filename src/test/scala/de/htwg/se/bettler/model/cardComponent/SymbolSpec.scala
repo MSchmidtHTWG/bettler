@@ -5,8 +5,7 @@ package cardComponent
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-class SymbolSpec extends AnyWordSpec with Matchers {
-    
+class SymbolSpec extends AnyWordSpec with Matchers:
     "Symbols " should {
         "Have a function to return the String Reparsentation of a Symbol" in {
             Symbol.Hearts.toString shouldBe("H")
@@ -15,5 +14,4 @@ class SymbolSpec extends AnyWordSpec with Matchers {
             Symbol.Spades.toString shouldBe("S")
         }
     }
- }
 

@@ -11,7 +11,7 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 import java.io.File
 
-class cardSpec extends AnyWordSpec{
+class cardSpec extends AnyWordSpec:
   "Card" should {
     val card1 = Card(Symbol.Clubs, Value.Seven)
     val card2 = Card(Symbol.Spades, Value.King)
@@ -88,4 +88,3 @@ class cardSpec extends AnyWordSpec{
       file.isInstanceOf[File] should be(true)
     }
   }
-}

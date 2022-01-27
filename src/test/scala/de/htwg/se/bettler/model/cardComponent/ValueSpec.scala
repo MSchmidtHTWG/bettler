@@ -5,8 +5,7 @@ package cardComponent
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-class ValueSpec extends AnyWordSpec with Matchers {
-
+class ValueSpec extends AnyWordSpec with Matchers:
     "Value" should {
         "have a method getValue to return the value" in {
             Value.Seven.getValue shouldBe(7)
@@ -32,5 +31,8 @@ class ValueSpec extends AnyWordSpec with Matchers {
             Value.Empty.toString shouldBe("")
             
         }
+        "have a factory method returning a value from a string" in {
+            val v1 = Value("7")
+            v1.toString should be("7")
+        }
     }
-}

@@ -6,7 +6,7 @@ package cardBaseImpl
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 
-class deckSpec extends AnyWordSpec {
+class deckSpec extends AnyWordSpec:
    "Deck" should {
       var deck = Deck(32)
       var deck2 = Deck(32)
@@ -17,4 +17,3 @@ class deckSpec extends AnyWordSpec {
          deck.draw().returnSet subsetOf deck2.deck should be (true)
       }
    }
-}

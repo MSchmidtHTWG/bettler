@@ -9,7 +9,7 @@ import Symbol._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 
-class cardsSpec extends AnyWordSpec {
+class cardsSpec extends AnyWordSpec:
     "Cards" should {
         "have a method to return the Set of Cards (Set[Card])" in {
 
@@ -167,9 +167,4 @@ class cardsSpec extends AnyWordSpec {
             card2s shouldBe("CA")
             card3s shouldBe("SK")
         }
-
-
-
-        
     }
-}
