@@ -4,7 +4,7 @@ package fileIOComponent
 package fileIOXml
 
 import com.google.inject.Guice
-import com.google.inject.name.Names
+import com.google.inject.Inject
 
 import scala.xml.{NodeSeq, PrettyPrinter}
 import de.htwg.se.bettler.model.gameComponent.Game
@@ -16,7 +16,7 @@ import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
 import scala.util.Success
 import scala.util.Failure
 
-class FileIOXml extends FileIOInterface:
+class FileIOXml @Inject() extends FileIOInterface:
     override def load: Game =
         val file = scala.xml.XML.loadFile("game.xml") 
         var cards1 : CardsInterface = Cards(Set.empty[CardInterface])

@@ -105,19 +105,11 @@ case class Controller @Inject() (var game : Option[Game]) extends ControllerInte
     def exit : Unit =
         publish(new CloseEvent)
 
-    def saveXML : Unit =
+    def save : Unit =
         game match
             case Some(g) => fileIO.save(g)
             case None => return
-    def loadXML : Unit =
+    def load : Unit =
         game = Some(fileIO.load)
-        notifyObservers
-        publish(new GameChanged())
-    def saveJSON : Unit =
-        game match
-            case Some(g) => fileIOj.save(g)
-            case None => return
-    def loadJSON : Unit =
-        game = Some(fileIOj.load)
         notifyObservers
         publish(new GameChanged())

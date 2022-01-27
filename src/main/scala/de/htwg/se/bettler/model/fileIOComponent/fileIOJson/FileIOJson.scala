@@ -9,6 +9,10 @@ import java.io.PrintWriter
 import de.htwg.se.bettler.model.gameComponent.Game
 import de.htwg.se.bettler.model.cardComponent.CardsInterface
 
+import com.google.inject.Guice
+import com.google.inject.Inject
+import com.google.inject.name.Names
+
 import play.api.libs.json._
 import scala.io.Source
 import de.htwg.se.bettler.model.cardComponent.CardInterface
@@ -21,7 +25,7 @@ import scala.util.Failure
 import de.htwg.se.bettler.model.stateComponent.GameStateContext
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 
-class FileIOJSon extends FileIOInterface:
+class FileIOJSon @Inject() extends FileIOInterface:
     override def load: Game = 
         val source: String = Source.fromFile("game.json").getLines.mkString
         val json: JsValue = Json.parse(source)
