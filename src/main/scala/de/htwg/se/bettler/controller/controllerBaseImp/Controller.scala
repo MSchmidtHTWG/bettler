@@ -11,13 +11,11 @@ import util._
 import scala.swing.Publisher
 import scala.swing.event.Event
 import model._
-import de.htwg.se.bettler.model.fileIOComponent.fileIOXml.FileIOXml
-import de.htwg.se.bettler.model.fileIOComponent.fileIOJsonImpl.FileIOJSon
+import de.htwg.se.bettler.model.fileIOComponent.FileIOInterface
 
 case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
     val undomanager = util.UndoManager()
-    val fileIO = FileIOXml()
-    val fileIOj = FileIOJSon()
+    val fileIO = FileIOInterface()
     override def toString = 
         game match
             case Some(g) => g.toString

@@ -1,7 +1,7 @@
 package de.htwg.se.bettler
 package model
 package fileIOComponent
-package fileIOJsonImpl
+package fileIOJson
 
 import scala.io.Source
 import java.io._
@@ -25,7 +25,7 @@ import scala.util.Failure
 import de.htwg.se.bettler.model.stateComponent.GameStateContext
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 
-class FileIOJSon extends FileIOInterface:
+class FileIO extends FileIOInterface:
     override def load: Game = 
         val source: String = Source.fromFile("game.json").getLines.mkString
         val json: JsValue = Json.parse(source)

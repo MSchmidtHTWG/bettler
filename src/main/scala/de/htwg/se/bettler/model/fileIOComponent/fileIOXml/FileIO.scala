@@ -16,7 +16,7 @@ import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
 import scala.util.Success
 import scala.util.Failure
 
-class FileIOXml @Inject() extends FileIOInterface:
+class FileIO extends FileIOInterface:
     override def load: Game =
         val file = scala.xml.XML.loadFile("game.xml") 
         var cards1 : CardsInterface = Cards(Set.empty[CardInterface])
