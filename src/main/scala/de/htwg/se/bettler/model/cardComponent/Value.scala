@@ -2,7 +2,7 @@ package de.htwg.se.bettler
 package model
 package cardComponent
 
-import org.checkerframework.checker.units.qual.K
+//import org.checkerframework.checker.units.qual.K
 
 enum Value(value : String):
     override def toString = value
