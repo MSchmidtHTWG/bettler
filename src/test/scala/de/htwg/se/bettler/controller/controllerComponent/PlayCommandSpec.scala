@@ -4,8 +4,12 @@ package controller
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers._
 import model._
+import de.htwg.se.bettler.model.stateComponent.GameStateContext
+import de.htwg.se.bettler.model.gameComponent.pvpGameImpl.PvPGame
+import de.htwg.se.bettler.controller.controllerBaseImp.PlayCommand
+import de.htwg.se.bettler.controller.controllerBaseImp.Controller
 
-/*class PlayCommandSpec extends AnyWordSpec {
+class PlayCommandSpec extends AnyWordSpec {
     "A PlayCommand" should {
         val state = GameStateContext.getState()
         val game = PvPGame()
@@ -30,4 +34,4 @@ import model._
             playCommand.memento.savestate shouldBe(GameStateContext.getState())
         }
     }
-}*/
+}
