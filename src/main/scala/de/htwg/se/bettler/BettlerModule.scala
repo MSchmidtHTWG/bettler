@@ -18,6 +18,5 @@ import model.fileIOComponent._
 class BettlerModule extends AbstractModule:
     override def configure() = {
         bind(classOf[ControllerInterface]).toInstance(Controller(None))
-        //bind(classOf[FileIOInterface]).to(classOf[fileIOJson.FileIO])
         bind(classOf[FileIOInterface]).toInstance(fileIOJson.FileIO())
     }
