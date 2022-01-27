@@ -104,6 +104,8 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
             var f = card.image
             var pic = ImageIO.read(f).getScaledInstance(52,80,java.awt.Image.SCALE_SMOOTH)
             val cb = new ToggleButton(card.toString)
+            cb.text = ""
+            cb.name = card.toString
             cb.selectedIcon = ImageIcon(pic)
             cb.disabledIcon = ImageIcon(ImageIO.read(f).getScaledInstance(46,72,java.awt.Image.SCALE_SMOOTH))
             cb.icon = cb.disabledIcon
@@ -117,11 +119,11 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
             reactions += {
                 case ButtonClicked(`cb`) =>
                     if cb.selected then
-                        Card(cb.text) match
+                        Card(cb.name) match
                             case Success(s) => cardsSelected = cardsSelected + s
                             case Failure(f) => System.exit(0)
                     else 
-                        Card(cb.text) match
+                        Card(cb.name) match
                             case Success(s) => cardsSelected = cardsSelected - s
                             case Failure(f) => System.exit(0)
             }
