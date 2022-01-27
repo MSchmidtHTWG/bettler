@@ -12,7 +12,6 @@ import org.scalatest.matchers.should.Matchers._
 class cardsSpec extends AnyWordSpec:
     "Cards" should {
         "have a method to return the Set of Cards (Set[Card])" in {
-
             val set = (Set[CardInterface](Card(Symbol.Hearts, Value.Ace)))
             val cards = Cards(set)
             cards.returnSet.equals(set) shouldBe(true)
