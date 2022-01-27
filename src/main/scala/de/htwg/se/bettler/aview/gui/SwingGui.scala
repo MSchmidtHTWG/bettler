@@ -111,6 +111,7 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
             cb.opaque = false
             cb.contentAreaFilled = false
             cb.borderPainted = false
+            cb.focusPainted = false
             contents += cb
             listenTo(cb)
             reactions += {
