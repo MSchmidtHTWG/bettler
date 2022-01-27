@@ -108,6 +108,9 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
             cb.disabledIcon = ImageIcon(ImageIO.read(f).getScaledInstance(46,72,java.awt.Image.SCALE_SMOOTH))
             cb.icon = cb.disabledIcon
             cb.selected = false
+            cb.opaque = false
+            cb.contentAreaFilled = false
+            cb.borderPainted = false
             contents += cb
             listenTo(cb)
             reactions += {
