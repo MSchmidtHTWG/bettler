@@ -12,7 +12,7 @@ import scala.swing.Publisher
 import scala.swing.event.Event
 import model._
 import de.htwg.se.bettler.model.fileIOComponent.fileIOXml.FileIOXml
-import de.htwg.se.bettler.model.fileIOComponent.fileIOJson.FileIOJSon
+import de.htwg.se.bettler.model.fileIOComponent.fileIOJsonImpl.FileIOJSon
 
 case class Controller @Inject() (var game : Option[Game]) extends ControllerInterface:
     val undomanager = util.UndoManager()
