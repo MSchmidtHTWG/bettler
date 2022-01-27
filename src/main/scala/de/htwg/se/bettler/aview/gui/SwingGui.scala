@@ -34,6 +34,7 @@ import scala.swing.Publisher
 import scala.swing.event.Event
 import de.htwg.se.bettler.controller.CloseEvent
 import de.htwg.se.bettler.controller.GameChanged
+import javax.swing.JLabel
 
 
 class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
@@ -128,22 +129,39 @@ class SwingGui(controller: ControllerInterface) extends Frame with Reactor{
                             case Failure(f) => System.exit(0)
             }
 
-    def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Horizontal):
-        val startButton = new Button("Start PvP")
-        val startButton2 = new Button("Start PvE")
-        contents += startButton  
-        contents += startButton2 
-        listenTo(startButton)
-        listenTo(startButton2)
-        reactions += {
+    def mainMenuPanel : BoxPanel = new BoxPanel(Orientation.Vertical):
+        val boxpanelTitle = new BoxPanel(Orientation.Horizontal):
+            val image = new File(f"src/main/scala/de/htwg/se/bettler/aview/gui/bettler.png")
+            val title = new Button("")
+            title.icon = ImageIcon(ImageIO.read(image))
+            title.selected = false
+            title.opaque = false
+            title.contentAreaFilled = false
+            title.borderPainted = false
+            title.focusPainted = false
+            contents += title
+        
+        val boxpanelButtons = new BoxPanel(Orientation.Horizontal):
+            val startButton = new Button("Start PvP")
+            val startButton2 = new Button("Start PvE")
+            contents += startButton  
+            contents += startButton2 
+            listenTo(startButton)
+            listenTo(startButton2)
+            reactions += {
             case ButtonClicked(`startButton`) => controller.doAndNotify(controller.newGame, "pvp")
             case ButtonClicked(`startButton2`) => controller.doAndNotify(controller.newGame, "pve")
-        }
+            }
+
+        contents += boxpanelTitle
+        contents += boxpanelButtons
+        
+
+
 
     def redraw: Unit =
         if !controller.returnGame.isDefined then
-            contents = new GridPanel(5,1):
-                contents += mainMenuPanel
+            contents = mainMenuPanel               
             return
         contents = new GridPanel(5,1):
             contents += new Label(controller.returnGame.get.getMessage())
