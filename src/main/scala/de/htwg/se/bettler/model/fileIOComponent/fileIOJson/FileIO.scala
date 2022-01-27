@@ -26,7 +26,7 @@ import de.htwg.se.bettler.model.stateComponent.GameStateContext
 import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 
 class FileIO extends FileIOInterface:
-    override def load: Game = 
+    override def load : Game = 
         val source: String = Source.fromFile("game.json").getLines.mkString
         val json: JsValue = Json.parse(source)
         GameStateContext.setState(PlayerTurnState((json \ "turn").as[Int], (json \ "maxplayer").as[Int]))

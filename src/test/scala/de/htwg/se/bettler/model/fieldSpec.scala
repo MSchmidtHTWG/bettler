@@ -18,7 +18,7 @@ import de.htwg.se.bettler.model.cardComponent.Symbol
 import de.htwg.se.bettler.model.stateComponent.GameStateContext
 
 
-class FieldSpec extends AnyWordSpec {
+class FieldSpec extends AnyWordSpec:
   "Field" should {
     val game = PvPGame(Vector.empty[Cards], Cards(Set.empty[CardInterface]), "")
     val field = Field(game)
@@ -45,7 +45,6 @@ class FieldSpec extends AnyWordSpec {
       field2.printField() should be(field2.eol + field2.bar() + "Player 1" + field2.eol + "[D10]" + field2.eol + field2.bar() + "Player 2" + field2.eol + "[H9]" + field2.eol + field2.bar() + "[H7]" + field2.eol + field2.bar())
     }
   }
-}
 
 
 

@@ -33,11 +33,13 @@ class controllerSpec extends AnyWordSpec {
             GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(0)
             controller.game match
                 case Some(g) => g.getMessage() shouldBe("Player 1 turn.")
+                case None =>
             controller.doAndNotify(controller.play, player1HeadCard)
             GameStateContext.getState().isInstanceOf[PlayerTurnState] shouldBe(true)
             GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer shouldBe(1)
             controller.game match
                 case Some(g) => g.getMessage() shouldBe("Player 2 turn.")
+                case None =>
         }
         "have a method skip to skip a turn" in {
             GameStateContext.setState(StartState())
