@@ -16,9 +16,6 @@ import net.codingwell.scalaguice.InjectorExtensions._
 
 case class Controller(var game : Option[Game]) extends ControllerInterface:
     val undomanager = util.UndoManager()
-    /*val injector = Guice.createInjector(new BettlerModule)
-    val fileIO = injector.getInstance(classOf[FileIOInterface])*/
-    val fileIO = FileIOInterface()
     override def toString = 
         game match
             case Some(g) => g.toString
@@ -108,9 +105,9 @@ case class Controller(var game : Option[Game]) extends ControllerInterface:
 
     def save : Unit =
         game match
-            case Some(g) => fileIO.save(g)
+            case Some(g) => Guice.createInjector(new BettlerModule).getInstance(classOf[FileIOInterface]).save(g)
             case None => return
     def load : Unit =
-        game = Some(fileIO.load)
+        game = Some(Guice.createInjector(new BettlerModule).getInstance(classOf[FileIOInterface]).load)
         notifyObservers
         publish(new GameChanged())
