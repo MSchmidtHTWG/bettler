@@ -16,7 +16,7 @@ lazy val root = project
     libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
     libraryDependencies += ("com.typesafe.play" %% "play-json" % "2.10.0-RC5"),
 
-    jacocoExcludes := Seq("*aview.*", "Bettler*", "BettlerModule*"),
+    jacocoExcludes := Seq("*aview.*", "*Bettler*", "*BettlerModule*"),
     jacocoCoverallsServiceName := "github-actions", 
     jacocoCoverallsBranch := sys.env.get("CI_BRANCH"),
     jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
