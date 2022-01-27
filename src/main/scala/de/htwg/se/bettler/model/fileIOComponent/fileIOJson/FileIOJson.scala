@@ -16,32 +16,42 @@ import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Card
 import com.google.common.base.Strings
 import de.htwg.se.bettler.model.gameComponent.pvpGameImpl.PvPGame
 import de.htwg.se.bettler.model.cardComponent.cardBaseImpl.Cards
+import scala.util.Success
+import scala.util.Failure
+import de.htwg.se.bettler.model.stateComponent.GameStateContext
+import de.htwg.se.bettler.model.stateComponent.stateBaseImpl.PlayerTurnState
 
 class FileIOJSon extends FileIOInterface:
     override def load: Game = 
         val source: String = Source.fromFile("game.json").getLines.mkString
         val json: JsValue = Json.parse(source)
-        var p1cards = Set.empty[CardInterface]
-        var p2cards = Set.empty[CardInterface]
-        var boardc = Set.empty[CardInterface]
-        val player1 = (json \\ "player1")
-        val player2 = (json \\ "player2")
-        val board = (json \\ "board")
-        val message = (json \ "message")
-        val msg = message.as[String]
-        for (p1<-player1)
-            val value = (p1 \ "value").as[String]
-            val symbol = (p1 \ "symbol").as[String]
-            p1cards = p1cards + Card(de.htwg.se.bettler.model.cardComponent.Symbol(symbol), de.htwg.se.bettler.model.cardComponent.Value(value))
-        for (p1<-player2)
-            val value = (p1 \ "value").as[String]
-            val symbol = (p1 \ "symbol").as[String]
-            p2cards = p2cards + Card(de.htwg.se.bettler.model.cardComponent.Symbol(symbol), de.htwg.se.bettler.model.cardComponent.Value(value))
-        for (p1<-board)
-            val value = (p1 \ "value").as[String]
-            val symbol = (p1 \ "symbol").as[String]
-            boardc = boardc + Card(de.htwg.se.bettler.model.cardComponent.Symbol(symbol), de.htwg.se.bettler.model.cardComponent.Value(value))
-        PvPGame(Vector(Cards(p1cards), Cards(p2cards)), Cards(boardc), msg)
+        GameStateContext.setState(PlayerTurnState((json \ "turn").as[Int], (json \ "maxplayer").as[Int]))
+        var p1cards : CardsInterface = Cards(Set.empty[CardInterface])
+        var p2cards : CardsInterface = Cards(Set.empty[CardInterface])
+        var boardc : CardsInterface = Cards(Set.empty[CardInterface])
+        val player1 = (json \ "player1")
+        val player2 = (json \ "player2")
+        val board = (json \ "board")
+        val msg = (json \ "message").as[String]
+        for (i <- 0 to (player1 \ "anzahl").as[Int] - 1)
+            val value = (player1.get \\ "value")(i).as[String]
+            val symbol = (player1.get \\ "symbol")(i).as[String]
+            Card(symbol + value) match
+                case Success(c) => p1cards = p1cards.add(c)
+                case Failure(e) => e.printStackTrace
+        for (i <- 0 to (player2 \ "anzahl").as[Int] - 1)
+            val value = (player2.get \\ "value")(i).as[String]
+            val symbol = (player2.get \\ "symbol")(i).as[String]
+            Card(symbol + value) match
+                case Success(c) => p2cards = p2cards.add(c)
+                case Failure(e) =>
+        for (i <- 0 to (board \ "anzahl").as[Int] - 1)
+            val value = (board.get \\ "value")(i).as[String]
+            val symbol = (board.get \\ "symbol")(i).as[String]
+            Card(symbol + value) match
+                case Success(c) => boardc = boardc.add(c)
+                case Failure(e) =>
+        PvPGame(Vector(p1cards, p2cards), boardc, msg)
 
     override def save(game : Game) = 
         import java.io._
@@ -51,36 +61,44 @@ class FileIOJSon extends FileIOInterface:
 
     implicit val gameWrites : Writes[Game] = new Writes[Game] {
         def writes(game : Game):JsValue = Json.obj(
-            "player1" -> Json.toJson(
-                for {
-                    p <- game.getPlayers()(0).returnSet
-                } yield {
-                    Json.obj(
-                        "symbol" -> p.getSymbol.toString,
-                        "value" -> p.getValue.toString
-                    )
-                }
-            ),
-            "player2" -> Json.toJson(
-                for {
-                    p <- game.getPlayers()(1).returnSet
-                } yield {
-                    Json.obj(
-                        "symbol" -> p.getSymbol.toString,
-                        "value" -> p.getValue.toString
-                    )
-                }
-            ),
-            "board" -> Json.toJson(
-                for {
-                    p <- game.getBoard().returnSet
-                } yield {
-                    Json.obj(
-                        "symbol" -> p.getSymbol.toString,
-                        "value" -> p.getValue.toString
-                    )
-                }
-            ),
+            "turn" -> GameStateContext.getState().asInstanceOf[PlayerTurnState].currentPlayer,
+            "maxplayer" -> GameStateContext.getState().asInstanceOf[PlayerTurnState].maxPlayers,
+            "player1" -> Json.obj(
+                "anzahl" -> game.getPlayers()(0).size,
+                "karten" -> Json.toJson(
+                    for {
+                        p <- game.getPlayers()(0).returnSet
+                    } yield {
+                        Json.obj(
+                            "symbol" -> p.getSymbol.toString,
+                            "value" -> p.getValue.toString
+                        )
+                    }
+            )),
+            "player2" -> Json.obj(
+                "anzahl" -> game.getPlayers()(1).size,
+                "karten" -> Json.toJson(
+                    for {
+                        p <- game.getPlayers()(1).returnSet
+                    } yield {
+                        Json.obj(
+                            "symbol" -> p.getSymbol.toString,
+                            "value" -> p.getValue.toString
+                        )
+                    }
+            )),
+            "board" -> Json.obj(
+                "anzahl" -> game.getBoard().size,
+                "karten" -> Json.toJson(
+                    for {
+                        p <- game.getBoard().returnSet
+                    } yield {
+                        Json.obj(
+                            "symbol" -> p.getSymbol.toString,
+                            "value" -> p.getValue.toString
+                        )
+                    }
+            )),
             "message" -> game.getMessage(),
         )
     }
