@@ -4,6 +4,7 @@ package cardComponent
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import scala.annotation.varargs
 
 class ValueSpec extends AnyWordSpec with Matchers:
     "Value" should {
@@ -32,7 +33,21 @@ class ValueSpec extends AnyWordSpec with Matchers:
             
         }
         "have a factory method returning a value from a string" in {
-            val v1 = Value("7")
+            var v1 = Value("7")
             v1.toString should be("7")
+            v1 = Value("8")
+            v1.toString should be("8")
+            v1 = Value("9")
+            v1.toString should be("9")
+            v1 = Value("10")
+            v1.toString should be("10")
+            v1 = Value("J")
+            v1.toString should be("J")
+            v1 = Value("Q")
+            v1.toString should be("Q")
+            v1 = Value("K")
+            v1.toString should be("K")
+            v1 = Value("A")
+            v1.toString should be("A")
         }
     }
